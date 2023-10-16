@@ -1,27 +1,27 @@
 {
-  "name": "@wangankeji/vue-g6editor",
-  "description": "Editor for G6 graph.",
+  "name": "@wangankeji/vue-g6board",
+  "description": "Viewer & Editor for G6 graph.",
   "version": "0.1.0",
-  "main": "dist/g6editor.common.js",
+  "main": "dist/g6board.common.js",
   "scripts": {
     "serve": "npx vue-cli-service serve",
-    "build": "npx vue-cli-service build --target lib --dest dist --formats commonjs --name g6editor src/components/index.js",
+    "build": "npx vue-cli-service build --target lib --dest dist --formats commonjs --name g6board src/components/index.js",
     "release": "yarn run lint & yarn run build & node version.js",
     "lint": "npx vue-cli-service lint",
     "test": "npx vue-cli-service lint & npx vue-cli-service build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitee.com/wangankeji/vue-g6editor.git"
+    "url": "git+https://gitee.com/wangankeji/vue-g6board.git"
   },
   "bugs": {
-    "url": "https://gitee.com/wangankeji/vue-g6editor/issues"
+    "url": "https://gitee.com/wangankeji/vue-g6board/issues"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
-  "homepage": "https://wangankeji.gitee.io/vue-g6editor/",
+  "homepage": "https://wangankeji.gitee.io/vue-g6board/",
   "keywords": [
     "vue",
     "g6",
@@ -31,17 +31,22 @@
   "license": "MIT",
   "files": [
     "dist",
+    "src/assets",
     "src/components",
+    "src/views",
+    "types",
     "LICENSE",
     "README.md"
   ],
-  "dependencies": {
+  "types": "types/index.d.ts",
+  "dependencies": {},
+  "peerDependencies": {
     "@antv/g6": "^4.8.22",
-    "uuid": "^9.0.1"
+    "element-ui": "^2.15.14"
   },
-  "peerDependencies": {},
   "optionalDependencies": {},
   "devDependencies": {
+    "@antv/g6": "^4.8.22",
     "@vue/cli-plugin-babel": "^4.2.0",
     "@vue/cli-plugin-eslint": "^4.2.0",
     "@vue/cli-service": "^4.2.0",
@@ -52,8 +57,8 @@
     "eslint-plugin-vue": "^6.1.2",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
-    "vue": "^2.6.11",
-    "vue-template-compiler": "^2.6.11"
+    "vue": "^2.6.12",
+    "vue-template-compiler": "^2.6.12"
   },
   "eslintConfig": {
     "root": true,

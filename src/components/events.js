@@ -31,4 +31,10 @@ class EventBus {
   }
 }
 
+const instance = new EventBus()
+
+EventBus.on = instance.on.bind(instance)
+EventBus.off = instance.off.bind(instance)
+EventBus.emit = instance.emit.bind(instance)
+
 export default EventBus

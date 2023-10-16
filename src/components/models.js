@@ -1,4 +1,36 @@
-import InputTypes from "./inputtypes"
+/**
+ * 输入框类型
+ */
+const InputTypes = {
+  /**
+   * 文本
+   */
+  TEXT: 1,
+  /**
+   * 长文本(多行)
+   */
+  LONGTEXT: 2,
+  /**
+   * 下拉选择框
+   */
+  SELECT: 3,
+  /**
+   * 复选
+   */
+  CHECKBOX: 4,
+  /**
+   * 单选
+   */
+  RADIO: 5,
+  /**
+   * 数值输入
+   */
+  NUMBER: 6,
+  /**
+   * 开关样式
+   */
+  SWITCH: 7
+}
 
 const FieldConfig = {
   /**
@@ -37,7 +69,15 @@ const FieldConfig = {
    * 占位文本
    */
   placeholder: '',
-  render: function () { }
+  render: function () { },
+  /**
+   * 远程数据加载函数
+   */
+  optionLoader: null,
+  /**
+   * 选项变更事件
+   */
+  optionChange: () => { },
 }
 
 const FieldOption = {
@@ -56,11 +96,6 @@ const FieldOption = {
 }
 
 /**
- * 字段的样式
- */
-const FieldStyle = {}
-
-/**
  * 字段定义
  */
 const Field = {
@@ -73,8 +108,8 @@ const Field = {
    */
   name: '',
   /**
-   * 输入控件的类型，参考 G6Editor.InputTypes
-   * 默认值 G6Editor.InputTypes.TEXT: 1
+   * 输入控件的类型，参考 G6Board.InputTypes
+   * 默认值 G6Board.InputTypes.TEXT: 1
    */
   inputType: 1,
   /**
@@ -94,62 +129,116 @@ const Field = {
   style: {},
 }
 
-/**
- * @type {Field[]}
- */
-class Fields extends Array {
+
+const BoardOptions = {
   /**
-   *
-   * @param {Field[]} fields
-   * @returns {Fields}
+   * 编辑节点时的字段
+   * @type {Field[]}
    */
-  constructor(fields) {
-    super()
-    if (!fields) {
-      return
-    }
-    fields.forEach(field => {
-      field.config = Object.assign({}, FieldConfig, field.config)
-      field.style = Object.assign({}, FieldStyle, field.style)
-
-      if (field.inputType === InputTypes.CHECKBOX) {
-        // 当输入类型为 checkbox 时，默认值应当为 []
-        if (!field.config.default) {
-          field.config.default = []
-        }
-      } else if (field.inputType === InputTypes.SWITCH) {
-        // 当输入类型为 switch 时，默认值应当为 false
-        if (!field.config.default) {
-          field.config.default = false
-        }
+  nodeFields: [],
+  /**
+   * 编辑边时的字段
+   * @type {Field[]}
+   */
+  edgeFields: [],
+  /**
+   * 在编辑节点或边时的数据处理函数
+   * @type {Function}
+   */
+  editHandler: () => { },
+  styles: {
+    /**
+     * 节点的样式
+     */
+    node: {},
+    /**
+     * 边的样式
+     */
+    edge: {},
+    /**
+     * 分组的样式
+     */
+    combo: {},
+    /**
+     * 节点不同状态的样式
+     */
+    nodeStates: {
+      /**
+       * 节点被选中时的样式
+       */
+      selected: {
+        'select-border': {}
+      },
+      /**
+       * 节点高亮时的样式（在搜索节点命中时生效）
+       */
+      highlight: {
+        'highlight-border': {}
       }
-
-      this.push(field)
-    })
+    },
+    edgeStates: {
+      /**
+       * 边被选中时的样式
+       */
+      selected: {
+      },
+    },
+  },
+  /**
+   * Tooltip 渲染器
+   */
+  tooltipRenderers: {
+    /**
+     * 节点的 Tooltip 渲染器
+     * @type {defineTooltip}
+     */
+    node: () => { },
+    /**
+     * 边的 Tooltip 渲染器
+     * @type {defineTooltip}
+     */
+    edge: () => { },
   }
 }
 
-const GraphStyleConfig = {
-  node: {},
-  edge: {},
-  combo: {},
-  nodeStates: {},
-  edgeStates: {},
+/**
+ * 定义编辑器的选项
+ *
+ * @param {BoardOptions} options
+ * @returns {BoardOptions}
+ */
+function defineOptions(options) {
+  return options
 }
 
 /**
- * 图形的样式定义
+ * 构造数据的工具函数
+ * @param {Field[]} fields
+ * @returns {Field[]}
  */
-class GraphStyle {
-  /**
-   * @param {GraphStyleConfig} options
-   */
-  constructor(options) {
-    this.node = options.node
-    this.edge = options.edge
-    this.combo = options.combo
-    this.nodeStates = options.nodeStates
-    this.edgeStates = options.edgeStates
+function defineFields(fields) {
+  return fields || []
+}
+
+/**
+ *
+ * @param {Function<object>} renderer
+ * @param {{x: number, y: number}} offset
+ * @returns
+ */
+function defineTooltip(renderer, offset) {
+  offset = Object.assign({
+    x: 10,
+    y: 10
+  }, offset)
+  return {
+    // offsetX 与 offsetY 需要加上父容器的 padding
+    offsetX: offset.x,
+    offsetY: offset.y,
+    getContent: (e) => {
+      const data = e.item.getModel()
+      return renderer(data)
+    }
   }
 }
 
@@ -158,7 +247,8 @@ export {
   FieldConfig,
   FieldOption,
   Field,
-  Fields,
-  GraphStyle,
-  GraphStyleConfig
+  BoardOptions,
+  defineFields,
+  defineOptions,
+  defineTooltip
 }

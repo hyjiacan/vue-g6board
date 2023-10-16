@@ -1,13 +1,13 @@
 <template>
-  <div class="g6-editor">
-    <div class="g6-editor--toolbar">
-      <slot name="toolbar"></slot>
-    </div>
-    <div class="g6-editor--body" ref="canvas" @contextmenu.prevent></div>
-    <fields-dialog :fields="nodeFields" :title="dialogs.node.editItem ? '编辑节点' : '添加节点'"
+  <div class="g6-board">
+    <div class="g6-board--body" ref="canvas" @contextmenu.prevent></div>
+
+    <fields-dialog :fields="options.nodeFields" :title="dialogs.node.editItem ? '编辑节点' : '添加节点'"
       :visible.sync="dialogs.node.visible" v-model="dialogs.node.form" :graph="graph" @ok="onNodeOk" />
-    <fields-dialog :fields="edgeFields" title="编辑连接" :visible.sync="dialogs.edge.visible" v-model="dialogs.edge.form"
-      :graph="graph" @ok="onEdgeOk" />
+
+    <fields-dialog :fields="options.edgeFields" title="编辑连接" :visible.sync="dialogs.edge.visible"
+      v-model="dialogs.edge.form" :graph="graph" @ok="onEdgeOk" />
+
     <contextmenu ref="contextmenu" :items="contextmenus"></contextmenu>
   </div>
 </template>
@@ -16,8 +16,8 @@
 import G6 from '@antv/g6';
 import FieldsDialog from './fieldsdialog.vue'
 import contextmenu from './contextmenu';
-import { GraphStyle } from './models';
-import setup from './setup'
+import EventBus from './events';
+import './setup'
 
 export default {
   components: { FieldsDialog, contextmenu },
@@ -30,24 +30,17 @@ export default {
       type: Object,
       required: true
     },
-    nodeFields: {
-      type: Array,
-      required: true
-    },
-    edgeFields: {
-      type: Array,
-      required: true
-    },
-    editHandler: {
-      type: Function
-    },
-    styles: {
-      type: GraphStyle
-    },
     editMode: {
       type: Boolean,
       default: false
-    }
+    },
+    /**
+     * @type {BoardOptions}
+     */
+    options: {
+      type: Object,
+      required: true
+    },
   },
   watch: {
     editMode() {
@@ -77,7 +70,7 @@ export default {
       },
       contextmenus: {
         canvas: [{
-          label: '添加节点',
+          label: '添加',
           command: 'add-node',
           handler: (e) => {
             this.dialogs.node.editItem = null
@@ -107,15 +100,6 @@ export default {
               this.graph.removeItem(data)
             }).catch(() => { })
           }
-          // }, {
-          //   label: '连线',
-          //   command: 'add-edge',
-          //   handler: (e) => {
-          //     this.$confirm('您正在移除节点，此操作会同时移除与此节点相连接的边，是否继续？', '提示').then(() => {
-          //       const data = e.data
-          //       this.graph.removeItem(data)
-          //     }).catch(() => { })
-          //   }
         }],
         edge: [{
           label: '移除',
@@ -138,31 +122,46 @@ export default {
   },
   methods: {
     init() {
-      const styles = this.styles
+      const styles = this.options.styles
       const size = this.getBounds()
+
+      const plugins = []
+      if (this.options.tooltipRenderers.node) {
+        // 允许出现 tooltip 的 item 类型
+        this.options.tooltipRenderers.node.itemTypes = ['node']
+        plugins.push(new G6.Tooltip(this.options.tooltipRenderers.node))
+      }
+      if (this.options.tooltipRenderers.edge) {
+        // 允许出现 tooltip 的 item 类型
+        this.options.tooltipRenderers.edge.itemTypes = ['edge']
+        plugins.push(new G6.Tooltip(this.options.tooltipRenderers.edge))
+      }
+
       // 创建 G6 图实例
       const graph = this.graph = new G6.Graph({
         // 指定图画布的容器 id
         container: this.$refs.canvas,
         enabledStack: true,
-        // plugins: [tooltip.edgeTooltip, tooltip.nodeTooltip],
+        plugins,
         modes: {
           // 支持的 behavior
           default: [
             'zoom-canvas',
             'click-select',
             // 'activate-relations',
-            'select-item'
+            'select-item',
+            'drag-canvas',
           ],
           edit: [
+            'click-select',
+            'select-item',
+            'zoom-canvas',
             'drag-node',
-            'create-edge',
-            'contextmenu'
+            // 'create-edge',
+            'add-edge',
+            'contextmenu',
+            'drag-canvas',
           ]
-          // edge: [
-          //   'create-edge'
-          // ]
-          // edit: ['click-add-node', 'click-add-edge', 'drag-combo', 'collapse-expand-combo', 'drag-node'],
         },
         // 画布宽高
         width: size.width,
@@ -173,7 +172,8 @@ export default {
         defaultEdge: {
           style: {
             lineAppendWidth: 5,
-          }
+          },
+          ...styles.edge
         },
         defaultCombo: {
           type: 'rect',
@@ -198,7 +198,14 @@ export default {
       graph.data(this.data);
       graph.render()
 
-      window.G = graph
+      window.G6 = graph
+
+      // // 处理多边场景
+      // const offsetDiff = 10;
+      // const multiEdgeType = 'quadratic';
+      // const singleEdgeType = 'polyline-ext';
+      // const loopEdgeType = 'loop';
+      // G6.Util.processParallelEdges(this.data.edges, offsetDiff, multiEdgeType, singleEdgeType, loopEdgeType);
 
       this.bindMethods()
 
@@ -218,14 +225,14 @@ export default {
       }
     },
     bindMethods() {
-      setup.events.on('canvas:contextmenu', this.onCanvasContextMenu)
-      setup.events.on('node:contextmenu', this.onNodeContextMenu)
-      setup.events.on('edge:contextmenu', this.onEdgeContextMenu)
+      EventBus.on('canvas:contextmenu', this.onCanvasContextMenu)
+      EventBus.on('node:contextmenu', this.onNodeContextMenu)
+      EventBus.on('edge:contextmenu', this.onEdgeContextMenu)
     },
     unbindMethods() {
-      setup.events.off('canvas:contextmenu', this.onCanvasContextMenu)
-      setup.events.off('node:contextmenu', this.onNodeContextMenu)
-      setup.events.off('edge:contextmenu', this.onEdgeContextMenu)
+      EventBus.off('canvas:contextmenu', this.onCanvasContextMenu)
+      EventBus.off('node:contextmenu', this.onNodeContextMenu)
+      EventBus.off('edge:contextmenu', this.onEdgeContextMenu)
     },
     onCanvasContextMenu(e) {
       this.clearSelectedNode()
@@ -245,9 +252,9 @@ export default {
       let y = e.canvasY
       const data = e.item
 
-      const bounds = this.getBounds()
-      x += bounds.left
-      y += bounds.top
+      // const bounds = this.getBounds()
+      // x += bounds.left
+      // y += bounds.top
       this.$refs.contextmenu.show(x, y, type, data)
     },
     async onNodeOk() {
@@ -265,11 +272,12 @@ export default {
         node: editItem
       }
 
-      if (this.editHandler) {
+      const editHandler = this.options.editHandler
+      if (editHandler) {
         // 如果有返回值，则使用返回值作为节点数据
         let handleResult
         try {
-          handleResult = await this.editHandler(e)
+          handleResult = await editHandler(e)
         } catch (e) {
           this.$message.warning(e.message)
           return
@@ -298,11 +306,8 @@ export default {
       this.dialogs.node.visible = false
     },
     onEdgeOk() {
-      console.info('edge oooooooook')
       const editItem = this.dialogs.node.editItem
       const form = this.dialogs.node.form
-
-      console.info(form)
 
       if (editItem) {
         this.graph.updateItem(editItem, form)
@@ -329,6 +334,9 @@ export default {
     getData() {
       return this.graph.save()
     },
+    getGraph() {
+      return this.graph
+    },
     undo() {
       this.graph.undo()
     },
@@ -338,12 +346,14 @@ export default {
     clearSelection() {
       this.clearHighlightNodes()
     },
-    findNode(predicator) {
-      this.clearHighlightNodes()
+    findNode(predicator, highlight) {
+      if (highlight) {
+        this.clearHighlightNodes()
+      }
       return this.graph.findAll('node', node => {
         const data = node.getModel()
         const hit = predicator(data)
-        if (hit) {
+        if (hit && highlight) {
           this.highlightNode(node)
         }
         return hit

@@ -1,10 +1,11 @@
 <template>
-  <div class="g6-editor--contextmenu" v-if="visible" @contextmenu.prevent :style="style" @click.stop>
-    <div class="g6-editor--contextmenu-title" v-if="title">{{ title }}</div>
-    <ul class="g6-editor--contextmenu-items">
-      <li v-for="item in activeMenu" :key="item.command" :title="item.title" @click="onItemClick(item)">
+  <div class="g6-board--contextmenu" v-if="visible" @contextmenu.prevent :style="style" @click.stop>
+    <div class="g6-board--contextmenu-title" v-if="title">{{ title }}</div>
+    <ul class="g6-board--contextmenu-items">
+      <li v-for="(item, i) in activeMenu" :key="i" :title="item.title" @click="onItemClick(item)"
+        :class="{ 'g6-board--contextmenu-separator': !Object.keys(item).length }">
         <i></i>
-        <span class="g6-editor--contextmenu-item-label">{{ item.label }}</span>
+        <span class="g6-board--contextmenu-item-label">{{ item.label }}</span>
       </li>
     </ul>
   </div>
@@ -20,6 +21,7 @@ export default {
     /**
      * 数组表示菜单不复用
      * 对象表示菜单要复用，此时对象的每个 value 为数组
+     * 空对象表示为分隔线
      * {
      * key1: [{
      *  command: 'xxx',
@@ -150,49 +152,3 @@ export default {
   },
 }
 </script>
-
-<style lang="less">
-.g6-editor--contextmenu {
-  position: absolute;
-  user-select: none;
-  background-color: #fff;
-  box-shadow: 2px 2px 5px 1px #e6e5e5;
-  min-width: 160px;
-}
-
-.g6-editor--contextmenu-title {
-  padding: 5px;
-  font-size: small;
-  border-bottom: 1px solid #dbdadaaa;
-  font-weight: bold;
-}
-
-.g6-editor--contextmenu-items {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-
-  li {
-    cursor: default;
-    display: flex;
-    font-size: small;
-
-    &:hover {
-      color: blue;
-      background-color: rgb(215, 239, 247);
-    }
-
-    i {
-      display: block;
-      width: 30px;
-      background-color: #dbdada88;
-    }
-
-    span {
-      display: block;
-      flex: 1 1;
-      padding: 5px 10px 5px 5px;
-    }
-  }
-}
-</style>

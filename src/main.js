@@ -4,10 +4,10 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
 import App from '@/views/App'
-import G6Editor from '@/components'
+import G6Board from '@/components'
 
 Vue.use(ElementUI)
-Vue.use(G6Editor)
+Vue.use(G6Board)
 
 new Vue({
   render: h => h(App)

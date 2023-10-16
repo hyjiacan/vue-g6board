@@ -1,27 +1,34 @@
-# g6editor
+# G6Board
 
-G6 图库的编辑器。
+G6 图库的渲染与编辑器。
 
 ## 安装
 
 ```shell
-npm i @wangankeji/vue-g6editor
+npm i @wangankeji/vue-g6board
 ```
 
 ## 用法
 
 ```vue
-
 <template>
-  <g6-editor />
+  <g6-board ref="board" :options="options" :data="data" :edit-mode="editMode" />
 </template>
 <script>
-import G6Editor from '@wangankeji/vue-g6editor'
+import G6Board from '@wangankeji/vue-g6board'
 
 export default {
-  components: {G6Editor},
+  components: {G6Board},
   data() {
     return {
+      options: G6Board.defineOptions({
+
+      }),
+      data: {
+        nodes: [],
+        edges: []
+      },
+      editMode: false
     }
   }
 }
@@ -30,58 +37,43 @@ export default {
 
 ## 属性
 
-| 名称 | 类型 | 必填 | 默认值 | 描述 |
-| ---- | ---- | ---- | ------ | ---- |
-
-## 属性编辑器
-
-### 数据结构
-
-此节描述 `node-props` 属性 和 `edge-props` 的数据结构。
-
-```js
-import G6Editor from '@wangankeji/vue-g6editor'
-
-const props = [{
-  // 展示名称
-  "label": "",
-  // 字段名称
-  "field": "",
-  // 默认值
-  "default": null,
-  // 提示文本
-  "tip": "",
-  // 参考 Element-UI 的 表单校验
-  "validators": [{}],
-  // 输入类型，参考类型 G6Editor.InputTypes
-  "input": "",
-  // 是否必填
-  "required": false,
-  // 允许输入的最大长度
-  "maxlength": 0
-}]
-```
-
-## 内置事件
-
-| 名称  | 参数                         | 描述                                                                                  |
-| ----- | ---------------------------- | ------------------------------------------------------------------------------------- |
-| ready | {id: String, chart: echarts} | 组件首次渲染完成后触发。`id` 为 `ECharts` 组件实例的 id，并非 `echarts` 图表实例的 id |
-
-> 仅当 `options` 不为空，并且其内的数据有效时才会渲染图表，在其后才会触发 `ready` 事件。
-> `ready` 事件仅在首次渲染后会触发一次。
+| 名称      | 类型    | 必填 | 默认值 | 描述                                            |
+| --------- | ------- | ---- | ------ | ----------------------------------------------- |
+| options   | Object  | 是   | -      | 绘制的选项，使用 `G6Board.defineOptions()` 定义 |
+| data      | Object  | 是   | -      | 绘制的数据，结构见上方示例的 `data`             |
+| edit-mode | boolean | 是   | -      | 是否启用编辑模式                                |
 
 ## 函数
 
-### get
+函数通过引用调用 `this.$refs.board`。
 
-`ECharts.get(id)` 获取组件的 echarts 实例，`id` 为 `ready` 事件的参数， 也可以通过 `$el.getAttribute('data-echarts-id')` 获取到。
+### getGraph
 
-## 插槽
+获取当前图的实例。
 
-| 名称 | 参数 | 描述 |
-| ---- | ---- | ---- |
+### getData
 
-## 参考
+获取当前图的数据。
 
-- 主题和附加参数 [echarts.init](https://echarts.apache.org/zh/api.html#echarts.init)
+### findNode
+
+`findNode(predicator, highlight)` 在图中查找节点，返回命中的项。
+
+- `predicator` 判定函数，返回 `true` 表示命中
+- `highlight` 是否在命中时高亮节点
+
+### clearSelection
+
+清除节点的查找命中状态。
+
+## 附录
+
+### 数据结构
+
+- 节点数据 [nodes](./src/assets/nodes.js)
+- 边数据 [edges](./src/assets/edges.js)
+- 配置 [options](./src/assets/options.js)
+
+### 节点图标
+
+现支持图片、SVG格式作为节点图标。

@@ -1,16 +1,83 @@
-import InputTypes from "../components/inputtypes"
-import { Fields } from "../components/models"
+import { InputTypes, defineFields } from "../components/models"
 import storage from '../assets/storage'
 import lineTypes from "./lineTypes"
 
-const nodeFields = new Fields([{
+const nodeFields = defineFields([{
   label: '设备类型',
   name: 'deviceType',
   inputType: InputTypes.SELECT,
   options: storage.getDeviceTypes(),
   config: {
     required: true,
-    tip: '不同的设备类型，有不同有图标和含义'
+    tip: '不同的设备类型，有不同有图标和含义',
+    optionChange(e) {
+      e.data.device = null
+      e.fields.forEach(item => {
+        if (item.name === 'device') {
+          item.config.options = []
+        }
+      })
+    },
+  }
+}, {
+  label: '选择设备',
+  name: 'device',
+  inputType: InputTypes.SELECT,
+  options: [],
+  config: {
+    required: true,
+    optionsLoader: function (e, keyword) {
+      const deviceType = e.data.deviceType
+
+      const data = {
+        pc: [{
+          label: '终端1111',
+          value: '192.168.11.11'
+        }, {
+          label: '终端2222',
+          value: '192.168.11.12'
+        }, {
+          label: '终端3333',
+          value: '192.168.11.13'
+        }],
+        server: [{
+          label: '服务器1111',
+          value: '192.168.12.11'
+        }, {
+          label: '服务器2222',
+          value: '192.168.12.12'
+        }, {
+          label: '服务器3333',
+          value: '192.168.12.13'
+        }],
+      }
+
+      if (!deviceType) {
+        console.debug('未选择设备类型')
+        this.options = []
+        return
+      }
+
+      const list = data[deviceType]
+
+      if (!list) {
+        console.debug('设备类型下没有设备')
+        this.options = []
+        return
+      }
+
+      if (!keyword) {
+        console.debug('关键字为空')
+        this.options = list
+        return
+      }
+
+      console.debug('有数据')
+
+      this.options = list.filter(item => {
+        return item.label.indexOf(keyword) !== -1 || item.value.indexOf(keyword) !== -1
+      })
+    },
   }
 }, {
   label: '设备 IP',
@@ -20,7 +87,7 @@ const nodeFields = new Fields([{
     required: true,
     tip: 'IP 是一个设备的唯一标识'
   }
-},{
+}, {
   label: '设备名称',
   name: 'label',
   inputType: InputTypes.TEXT,
@@ -51,7 +118,7 @@ const nodeFields = new Fields([{
   options: storage.getDeviceTypes(),
 }])
 
-const edgeFields = new Fields()
+const edgeFields = defineFields()
 
 export default {
   nodeFields,

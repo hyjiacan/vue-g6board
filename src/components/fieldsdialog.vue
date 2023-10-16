@@ -1,8 +1,8 @@
 <template>
   <el-dialog :title="title" :visible.sync="isVisible" @closed="onClose" :width="width" :close-on-click-modal="false"
-    :close-on-press-escape="false">
+    :close-on-press-escape="false" append-to-body>
     <el-form size="small" ref="form" :model="form" :rules="rules" label-width="100px" :style="styles">
-      <template v-for="field in fields">
+      <template v-for="field in data">
         <el-form-item :key="field.name" :label="field.label" :prop="field.name" v-show="!field.config.hidden">
 
           <el-input v-if="field.inputType === InputTypes.TEXT" v-model.trim="form[field.name]"
@@ -21,8 +21,24 @@
           <el-switch v-else-if="field.inputType === InputTypes.SWITCH" v-model.number="form[field.name]"
             :readonly="field.config.readonly" :style="field.style" active-text="" inactive-text=""></el-switch>
 
+          <el-select v-else-if="field.inputType === InputTypes.SELECT && field.config.optionsLoader"
+            v-model="form[field.name]" :placeholder="field.config.placeholder"
+            :remote-method="field.config.optionsLoader.bind(field, { data: form, fields: data })"
+            :disabled="field.config.readonly" :style="field.style"
+            @change="field.config.optionChange.call(field, { data: form, fields: data })" filterable remote>
+            <template #prefix v-if="getSelectIcon(field)">
+              <img class="select-icon" :src="getSelectIcon(field)" />
+            </template>
+
+            <el-option v-for="item in field.options" :key="item.value" :label="item.label" :value="item.value">
+              <img v-if="item.icon" class="select-icon" :src="item.icon" />
+              <span>{{ item.label }}</span>
+            </el-option>
+          </el-select>
+
           <el-select v-else-if="field.inputType === InputTypes.SELECT" v-model="form[field.name]"
-            :placeholder="field.config.placeholder" :disabled="field.config.readonly" :style="field.style">
+            :placeholder="field.config.placeholder" :disabled="field.config.readonly" :style="field.style"
+            @change="field.config.optionChange.call(field, { data: form, fields: data })" filterable>
             <template #prefix v-if="getSelectIcon(field)">
               <img class="select-icon" :src="getSelectIcon(field)" />
             </template>
@@ -55,7 +71,7 @@
   </el-dialog>
 </template>
 <script>
-import InputTypes from './inputtypes'
+import { InputTypes, FieldConfig } from './models'
 
 export default {
   props: {
@@ -97,6 +113,7 @@ export default {
     return {
       InputTypes,
       isVisible: false,
+      data: [],
       form: {},
       rules: {},
       // 标记量，用于在触发事件时，不执行 watch，以避免数据被循环处理
@@ -127,12 +144,30 @@ export default {
     processFields() {
       // 处理校验规则和表单字段
       const rules = {}
-      const form = {
-      }
+      const form = {}
+
 
       this.fields.forEach((field) => {
+        field.config = Object.assign({}, FieldConfig, field.config)
+        field.style = Object.assign({}, field.style)
+
         const config = field.config
-        form[field.name] = config.default
+
+        let defaultValue = config.default
+
+        if (field.inputType === InputTypes.CHECKBOX) {
+          // 当输入类型为 checkbox 时，默认值应当为 []
+          if (!defaultValue) {
+            defaultValue = []
+          }
+        } else if (field.inputType === InputTypes.SWITCH) {
+          // 当输入类型为 switch 时，默认值应当为 false
+          if (!defaultValue) {
+            defaultValue = false
+          }
+        }
+
+        form[field.name] = defaultValue
 
         const validators = []
         if (config.validators) {
@@ -149,6 +184,7 @@ export default {
         }
       })
 
+      this.data = this.fields
       this.form = Object.assign({}, form, this.value)
       this.rules = rules
     },
@@ -161,11 +197,15 @@ export default {
         return ''
       }
       const item = field.options.filter(opt => opt.value === value)[0]
+      if (!item) {
+        return ''
+      }
       return item.icon || ''
     },
     onCancel() {
       this.isVisible = false
       this.form = {}
+      this.data = []
     },
     async onOk() {
       try {

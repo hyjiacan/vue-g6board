@@ -17,7 +17,7 @@ G6.registerNode('image-ext', {
         y: y - offset / 2,
         radius: 4,
       },
-      name: 'select-box'
+      name: 'select-border'
     })
 
     // 高亮框
@@ -28,7 +28,7 @@ G6.registerNode('image-ext', {
         x: 0,
         y: 0,
       },
-      name: 'highlight-box'
+      name: 'highlight-border'
     })
   }
 }, 'image')
@@ -51,30 +51,83 @@ G6.registerBehavior('select-item', {
     }
   },
   onClick(e) {
-    // const graph = this.graph
-    const edge = e.item
-    // const states = edge.getStates()
-    // if (states.indexOf('selected') !== -1) {
-    //   graph.clearItemStates(edge, 'selected')
-    // } else {
-    edge.setState('selected', true)
-    // }
+    const item = e.item
+
+    // 在连线时，如果点击空白处取消会报错
+    try {
+      item.setState('selected', true)
+    } catch (e) {
+      // ignore
+    }
   },
   onHover(e) {
-    const edge = e.item
-    edge.setState('hover', true)
+    const item = e.item
+    item.setState('hover', true)
   },
   onLeave(e) {
     const graph = this.graph
-    const edge = e.item
-    const states = edge.getStates()
+    const item = e.item
+    const states = item.getStates()
     if (states.indexOf('hover') !== -1) {
-      graph.clearItemStates(edge, 'hover')
+      graph.clearItemStates(item, 'hover')
     }
   }
 })
 
-const events = new EventBus()
+G6.registerBehavior('add-edge', {
+  getEvents() {
+    return {
+      'node:click': 'onClick',
+      mousemove: 'onMousemove',
+      // 点击空白处，取消边
+      'edge:click': 'onEdgeClick'
+    };
+  },
+  onClick(ev) {
+    const node = ev.item;
+    const graph = this.graph;
+    const point = {
+      x: ev.x,
+      y: ev.y
+    };
+    const model = node.getModel();
+    if (this.addingEdge && this.edge) {
+      graph.updateItem(this.edge, {
+        target: model.id,
+      });
+      // graph.setItemState(this.edge, 'selected', true);
+      this.edge = null;
+      this.addingEdge = false;
+    } else {
+      this.edge = graph.addItem('edge', {
+        type: 'polyline-ext',
+        source: model.id,
+        target: point
+      });
+      this.addingEdge = true;
+    }
+  },
+  onMousemove(ev) {
+    const point = {
+      x: ev.x,
+      y: ev.y
+    };
+    if (this.addingEdge && this.edge) {
+      this.graph.updateItem(this.edge, {
+        target: point
+      });
+    }
+  },
+  onEdgeClick(ev) {
+    const currentEdge = ev.item;
+    // 拖拽过程中，点击会点击到新增的边上
+    if (this.addingEdge && this.edge == currentEdge) {
+      this.graph.removeItem(this.edge);
+      this.edge = null;
+      this.addingEdge = false;
+    }
+  }
+});
 
 G6.registerBehavior('contextmenu', {
   getEvents() {
@@ -85,16 +138,12 @@ G6.registerBehavior('contextmenu', {
     }
   },
   onCanvasContextMenu(e) {
-    events.emit('canvas:contextmenu', e)
+    EventBus.emit('canvas:contextmenu', e)
   },
   onNodeContextMenu(e) {
-    events.emit('node:contextmenu', e)
+    EventBus.emit('node:contextmenu', e)
   },
   onEdgeContextMenu(e) {
-    events.emit('edge:contextmenu', e)
+    EventBus.emit('edge:contextmenu', e)
   },
 })
-
-export default {
-  events
-}

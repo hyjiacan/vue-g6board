@@ -1,74 +1,38 @@
 <template>
   <div class="app">
-    <g6-editor ref="editor" :styles="graphStyle" :data="data" :node-fields="fields.nodeFields"
-      :edge-fields="fields.edgeFields" :edit-handler="editHandler" :edit-mode="editMode">
-      <template #toolbar>
-        <div class="g6-editor--title">
-          <span>图编辑器</span>
-        </div>
+    <div class="toolbar">
+      <div class="g6-board--title">
+        <span>图编辑器</span>
+      </div>
 
+      <div style="gap: 20px;display: flex;">
         <div class="search">
           <span>查找节点</span>
           <el-input size="small" v-model="search.keyword" style="width: 200px" />
           <el-button size="small" @click="onSearch">查找</el-button>
         </div>
 
-        <div style="gap: 20px;display: flex;">
-          <span>
+        <span>
+          <span>编辑模式</span>
+          <el-switch v-model="editMode"></el-switch>
+        </span>
 
-            <span>编辑模式</span>
-            <el-switch v-model="editMode"></el-switch>
-          </span>
-          <el-button size="small" @click="saveData">保存</el-button>
-        </div>
+        <el-button size="small" @click="saveData">保存</el-button>
+      </div>
 
-      </template>
-    </g6-editor>
+    </div>
+    <g6-board ref="board" :options="options" :data="data" :edit-mode="editMode" />
   </div>
 </template>
 <script>
 import storage from '../assets/storage'
-import fields from '@/assets/fields'
-import { GraphStyle } from '../components/models'
+import options from '../assets/options'
 
 export default {
   data() {
     const { nodes, edges } = storage.get()
     return {
-      fields,
-      graphStyle: new GraphStyle({
-        nodeStates: {
-          highlight: {
-            'highlight-box': {
-              fill: 'green',
-              fillOpacity: 0.1,
-              stroke: 'green',
-              strokeOpacity: 0.3,
-              lineWidth: 2,
-            }
-          },
-          selected: {
-            'select-box': {
-              stroke: 'blue',
-              lineWidth: 3
-            }
-          },
-          hover: {
-            'select-box': {
-              stroke: 'green'
-            }
-          }
-        },
-        edgeStates: {
-          selected: {
-            stroke: 'blue',
-            lineWidth: 3
-          },
-          hover: {
-            lineWidth: 3
-          }
-        }
-      }),
+      options,
       deviceTypes: storage.getDeviceTypes(),
       data: {
         nodes,
@@ -105,29 +69,19 @@ export default {
   },
   methods: {
     saveData() {
-      const data = this.$refs.editor.getData()
+      const data = this.$refs.board.getData()
       storage.set(data)
-    },
-    editHandler(e) {
-      const data = e.data
-      if (e.type === 'node') {
-        data.id = data.ip
-        if (!data.type) {
-          data.type = 'image-ext'
-        }
-        data.img = storage.getIcon(data.deviceType)
-        data.size = storage.getSize(data.deviceType)
-      }
+      this.$message.success('数据已保存')
     },
     onSearch() {
       const keyword = this.search.keyword
       if (!keyword) {
-        this.$refs.editor.clearSelection()
+        this.$refs.board.clearSelection()
         return
       }
-      const nodes = this.$refs.editor.findNode(node => {
+      const nodes = this.$refs.board.findNode(node => {
         return node.ip.indexOf(keyword) !== -1 || node.label.indexOf(keyword) !== -1
-      })
+      }, true)
       console.info(nodes)
     }
   },
@@ -142,5 +96,19 @@ body {
 
 .app {
   height: 100vh;
+}
+
+.toolbar {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  padding: 5px 10px;
+  box-sizing: border-box;
 }
 </style>
