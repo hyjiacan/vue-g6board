@@ -118,15 +118,26 @@ G6.registerBehavior('add-edge', {
       this.edge = null;
       this.addingEdge = false;
     } else {
-      this.edge = graph.addItem('edge', {
+      const builtinOptions = model._builtin
+      const option = {
         type: 'polyline-ext',
         source: model.id,
         target: point,
-        style: {
+        style:{
           stroke: 'blue',
           endArrow: true
         }
-      });
+      }
+      if (builtinOptions) {
+        if (builtinOptions.lineType) {
+          option.type = builtinOptions.lineType
+        }
+        if (builtinOptions.lineStyle) {
+
+          
+        }
+      }
+      this.edge = graph.addItem('edge', option);
       this.addingEdge = true;
     }
   },

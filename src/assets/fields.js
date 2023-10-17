@@ -74,9 +74,9 @@ const nodeFields = defineFields([{
       this.options = list.filter(item => {
         return item.label.indexOf(keyword) !== -1 || item.value.indexOf(keyword) !== -1
       })
-    },
-    optionsChange(e) {
-      console.info(e)
+    // },
+    // optionsChange(e) {
+    //   console.info(e)
     }
   }
 }, {
@@ -111,7 +111,9 @@ const nodeFields = defineFields([{
   config: {
     default: lineTypes[0].value
   }
-}, BUILTIN_FIELDS.EDGE_TYPE,
+}, 
+  BUILTIN_FIELDS.EDGE_TYPE,
+  BUILTIN_FIELDS.EDGE_STYLE,
 ])
 
 const edgeFields = defineFields()

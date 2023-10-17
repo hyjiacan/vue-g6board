@@ -297,6 +297,7 @@ const BUILTIN_FIELDS = {
     label: '边类型',
     name: 'lineType',
     inputType: InputTypes.RADIO,
+    _builtin: true,
     options: [{
       label: '直线',
       value: 'line',
@@ -312,6 +313,28 @@ const BUILTIN_FIELDS = {
     }],
     config: {
       default: 'polyline'
+    }
+  },
+  EDGE_STYLE: {
+    label: '边样式',
+    name: 'lineStyle',
+    inputType: InputTypes.RADIO,
+    _builtin: true,
+    options: [{
+      label: '实线',
+      value: 'solid',
+      title: '节点间使用实线连接'
+    }, {
+      label: '点线',
+      value: 'dotted',
+      title: '节点间使用点线连接'
+    }, {
+      label: '虚线',
+      value: 'dashed',
+      title: '节点间使用虚线连接'
+    }],
+    config: {
+      default: 'solid'
     }
   }
 }
