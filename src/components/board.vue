@@ -83,6 +83,18 @@ export default {
 
             this.dialogs.node.visible = true
           }
+          // }, {}, {
+          //   label: '添加分组',
+          //   command: 'add-combo',
+          //   handler: (e) => {
+          //     this.graph.createCombo()
+          //     this.dialogs.node.editItem = null
+          //     this.dialogs.node.form = {}
+          //     this.dialogs.node.position.x = e.x
+          //     this.dialogs.node.position.y = e.y
+
+          //     this.dialogs.node.visible = true
+          // }
         }],
         node: [{
           label: '编辑',
@@ -302,7 +314,8 @@ export default {
       const e = {
         type: 'node',
         data: form,
-        node: editItem
+        node: editItem,
+        graph: this.graph
       }
 
       const editHandler = this.options.editHandler
@@ -313,6 +326,10 @@ export default {
           handleResult = await editHandler(e)
         } catch (e) {
           this.$message.warning(e.message)
+          return
+        }
+        // 返回 false 取消编辑
+        if (handleResult === false) {
           return
         }
         if (handleResult !== undefined) {

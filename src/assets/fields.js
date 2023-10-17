@@ -10,7 +10,7 @@ const nodeFields = defineFields([{
   config: {
     required: true,
     tip: '不同的设备类型，有不同有图标和含义',
-    optionsChange(e) {
+    onchange(e) {
       e.data.device = null
       e.fields.device.options = []
     },
@@ -75,7 +75,7 @@ const nodeFields = defineFields([{
         return item.label.indexOf(keyword) !== -1 || item.value.indexOf(keyword) !== -1
       })
     // },
-    // optionsChange(e) {
+    // onchange(e) {
     //   console.info(e)
     }
   }

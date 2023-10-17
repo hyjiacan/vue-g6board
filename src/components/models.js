@@ -77,7 +77,6 @@ const FieldConfig = {
    * 占位文本
    */
   placeholder: '',
-  render: function () { },
   /**
    * 远程数据加载函数
    */
@@ -87,9 +86,9 @@ const FieldConfig = {
    */
   optionsLoading: false,
   /**
-   * 选项变更事件
+   * 变更事件
    */
-  optionsChange: () => { },
+  onchange: () => { },
 }
 
 const FieldOption = {
@@ -143,6 +142,10 @@ const Field = {
    * @type {FieldStyle}
    */
   style: {},
+  /**
+   * 自定义渲染组件
+   */
+  component: null,
 }
 
 
@@ -160,6 +163,7 @@ const BoardOptions = {
   /**
    * 在编辑节点或边时的数据处理函数
    * @type {Function}
+   * @returns {Object|false} 返回 false 可以取消节点的操作
    */
   editHandler: () => { },
   styles: {

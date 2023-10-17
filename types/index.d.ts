@@ -1,4 +1,5 @@
-import { ModelStyle, StateStyles } from "@antv/g6";
+import Vue from "vue/types/umd";
+import { ModelStyle, StateStyles, Graph } from "@antv/g6";
 
 /**
  * 输入框类型
@@ -34,9 +35,21 @@ export type InputTypes = {
   SWITCH: 7;
 };
 
-function FieldVisibleFunction(e: {data: Object, fields: Map<String, Field>}): Boolean;
+export function FieldVisibleFunction(e: {
+  data: Object;
+  fields: Map<String, Field>;
+}): Boolean;
 
-interface FieldConfig {
+export interface FieldChangeEventArgs {
+  type: "change";
+  field: Field;
+  value: any;
+  data: Object;
+  fields: Map<String, Field>;
+  graph: Graph;
+}
+
+export interface FieldConfig {
   /**
    * 默认值
    */
@@ -77,7 +90,6 @@ interface FieldConfig {
    * 占位文本
    */
   placeholder?: String;
-  render?: (data: Object) => String;
   /**
    * 远程数据加载函数
    */
@@ -87,16 +99,12 @@ interface FieldConfig {
    */
   optionsLoading?: boolean;
   /**
-   * 选项变更事件
+   * 变更事件
    */
-  optionsChange?: (e: {
-    value: any;
-    data: Object;
-    fields: { [String]: [Field] };
-  }) => void;
+  onchange?: (e: FieldChangeEventArgs) => void;
 }
 
-interface FieldOption {
+export interface FieldOption {
   /**
    * 名称
    */
@@ -119,12 +127,12 @@ interface FieldOption {
  * 加载字段的选项数据
  * @param keyword
  */
-declare function fieldOptionGetter(keyword: String): Array<Object>;
+export declare function fieldOptionGetter(keyword: String): Array<Object>;
 
 /**
  * 字段定义
  */
-interface Field {
+export interface Field {
   /**
    * 字段标签
    */
@@ -150,15 +158,20 @@ interface Field {
    * 控件样式
    */
   style?: Object;
+  /**
+   * 自定义渲染组件
+   */
+  component: Vue;
 }
 
-interface EditHandlerEventArgs {
+export interface EditHandlerEventArgs {
   type: "node" | "edge";
   data: Object;
   node?: Object;
+  graph?: Graph;
 }
 
-interface BoardOptions {
+export interface BoardOptions {
   /**
    * 编辑节点时的字段
    */
@@ -169,8 +182,9 @@ interface BoardOptions {
   edgeFields?: Array<Field>;
   /**
    * 在编辑节点或边时的数据处理函数
+   * @returns {Object|false} 返回 false 可以取消节点的操作
    */
-  editHandler?: (e: EditHandlerEventArgs) => {};
+  editHandler?: (e: EditHandlerEventArgs) => Object | false;
   styles: {
     /**
      * 节点的样式

@@ -111,7 +111,7 @@ G6.registerBehavior('add-edge', {
           (itemModel.source === target && itemModel.target === source)
       })) {
         // eslint-disable-next-line
-        console.debug(`The edge from ${source} to ${target} is dunplicated, abort!`)
+        console.debug(`The edge from ${source} to ${target} is duplicated, abort!`)
         this.graph.removeItem(this.edge);
         this.edge = null;
         this.addingEdge = false;
