@@ -34,6 +34,8 @@ export type InputTypes = {
   SWITCH: 7;
 };
 
+function FieldVisibleFunction(e: {data: Object, fields: Map<String, Field>}): Boolean;
+
 interface FieldConfig {
   /**
    * 默认值
@@ -56,13 +58,17 @@ interface FieldConfig {
    */
   maxlength?: Number;
   /**
+   * 数值的精度
+   */
+  precision?: Number;
+  /**
    * 是否只读
    */
   readonly?: Boolean;
   /**
-   * 是否为隐藏域
+   * 是否可见
    */
-  hidden?: Boolean;
+  isVisible?: Boolean | FieldVisibleFunction;
   /**
    * 是否必填
    */

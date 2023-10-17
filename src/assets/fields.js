@@ -1,6 +1,6 @@
 import { BUILTIN_FIELDS, InputTypes, defineFields } from "../components/models"
 import storage from '../assets/storage'
-import lineTypes from "./lineTypes"
+// import lineTypes from "./lineTypes"
 
 const nodeFields = defineFields([{
   label: '设备类型',
@@ -91,29 +91,31 @@ const nodeFields = defineFields([{
   label: '设备名称',
   name: 'label',
   inputType: InputTypes.TEXT,
-}, {
-  label: '速率',
-  name: 'speed',
-  inputType: InputTypes.NUMBER,
-}, {
-  label: '可用',
-  name: 'enabled',
-  inputType: InputTypes.SWITCH,
+// }, {
+//   label: '速率',
+//   name: 'speed',
+//   inputType: InputTypes.NUMBER,
+// }, {
+//   label: '可用',
+//   name: 'enabled',
+//   inputType: InputTypes.SWITCH,
 }, {
   label: '备注',
   name: 'remark',
   inputType: InputTypes.LONGTEXT,
-}, {
-  label: '连接类型',
-  name: 'lineType',
-  inputType: InputTypes.RADIO,
-  options: lineTypes,
-  config: {
-    default: lineTypes[0].value
-  }
-}, 
+// }, {
+//   label: '连接类型',
+//   name: 'lineType',
+//   inputType: InputTypes.RADIO,
+//   options: lineTypes,
+//   config: {
+//     default: lineTypes[0].value
+//   }
+},
   BUILTIN_FIELDS.EDGE_TYPE,
+  BUILTIN_FIELDS.EDGE_CURVE_OFFSET,
   BUILTIN_FIELDS.EDGE_STYLE,
+  BUILTIN_FIELDS.EDGE_VISIBLE,
 ])
 
 const edgeFields = defineFields()

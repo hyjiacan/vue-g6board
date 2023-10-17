@@ -58,13 +58,17 @@ const FieldConfig = {
    */
   maxlength: 255,
   /**
+   * 数值的精度
+   */
+  precision: 0,
+  /**
    * 是否只读
    */
   readonly: false,
   /**
-   * 是否为隐藏域
+   * 是否可见
    */
-  hidden: false,
+  isVisible: true,
   /**
    * 是否必填
    */
@@ -295,31 +299,59 @@ const BUILTIN_FIELDS = {
    */
   EDGE_TYPE: {
     label: '边类型',
-    name: 'lineType',
+    name: '_lineType',
     inputType: InputTypes.RADIO,
-    _builtin: true,
     options: [{
       label: '直线',
-      value: 'line',
-      title: '节点间使用直线连接'
+      value: 'line'
     }, {
       label: '折线',
-      value: 'polyline',
-      title: '节点间使用折线连接'
+      value: 'polyline'
     }, {
-      label: '曲线',
-      value: 'curve',
-      title: '节点间使用曲线连接'
+      label: '圆弧线',
+      value: 'arc'
+      // }, {
+      //   label: '二阶贝塞尔曲线',
+      //   value: 'quadratic'
+      // }, {
+      //   label: '三阶贝塞尔曲线',
+      //   value: 'cubic'
+      // }, {
+      //   label: '垂直方向的三阶贝塞尔曲线',
+      //   value: 'cubic-vertical'
+      // }, {
+      //   label: '水平方向的三阶贝塞尔曲线',
+      //   value: 'cubic-horizontal'
+      // }, {
+      //   label: '自环',
+      //   value: 'loop'
     }],
     config: {
       default: 'polyline'
     }
   },
+  /**
+   * 节点间连接边的绘制类型为圆弧时，调整其弧度
+   * @type {Field}
+   */
+  EDGE_CURVE_OFFSET: {
+    label: '边弧度',
+    name: '_curveOffset',
+    inputType: InputTypes.NUMBER,
+    config: {
+      tip: '指定弧的弯曲程度，其正负影响弧弯曲的方向。取值范围 -100 ~ 100',
+      maxlength: 100,
+      minlength: -100,
+      default: 20,
+      isVisible(e) {
+        return e.data._lineType === 'arc'
+      }
+    }
+  },
   EDGE_STYLE: {
     label: '边样式',
-    name: 'lineStyle',
+    name: '_lineStyle',
     inputType: InputTypes.RADIO,
-    _builtin: true,
     options: [{
       label: '实线',
       value: 'solid',
@@ -335,6 +367,15 @@ const BUILTIN_FIELDS = {
     }],
     config: {
       default: 'solid'
+    }
+  },
+  EDGE_VISIBLE: {
+    label: '边可见',
+    name: 'lineVisible',
+    inputType: InputTypes.SWITCH,
+    config: {
+      default: true,
+      tip: '在预览图时，边是否可见'
     }
   }
 }

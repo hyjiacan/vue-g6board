@@ -94,6 +94,15 @@ G6.registerBehavior('add-edge', {
     if (this.addingEdge && this.edge) {
       const source = this.edge.getModel().source
       const target = model.id
+      // 不允许连线自环
+      if (source === target) {
+        // eslint-disable-next-line
+        console.debug(`The edge is a loop, abort!`)
+        this.graph.removeItem(this.edge);
+        this.edge = null;
+        this.addingEdge = false;
+        return
+      }
       // 如果边已经存在，则取消此操作
       // 禁止两个节点间连接多条线
       if (this.graph.find('edge', item => {
@@ -118,24 +127,22 @@ G6.registerBehavior('add-edge', {
       this.edge = null;
       this.addingEdge = false;
     } else {
-      const builtinOptions = model._builtin
       const option = {
         type: 'polyline-ext',
         source: model.id,
         target: point,
-        style:{
+        style: {
           stroke: 'blue',
           endArrow: true
         }
       }
-      if (builtinOptions) {
-        if (builtinOptions.lineType) {
-          option.type = builtinOptions.lineType
-        }
-        if (builtinOptions.lineStyle) {
-
-          
-        }
+      if (model._lineType) {
+        option.type = model._lineType
+      }
+      if (model._lineStyle === 'dotted') {
+        option.style.lineDash = [2, 2]
+      } else if (model._lineStyle === 'dashed') {
+        option.style.lineDash = [10, 2]
       }
       this.edge = graph.addItem('edge', option);
       this.addingEdge = true;
