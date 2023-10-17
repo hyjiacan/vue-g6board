@@ -71,15 +71,23 @@ interface FieldConfig {
    * 占位文本
    */
   placeholder?: String;
-  render?: (data: Object) => {};
+  render?: (data: Object) => String;
   /**
    * 远程数据加载函数
    */
-  optionLoader: (keyword: string) => {};
+  optionsLoader?: (keyword: string) => void;
+  /**
+   * 是否正在从远程加载数据
+   */
+  optionsLoading?: boolean;
   /**
    * 选项变更事件
    */
-  optionChange: (e: { data: Object }) => {};
+  optionsChange?: (e: {
+    value: any;
+    data: Object;
+    fields: { [String]: [Field] };
+  }) => void;
 }
 
 interface FieldOption {
@@ -95,6 +103,10 @@ interface FieldOption {
    * 图标，目前仅支持图片
    */
   icon: String;
+  /**
+   * 选项上展示的提示文本
+   */
+  title: String;
 }
 
 /**
@@ -234,6 +246,6 @@ export function defineFields(fields: Array<Field>): Array<Field> {}
  * 定义提示框的渲染器
  */
 export function defineTooltip(
-  renderer: (model: Object) => {},
+  renderer: (model: Object, container: HTMLDivElement) => {},
   offset?: { x: Number; y: Number }
 ): Object {}

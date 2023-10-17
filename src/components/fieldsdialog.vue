@@ -1,6 +1,6 @@
 <template>
   <el-dialog :title="title" :visible.sync="isVisible" @closed="onClose" :width="width" :close-on-click-modal="false"
-    :close-on-press-escape="false" append-to-body>
+    :close-on-press-escape="false" custom-class="g6-board--dialog" append-to-body>
     <el-form size="small" ref="form" :model="form" :rules="rules" label-width="100px" :style="styles">
       <template v-for="field in data">
         <el-form-item :key="field.name" :label="field.label" :prop="field.name" v-show="!field.config.hidden">
@@ -22,15 +22,17 @@
             :readonly="field.config.readonly" :style="field.style" active-text="" inactive-text=""></el-switch>
 
           <el-select v-else-if="field.inputType === InputTypes.SELECT && field.config.optionsLoader"
-            v-model="form[field.name]" :placeholder="field.config.placeholder"
-            :remote-method="field.config.optionsLoader.bind(field, { data: form, fields: data })"
-            :disabled="field.config.readonly" :style="field.style"
-            @change="field.config.optionChange.call(field, { data: form, fields: data })" filterable remote>
+            v-model="form[field.name]" :placeholder="field.config.placeholder" :loading="field.config.optionsLoading"
+            :remote-method="field.config.optionsLoader.bind(field, { data: form, fields: fieldsMap })"
+            :disabled="field.config.readonly" :style="field.style" popper-class="g6-board--dialog-select-opions"
+            @change="field.config.optionsChange.call(field, { value: form[field.name], data: form, fields: fieldsMap })"
+            filterable remote>
             <template #prefix v-if="getSelectIcon(field)">
               <img class="select-icon" :src="getSelectIcon(field)" />
             </template>
 
-            <el-option v-for="item in field.options" :key="item.value" :label="item.label" :value="item.value">
+            <el-option v-for="item in field.options" :key="item.value" :label="item.label" :value="item.value"
+              :title="item.title">
               <img v-if="item.icon" class="select-icon" :src="item.icon" />
               <span>{{ item.label }}</span>
             </el-option>
@@ -38,12 +40,15 @@
 
           <el-select v-else-if="field.inputType === InputTypes.SELECT" v-model="form[field.name]"
             :placeholder="field.config.placeholder" :disabled="field.config.readonly" :style="field.style"
-            @change="field.config.optionChange.call(field, { data: form, fields: data })" filterable>
+            popper-class="g6-board--dialog-select-opions"
+            @change="field.config.optionsChange.call(field, { value: form[field.name], data: form, fields: fieldsMap })"
+            filterable>
             <template #prefix v-if="getSelectIcon(field)">
               <img class="select-icon" :src="getSelectIcon(field)" />
             </template>
 
-            <el-option v-for="item in field.options" :key="item.value" :label="item.label" :value="item.value">
+            <el-option v-for="item in field.options" :key="item.value" :label="item.label" :value="item.value"
+              :title="item.title">
               <img v-if="item.icon" class="select-icon" :src="item.icon" />
               <span>{{ item.label }}</span>
             </el-option>
@@ -51,13 +56,14 @@
 
           <el-checkbox-group v-else-if="field.inputType === InputTypes.CHECKBOX" v-model="form[field.name]"
             :disabled="field.config.readonly" :style="field.style">
-            <el-checkbox v-for="item in field.options" :key="item.value" :label="item.label"
+            <el-checkbox v-for="item in field.options" :key="item.value" :label="item.label" :title="item.title"
               :value="item.value"></el-checkbox>
           </el-checkbox-group>
 
           <el-radio-group v-else-if="field.inputType === InputTypes.RADIO" v-model="form[field.name]"
             :disabled="field.config.readonly" :style="field.style">
-            <el-radio v-for="item in field.options" :key="item.value" :label="item.value">{{ item.label }}</el-radio>
+            <el-radio v-for="item in field.options" :key="item.value" :label="item.value" :title="item.title">{{
+              item.label }}</el-radio>
           </el-radio-group>
 
           <div class="input-tip" v-if="field.config.tip">{{ field.config.tip }}</div>
@@ -117,7 +123,8 @@ export default {
       form: {},
       rules: {},
       // 标记量，用于在触发事件时，不执行 watch，以避免数据被循环处理
-      noWatch: false
+      noWatch: false,
+      fieldsMap: {}
     }
   },
   watch: {
@@ -146,10 +153,12 @@ export default {
       const rules = {}
       const form = {}
 
+      const map = {}
 
       this.fields.forEach((field) => {
         field.config = Object.assign({}, FieldConfig, field.config)
         field.style = Object.assign({}, field.style)
+        map[field.name] = field
 
         const config = field.config
 
@@ -184,6 +193,7 @@ export default {
         }
       })
 
+      this.fieldsMap = map
       this.data = this.fields
       this.form = Object.assign({}, form, this.value)
       this.rules = rules
@@ -231,19 +241,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.select-icon {
-  vertical-align: middle;
-  margin-right: 5px;
-}
-
-.input-tip {
-  color: #888;
-  font-size: x-small;
-  line-height: 1.5;
-  word-break: break-all;
-  word-wrap: break-word;
-  white-space: pre;
-}
-</style>

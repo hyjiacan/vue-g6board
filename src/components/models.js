@@ -29,7 +29,11 @@ const InputTypes = {
   /**
    * 开关样式
    */
-  SWITCH: 7
+  SWITCH: 7,
+  // /**
+  //  * 图片选择器
+  //  */
+  // IMAGE: 8,
 }
 
 const FieldConfig = {
@@ -73,11 +77,15 @@ const FieldConfig = {
   /**
    * 远程数据加载函数
    */
-  optionLoader: null,
+  optionsLoader: null,
+  /**
+   * 是否正在从远程加载数据
+   */
+  optionsLoading: false,
   /**
    * 选项变更事件
    */
-  optionChange: () => { },
+  optionsChange: () => { },
 }
 
 const FieldOption = {
@@ -92,7 +100,11 @@ const FieldOption = {
   /**
    * 图标，目前仅支持图片
    */
-  icon: null
+  icon: null,
+  /**
+   * 选项上展示的提示文本
+   */
+  title: ''
 }
 
 /**
@@ -235,9 +247,71 @@ function defineTooltip(renderer, offset) {
     // offsetX 与 offsetY 需要加上父容器的 padding
     offsetX: offset.x,
     offsetY: offset.y,
-    getContent: (e) => {
+    shouldBegin() {
+      // 仅在非编辑模式下才允许 tooltip 弹出
+      if (this.editMode) {
+        return false
+      }
+      return true
+    },
+    getContent(e) {
+      // 仅在非编辑模式下才允许 tooltip 弹出
+      if (this.editMode) {
+        return ''
+      }
       const data = e.item.getModel()
-      return renderer(data)
+      const container = document.createElement('div')
+      container.classList.add('g6-board--tooltip')
+
+      const result = renderer(data, container)
+
+      // 添加对异步的支持
+      if (result instanceof Promise) {
+        container.innerHTML = '<span>加载中 ...</span>'
+        result.then(content => {
+          if (typeof content === 'string') {
+            container.innerHTML = content
+          } else {
+            container.innerHTML = ''
+            container.appendChild(content)
+          }
+        })
+      } else {
+        if (typeof result === 'string') {
+          container.innerHTML = result
+        } else {
+          container.appendChild(result)
+        }
+      }
+      return container
+    }
+  }
+}
+
+const BUILTIN_FIELDS = {
+  /**
+   * 节点间连接边的绘制类型
+   * @type {Field}
+   */
+  EDGE_TYPE: {
+    label: '边类型',
+    name: 'lineType',
+    inputType: InputTypes.RADIO,
+    options: [{
+      label: '直线',
+      value: 'line',
+      title: '节点间使用直线连接'
+    }, {
+      label: '折线',
+      value: 'polyline',
+      title: '节点间使用折线连接'
+    }, {
+      label: '曲线',
+      value: 'curve',
+      title: '节点间使用曲线连接'
+    }],
+    config: {
+      default: 'polyline'
     }
   }
 }
@@ -250,5 +324,6 @@ export {
   BoardOptions,
   defineFields,
   defineOptions,
-  defineTooltip
+  defineTooltip,
+  BUILTIN_FIELDS
 }

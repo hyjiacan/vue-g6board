@@ -52,6 +52,9 @@ export default {
   },
   data() {
     return {
+      /**
+       * @type {G6.Graph}
+       */
       graph: null,
       dialogs: {
         node: {
@@ -111,7 +114,8 @@ export default {
             }).catch(() => { })
           }
         }],
-      }
+      },
+      tooltipPlugins: []
     }
   },
   mounted() {
@@ -129,13 +133,21 @@ export default {
       if (this.options.tooltipRenderers.node) {
         // 允许出现 tooltip 的 item 类型
         this.options.tooltipRenderers.node.itemTypes = ['node']
-        plugins.push(new G6.Tooltip(this.options.tooltipRenderers.node))
+        const tooltipOption = this.options.tooltipRenderers.node
+        tooltipOption.shouldBegin = tooltipOption.shouldBegin.bind(this)
+        tooltipOption.getContent = tooltipOption.getContent.bind(this)
+        this.tooltipPlugins.push(new G6.Tooltip(this.options.tooltipRenderers.node))
       }
       if (this.options.tooltipRenderers.edge) {
         // 允许出现 tooltip 的 item 类型
         this.options.tooltipRenderers.edge.itemTypes = ['edge']
-        plugins.push(new G6.Tooltip(this.options.tooltipRenderers.edge))
+        const tooltipOption = this.options.tooltipRenderers.edge
+        tooltipOption.shouldBegin = tooltipOption.shouldBegin.bind(this)
+        tooltipOption.getContent = tooltipOption.getContent.bind(this)
+        this.tooltipPlugins.push(new G6.Tooltip(this.options.tooltipRenderers.edge))
       }
+
+      plugins.push(...this.tooltipPlugins)
 
       // 创建 G6 图实例
       const graph = this.graph = new G6.Graph({
@@ -171,7 +183,7 @@ export default {
         },
         defaultEdge: {
           style: {
-            lineAppendWidth: 5,
+            lineAppendWidth: 5
           },
           ...styles.edge
         },
@@ -210,10 +222,31 @@ export default {
       this.bindMethods()
 
       this.updateMode()
+
+      this.$emit('ready', {
+        graph
+      })
     },
     updateMode() {
       const mode = this.editMode ? 'edit' : 'default'
       this.graph.setMode(mode)
+
+      // tooltip 插件，在编辑模式下禁用
+      const tooltipEnabled = !this.editMode
+      this.tooltipPlugins.forEach(tooltip => {
+        tooltip.set('enabled', tooltipEnabled)
+      })
+
+      // 更新连线的箭头：
+      // 在编辑模式时展示，预览模式时隐藏
+      const showEndArrow = this.editMode
+      this.data.edges.forEach(edge => {
+        if (!edge.style) {
+          edge.style = {}
+        }
+        edge.style.endArrow = showEndArrow
+      })
+      this.graph.render()
     },
     getBounds() {
       const rect = this.$refs.canvas.getClientRects()[0]

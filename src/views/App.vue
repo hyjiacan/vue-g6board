@@ -62,7 +62,7 @@ export default {
       search: {
         keyword: '192.168.1.1'
       },
-      editMode: false
+      editMode: true
     }
   },
   mounted() {

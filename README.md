@@ -66,6 +66,47 @@ export default {
 
 清除节点的查找命中状态。
 
+## 事件
+
+### ready
+
+图形准备就绪时触发。
+
+参数:
+
+```json
+{
+  "graph": G6.Graph
+}
+```
+
+## 样式
+
+### 右键菜单
+
+组件提供了以下样式变量
+
+```css
+--contextmenu-color: #000;
+--contextmenu-background: #fff;
+--contextmenu-shadow: 2px 2px 5px 1px #e6e5e5;
+
+--contextmenu-title-color: #000;
+--contextmenu-title-background: none;
+--contextmenu-title-border-color: #dbdadaaa;
+
+--contextmenu-hover-color: blue;
+--contextmenu-hover-background: rgb(215, 239, 247);
+
+--contextmenu-gutter-background: #dbdada88;
+
+--contextmenu-separeator-color: #ebebeb transparent #fffefec7 transparent;
+```
+
+### 编辑弹框样式
+
+可以通过全局样式 `g6-board--dialog` 来调整属性编辑框样式。
+
 ## 附录
 
 ### 数据结构

@@ -1,4 +1,4 @@
-import { InputTypes, defineFields } from "../components/models"
+import { BUILTIN_FIELDS, InputTypes, defineFields } from "../components/models"
 import storage from '../assets/storage'
 import lineTypes from "./lineTypes"
 
@@ -10,13 +10,9 @@ const nodeFields = defineFields([{
   config: {
     required: true,
     tip: '不同的设备类型，有不同有图标和含义',
-    optionChange(e) {
+    optionsChange(e) {
       e.data.device = null
-      e.fields.forEach(item => {
-        if (item.name === 'device') {
-          item.config.options = []
-        }
-      })
+      e.fields.device.options = []
     },
   }
 }, {
@@ -25,6 +21,7 @@ const nodeFields = defineFields([{
   inputType: InputTypes.SELECT,
   options: [],
   config: {
+    tip: '输入 IP 地址以选择设备',
     required: true,
     optionsLoader: function (e, keyword) {
       const deviceType = e.data.deviceType
@@ -78,6 +75,9 @@ const nodeFields = defineFields([{
         return item.label.indexOf(keyword) !== -1 || item.value.indexOf(keyword) !== -1
       })
     },
+    optionsChange(e) {
+      console.info(e)
+    }
   }
 }, {
   label: '设备 IP',
@@ -111,12 +111,8 @@ const nodeFields = defineFields([{
   config: {
     default: lineTypes[0].value
   }
-}, {
-  label: '多选',
-  name: 'checkbox',
-  inputType: InputTypes.CHECKBOX,
-  options: storage.getDeviceTypes(),
-}])
+}, BUILTIN_FIELDS.EDGE_TYPE,
+])
 
 const edgeFields = defineFields()
 

@@ -92,8 +92,27 @@ G6.registerBehavior('add-edge', {
     };
     const model = node.getModel();
     if (this.addingEdge && this.edge) {
+      const source = this.edge.getModel().source
+      const target = model.id
+      // 如果边已经存在，则取消此操作
+      // 禁止两个节点间连接多条线
+      if (this.graph.find('edge', item => {
+        const itemModel = item.getModel()
+        return (itemModel.source === source && itemModel.target === target) ||
+          (itemModel.source === target && itemModel.target === source)
+      })) {
+        // eslint-disable-next-line
+        console.debug(`The edge from ${source} to ${target} is dunplicated, abort!`)
+        this.graph.removeItem(this.edge);
+        this.edge = null;
+        this.addingEdge = false;
+        return
+      }
       graph.updateItem(this.edge, {
-        target: model.id,
+        target: target,
+        style: {
+          stroke: 'black'
+        }
       });
       // graph.setItemState(this.edge, 'selected', true);
       this.edge = null;
@@ -102,7 +121,11 @@ G6.registerBehavior('add-edge', {
       this.edge = graph.addItem('edge', {
         type: 'polyline-ext',
         source: model.id,
-        target: point
+        target: point,
+        style: {
+          stroke: 'blue',
+          endArrow: true
+        }
       });
       this.addingEdge = true;
     }
