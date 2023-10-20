@@ -165,11 +165,19 @@ export interface Field {
 }
 
 export interface EditHandlerEventArgs {
-  type: "node" | "edge";
+  type: "node" | "edge" | "combo";
   data: Object;
-  node?: Object;
+  item?: Object;
   graph?: Graph;
 }
+
+export type CustomComboStyle = Partial<{
+  [key: String]: {
+    shape: "rect" | "circle" | "image";
+    draggable: Boolean;
+    style: ModelStyle;
+  };
+}>;
 
 export interface BoardOptions {
   /**
@@ -181,7 +189,17 @@ export interface BoardOptions {
    */
   edgeFields?: Array<Field>;
   /**
-   * 在编辑节点或边时的数据处理函数
+   * 编辑分组时的字段
+   */
+  comboFields?: Array<Field>;
+  /**
+   * 在编辑节点、分组或边前的数据处理函数
+   * @type {Function}
+   * @returns {Object|false} 返回 false 可以取消节点的操作
+   */
+  beforeEditHandler: (e: EditHandlerEventArgs) => Object | false;
+  /**
+   * 在编辑节点、分组或边时的数据处理函数
    * @returns {Object|false} 返回 false 可以取消节点的操作
    */
   editHandler?: (e: EditHandlerEventArgs) => Object | false;
@@ -212,7 +230,8 @@ export interface BoardOptions {
       size: Number | Number[];
       color: String;
     }> &
-      ModelStyle;
+      ModelStyle &
+      CustomComboStyle;
     /**
      * 节点不同状态的样式
      */
@@ -235,6 +254,14 @@ export interface BoardOptions {
        * 边被选中时的样式
        */
       selected: StateStyles;
+    };
+    comboStates: {
+      /**
+       * 分组被选中时的样式
+       */
+      selected: {
+        "select-border": {};
+      };
     };
   };
   /**
@@ -267,5 +294,6 @@ export function defineFields(fields: Array<Field>): Array<Field> {}
  */
 export function defineTooltip(
   renderer: (model: Object, container: HTMLDivElement) => {},
-  offset?: { x: Number; y: Number }
+  offset?: { x: Number; y: Number },
+  trigger?: String
 ): Object {}

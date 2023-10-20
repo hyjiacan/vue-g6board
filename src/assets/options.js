@@ -5,9 +5,38 @@ import storage from '@/assets/storage'
 export default defineOptions({
   nodeFields: fields.nodeFields,
   edgeFields: fields.edgeFields,
+  comboFields: fields.comboFields,
   styles: {
     edge: {
-      type: 'polyline'
+      type: 'polyline',
+      style: {
+        stroke: 'purple'
+      }
+    },
+    combo: {
+      type: 'rect-ext',
+      style: {
+        stroke: 'red',
+        lineDash: [10, 2]
+      },
+      labelCfg: {
+        style: {
+          fontSize: 10,
+          stroke: 'red',
+          fill: 'blue',
+          backgroundColor: 'red'
+        }
+      },
+      title: {
+        style: {
+          stroke: 'blue'
+        }
+      },
+      background: {
+        style: {
+          fill: 'yellow'
+        }
+      }
     },
     nodeStates: {
       highlight: {
@@ -41,6 +70,26 @@ export default defineOptions({
       }
     }
   },
+  beforeEditHandler(e) {
+    if (e.type !== 'combo') {
+      return
+    }
+    const data = {
+      ...e.data,
+      type: 'rect-ext',
+    }
+    // 有个 21 的 padding
+    const bounds = e.item.getBBox()
+    const padding = 21 * 2
+    data.width = bounds.width - padding
+    data.height = bounds.height - padding
+    if (data.fixSize) {
+      data.fixed = true
+    } else {
+      data.fixed = false
+    }
+    return data
+  },
   editHandler(e) {
     const data = e.data
     if (e.type === 'node') {
@@ -50,7 +99,15 @@ export default defineOptions({
       }
       data.img = storage.getIcon(data.deviceType)
       data.size = storage.getSize(data.deviceType)
+    } else if (e.type === 'combo') {
+      data.label = data.name
+      if (data.fixed) {
+        data.fixSize = [data.width, data.height]
+      } else {
+        delete data.fixSize
+      }
     }
+    return data
   },
   tooltipRenderers: {
     node: defineTooltip(node => {

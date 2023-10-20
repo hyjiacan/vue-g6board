@@ -67,6 +67,7 @@ const FieldConfig = {
   readonly: false,
   /**
    * 是否可见
+   * @type {Boolean | Function(e: {data: Object, fields: Object})}
    */
   isVisible: true,
   /**
@@ -161,7 +162,18 @@ const BoardOptions = {
    */
   edgeFields: [],
   /**
-   * 在编辑节点或边时的数据处理函数
+   * 编辑分组时的字段
+   * @type {Field[]}
+   */
+  comboFields: [],
+  /**
+   * 在编辑节点、分组或边前的数据处理函数
+   * @type {Function}
+   * @returns {Object|false} 返回 false 可以取消节点的操作
+   */
+  beforeEditHandler: () => { },
+  /**
+   * 在编辑节点、分组或边时的数据处理函数
    * @type {Function}
    * @returns {Object|false} 返回 false 可以取消节点的操作
    */
@@ -202,6 +214,14 @@ const BoardOptions = {
        */
       selected: {
       },
+    },
+    comboStates: {
+      /**
+        * 分组被选中时的样式
+        */
+      selected: {
+        'select-border': {}
+      }
     },
   },
   /**
@@ -244,9 +264,10 @@ function defineFields(fields) {
  *
  * @param {Function<object>} renderer
  * @param {{x: number, y: number}} offset
+ * @param {string} [trigger=click]
  * @returns
  */
-function defineTooltip(renderer, offset) {
+function defineTooltip(renderer, offset, trigger) {
   offset = Object.assign({
     x: 10,
     y: 10
@@ -255,6 +276,7 @@ function defineTooltip(renderer, offset) {
     // offsetX 与 offsetY 需要加上父容器的 padding
     offsetX: offset.x,
     offsetY: offset.y,
+    trigger: trigger || 'click',
     shouldBegin() {
       // 仅在非编辑模式下才允许 tooltip 弹出
       if (this.editMode) {
@@ -268,7 +290,25 @@ function defineTooltip(renderer, offset) {
         return ''
       }
       const data = e.item.getModel()
+      const id = data.id
+
+      // 缓存数据
+      const cache = window.__g6board_tooltip_cache || {}
+
+      const now = new Date().getTime()
+      if (cache[id]) {
+        // 状态缓存 10 秒
+        if (cache[id].time && now - cache[id].time < 10000) {
+          return cache[id].element
+        }
+      }
+
       const container = document.createElement('div')
+      cache[id] = {
+        time: now,
+        element: container
+      }
+
       container.classList.add('g6-board--tooltip')
 
       const result = renderer(data, container)

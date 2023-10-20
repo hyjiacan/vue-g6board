@@ -18,6 +18,10 @@
   --contextmenu-gutter-background: #dbdada88;
 
   --contextmenu-separeator-color: #ebebeb transparent #fffefec7 transparent;
+
+  --input-tip-color: gray;
+
+  --zoom-tip-color: gray;
 }
 
 .g6-board--body {
@@ -98,7 +102,7 @@
 
 .g6-board--dialog {
   .input-tip {
-    color: #888;
+    color: var(--input-tip-color);
     font-size: x-small;
     line-height: 1.5;
     word-break: break-all;
@@ -113,5 +117,26 @@
 .g6-board--dialog-select-opions {
   .select-icon {
     .select-icon();
+  }
+}
+
+.g6-board--zoom-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--zoom-tip-color);
+  font-weight: bold;
+  z-index: 999;
+  font-size: 8em;
+  user-select: none;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:after {
+    content: "%";
   }
 }

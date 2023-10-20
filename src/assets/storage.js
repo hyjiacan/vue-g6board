@@ -4,6 +4,8 @@ import deviceTypes from "./deviceTypes"
 
 const storeKey = 'graph-data'
 
+const combos = []
+
 function getData() {
   let store = localStorage.getItem(storeKey)
   if (store) {
@@ -16,7 +18,8 @@ function getData() {
     })
     store = {
       nodes,
-      edges
+      edges,
+      combos
     }
   }
   return store

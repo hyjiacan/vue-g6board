@@ -68,7 +68,7 @@
           </el-radio-group>
 
           <component v-else-if="field.inputType === InputTypes.CUSTOM && field.component" v-model="form[field.name]"
-            :disabled="field.config.readonly" :style="field.style" :is="field.component" @change="onChange(field)" />
+            :disabled="field.config.readonly" :style="field.style" :is="ColorPicker" @change="onChange(field)" />
 
           <div class="input-tip" v-if="field.config.tip">
             {{ field.config.tip }}
@@ -130,7 +130,7 @@ export default {
       rules: {},
       // 标记量，用于在触发事件时，不执行 watch，以避免数据被循环处理
       noWatch: false,
-      fieldsMap: {},
+      fieldsMap: {}
     };
   },
   watch: {
@@ -156,7 +156,11 @@ export default {
     processFields() {
       // 处理校验规则和表单字段
       const rules = {};
-      const form = {};
+      const form = {
+        id: `g6-data-${new Date().getTime()}-${Math.round(
+          Math.random() * 10000
+        )}`
+      };
 
       const map = {};
 

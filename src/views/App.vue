@@ -30,12 +30,13 @@ import options from '../assets/options'
 
 export default {
   data() {
-    const { nodes, edges } = storage.get()
+    const { nodes, edges, combos } = storage.get()
     return {
       options,
       deviceTypes: storage.getDeviceTypes(),
       data: {
         nodes,
+        combos,
         edges: edges.map(edge => {
           if (edge.state === '正常') {
             edge.style = {

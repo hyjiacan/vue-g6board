@@ -39,6 +39,212 @@ G6.registerEdge('polyline-ext', {
   // }
 }, 'polyline')
 
+G6.registerCombo('rect-ext', {
+  drawShape(cfg, group) {
+    const style = this.getShapeStyle(cfg);
+    const rect = group.addShape('rect', {
+      attrs: {
+        ...style,
+      },
+      name: 'key-shape'
+    })
+    const titleKey = 'title'
+    const titleCfg = cfg[titleKey]
+    if (titleCfg) {
+      const { width, height } = style
+      group.addShape('rect', {
+        attrs: {
+          width: width,
+          height: 30,
+          x: -width / 2,
+          y: -height / 2 - 5,
+          ...titleCfg.style
+        },
+        draggable: titleCfg.draggable,
+        name: titleKey
+      })
+    }
+    const bgKey = 'background'
+    const bgCfg = cfg[bgKey]
+    if (cfg[bgKey]) {
+      const { width, height } = style
+      group.addShape(bgCfg.shape || 'rect', {
+        attrs: {
+          x: -width / 2,
+          y: -height / 2 - 5 + 30,
+          width: width,
+          height: height - 30,
+          ...bgCfg.style
+        },
+        draggable: bgCfg.draggable,
+        name: bgKey
+      })
+    }
+
+    return rect
+  },
+  afterUpdate(cfg, item) {
+    const group = item.get('group')
+    const shapes = group.getChildren()
+    const style = this.getShapeStyle(cfg);
+    const { width, height } = style
+
+    shapes.forEach(shape => {
+      const shapeName = shape.get('name')
+      if (shapeName === 'title') {
+        shape.attr({
+          width: width,
+          x: -width / 2,
+          y: -height / 2 - 5,
+        });
+        return
+      }
+      if (shapeName === 'background') {
+        shape.attr({
+          x: -width / 2,
+          y: -height / 2 - 5 + 30,
+          width: width,
+          height: height - 30,
+        });
+        return
+      }
+    })
+  }
+}, 'rect');
+// G6.registerCombo('rect-ext', {
+//   afterDraw(cfg, group, combo) {
+//     let { width, height } = cfg
+//     const handleSize = 50
+//     const handleHeight = 2
+//     const padding = 40
+//     const color = 'green'
+
+//     width += padding
+//     height += padding
+
+//     const origin = {
+//       x: -width / 2,
+//       y: -height / 2
+//     }
+
+//     const offset = {
+//       x: (width - handleSize) / 2,
+//       y: (height - handleSize) / 2,
+//     }
+
+//     // 允许分组拖动以调整大小
+//     // top
+//     const top = group.addShape('rect', {
+//       attrs: {
+//         x: origin.x + offset.x,
+//         y: origin.y - 6,
+//         height: handleHeight,
+//         width: handleSize,
+//         fill: color,
+//         cursor: 'ns-resize'
+//       },
+//       name: 'resize-handle-top'
+//     })
+
+//     // right
+//     const right = group.addShape('rect', {
+//       attrs: {
+//         x: origin.x + width - 1,
+//         y: origin.y + offset.y,
+//         width: handleHeight,
+//         height: handleSize,
+//         fill: color,
+//         cursor: 'ew-resize'
+//       },
+//       name: 'resize-handle-right'
+//     })
+//     // bottom
+//     const bottom = group.addShape('rect', {
+//       attrs: {
+//         x: origin.x + offset.x,
+//         y: origin.y + height - 6,
+//         height: handleHeight,
+//         width: handleSize,
+//         fill: color,
+//         cursor: 'ns-resize'
+//       },
+//       name: 'resize-handle-bottom'
+//     })
+//     // left
+//     const left = group.addShape('rect', {
+//       attrs: {
+//         x: origin.x - 1,
+//         y: origin.y + offset.y,
+//         width: handleHeight,
+//         height: handleSize,
+//         fill: color,
+//         cursor: 'ew-resize'
+//       },
+//       name: 'resize-handle-left'
+//     })
+
+//     // 事件设定
+//     let mouseDown = false
+//     let resizeDir = ''
+//     const pos = {
+//       x: 0,
+//       y: 0
+//     }
+
+//     function onMouseUp(e) {
+//       window.removeEventListener('mouseup', onMouseUp)
+
+//       if (!mouseDown) {
+//         return
+//       }
+//       mouseDown = false
+
+//       const { x, y } = e
+
+//       const attrs = combo.getBBox()
+//       console.info(attrs)
+//       const bounds = {
+//         x: attrs.canvasX,
+//         y: attrs.canvasY,
+//         width: attrs.width,
+//         height: attrs.height,
+//       }
+//       const boundsOffset = {
+//         x: x - pos.x,
+//         y: y - pos.y
+//       }
+//       if (resizeDir === 'top' || resizeDir === 'bottom') {
+//         bounds.y += boundsOffset.y
+//         bounds.height += boundsOffset.y
+//       } else {
+//         bounds.x += boundsOffset.x
+//         bounds.width += boundsOffset.x
+//       }
+
+//       console.info(boundsOffset, bounds)
+//       const graph = window.G6
+//       window.G6.updateItem(graph.findById(cfg.id), bounds)
+//     }
+
+//     function onMouseDown(dir, e) {
+//       e.preventDefault();
+//       resizeDir = dir
+//       const { x, y } = e
+
+//       mouseDown = true
+//       pos.x = x
+//       pos.y = y
+
+//       window.addEventListener('mouseup', onMouseUp)
+//     }
+
+//     top.on('mousedown', onMouseDown.bind(null, 'top'))
+//     right.on('mousedown', onMouseDown.bind(null, 'right'))
+//     bottom.on('mousedown', onMouseDown.bind(null, 'bottom'))
+//     left.on('mousedown', onMouseDown.bind(null, 'left'))
+//   }
+// }, 'rect')
+
 G6.registerBehavior('select-item', {
   getEvents() {
     return {
@@ -74,6 +280,7 @@ G6.registerBehavior('select-item', {
   }
 })
 
+// TODO 添加连线到分组的支持
 G6.registerBehavior('add-edge', {
   getEvents() {
     return {
@@ -83,6 +290,45 @@ G6.registerBehavior('add-edge', {
       'edge:click': 'onEdgeClick'
     };
   },
+  onEnd(model) {
+    const graph = this.graph
+    const source = this.edge.getModel().source
+    const target = model.id
+    // 不允许连线自环
+    if (source === target) {
+      // eslint-disable-next-line
+      console.debug(`The edge is a loop, abort!`)
+      graph.removeItem(this.edge);
+      this.edge = null;
+      this.addingEdge = false;
+      return
+    }
+    // 如果边已经存在，则取消此操作
+    // 禁止两个节点间连接多条线
+    if (graph.find('edge', item => {
+      const itemModel = item.getModel()
+      return (itemModel.source === source && itemModel.target === target) ||
+        (itemModel.source === target && itemModel.target === source)
+    })) {
+      // eslint-disable-next-line
+      console.debug(`The edge from ${source} to ${target} is duplicated, abort!`)
+      graph.removeItem(this.edge);
+      this.edge = null;
+      this.addingEdge = false;
+      return
+    }
+    const defaultStyle = graph.cfg.defaultEdge.style
+    graph.updateItem(this.edge, {
+      target: target,
+      style: {
+        ...defaultStyle
+      }
+    });
+    this.edge.toFront()
+    // graph.setItemState(this.edge, 'selected', true);
+    this.edge = null;
+    this.addingEdge = false;
+  },
   onClick(ev) {
     const node = ev.item;
     const graph = this.graph;
@@ -90,49 +336,25 @@ G6.registerBehavior('add-edge', {
       x: ev.x,
       y: ev.y
     };
+    // function cancel(e) {
+    //   if (e.keyCode === 27) {
+    //     window.removeEventListener('keydown', cancel)
+    //     // ESC 取消连线
+    //     graph.removeItem(this.edge);
+    //     this.edge = null;
+    //     this.addingEdge = false;
+    //   }
+    // }
     const model = node.getModel();
     if (this.addingEdge && this.edge) {
-      const source = this.edge.getModel().source
-      const target = model.id
-      // 不允许连线自环
-      if (source === target) {
-        // eslint-disable-next-line
-        console.debug(`The edge is a loop, abort!`)
-        this.graph.removeItem(this.edge);
-        this.edge = null;
-        this.addingEdge = false;
-        return
-      }
-      // 如果边已经存在，则取消此操作
-      // 禁止两个节点间连接多条线
-      if (this.graph.find('edge', item => {
-        const itemModel = item.getModel()
-        return (itemModel.source === source && itemModel.target === target) ||
-          (itemModel.source === target && itemModel.target === source)
-      })) {
-        // eslint-disable-next-line
-        console.debug(`The edge from ${source} to ${target} is duplicated, abort!`)
-        this.graph.removeItem(this.edge);
-        this.edge = null;
-        this.addingEdge = false;
-        return
-      }
-      graph.updateItem(this.edge, {
-        target: target,
-        style: {
-          stroke: 'black'
-        }
-      });
-      // graph.setItemState(this.edge, 'selected', true);
-      this.edge = null;
-      this.addingEdge = false;
+      this.onEnd(model)
     } else {
       const option = {
         type: 'polyline-ext',
         source: model.id,
         target: point,
         style: {
-          stroke: 'blue',
+          ...this.graph.cfg.defaultEdge.style,
           endArrow: true
         }
       }
@@ -146,6 +368,7 @@ G6.registerBehavior('add-edge', {
       }
       this.edge = graph.addItem('edge', option);
       this.addingEdge = true;
+      // window.addEventListener('keydown', cancel)
     }
   },
   onMousemove(ev) {
@@ -160,13 +383,35 @@ G6.registerBehavior('add-edge', {
     }
   },
   onEdgeClick(ev) {
-    const currentEdge = ev.item;
     // 拖拽过程中，点击会点击到新增的边上
-    if (this.addingEdge && this.edge == currentEdge) {
-      this.graph.removeItem(this.edge);
-      this.edge = null;
-      this.addingEdge = false;
+    if (!this.addingEdge || this.edge !== ev.item) {
+      return
     }
+
+    // 突然出现鼠标始终会点击在线上的问题，在此添加代码片段以处理
+    const graph = this.graph
+    const { x, y } = graph.getPointByClient(ev.clientX, ev.clientY);
+
+    let targetItem
+    const nodes = graph.getNodes()
+    for (const node of nodes) {
+      const bbox = node.getBBox();
+      if (x >= bbox.minX && x <= bbox.maxX && y >= bbox.minY && y <= bbox.maxY) {
+        targetItem = node;
+        break
+      }
+    }
+
+    if (targetItem) {
+      this.onEnd(targetItem.getModel())
+      return
+    }
+
+    // eslint-disable-next-line
+    console.debug(`The edge adding is canceled!`)
+    this.graph.removeItem(this.edge);
+    this.edge = null;
+    this.addingEdge = false;
   }
 });
 
@@ -176,6 +421,7 @@ G6.registerBehavior('contextmenu', {
       'canvas:contextmenu': 'onCanvasContextMenu',
       'node:contextmenu': 'onNodeContextMenu',
       'edge:contextmenu': 'onEdgeContextMenu',
+      'combo:contextmenu': 'onComboContextMenu',
     }
   },
   onCanvasContextMenu(e) {
@@ -186,5 +432,8 @@ G6.registerBehavior('contextmenu', {
   },
   onEdgeContextMenu(e) {
     EventBus.emit('edge:contextmenu', e)
+  },
+  onComboContextMenu(e) {
+    EventBus.emit('combo:contextmenu', e)
   },
 })

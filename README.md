@@ -15,13 +15,13 @@ npm i @wangankeji/vue-g6board
   <g6-board ref="board" :options="options" :data="data" :edit-mode="editMode" />
 </template>
 <script>
-import G6Board from '@wangankeji/vue-g6board'
+import {defineOptions} from '@wangankeji/vue-g6board'
 
 export default {
   components: {G6Board},
   data() {
     return {
-      options: G6Board.defineOptions({
+      options: defineOptions({
 
       }),
       data: {
@@ -39,9 +39,13 @@ export default {
 
 | 名称      | 类型    | 必填 | 默认值 | 描述                                            |
 | --------- | ------- | ---- | ------ | ----------------------------------------------- |
-| options   | Object  | 是   | -      | 绘制的选项，使用 `G6Board.defineOptions()` 定义 |
+| options   | Object  | 是   | -      | 绘制的选项，使用 `defineOptions()` 定义 |
 | data      | Object  | 是   | -      | 绘制的数据，结构见上方示例的 `data`             |
 | edit-mode | boolean | 是   | -      | 是否启用编辑模式                                |
+
+## 配置
+
+配置是指需要传给属性 `options` 的数据，其由 `defineOptions` 定义。
 
 ## 函数
 
@@ -66,6 +70,18 @@ export default {
 
 清除节点的查找命中状态。
 
+### exportImage
+
+`exportImage(name, type, config)`
+
+导出图片。
+
+### exportImageURL
+
+`exportImageURL(name, type, config): Promise<String>`
+
+导出图片为 Data URL。
+
 ## 事件
 
 ### ready
@@ -77,6 +93,20 @@ export default {
 ```json
 {
   "graph": G6.Graph
+}
+```
+
+### zoom
+
+图形缩放时触发。
+
+参数:
+
+```json
+{
+  value: 100,
+  event: MouseWhellEvent,
+  graph: G6.Graph
 }
 ```
 
