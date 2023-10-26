@@ -68,7 +68,7 @@ G6.registerBehavior('click-add-node', {
     }
     const data = graph._addData
     graph._addData = null
-    const node = graph.addItem('node', {
+    graph.addItem('node', {
       x: ev.canvasX,
       y: ev.canvasY,
       id: `node-${addedCount}`, // 生成唯一的 id

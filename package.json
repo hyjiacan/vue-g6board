@@ -31,9 +31,6 @@
   "license": "MIT",
   "files": [
     "dist",
-    "src/assets",
-    "src/components",
-    "src/views",
     "types",
     "LICENSE",
     "README.md"

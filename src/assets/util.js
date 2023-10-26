@@ -8,7 +8,6 @@ const iconCodes = {}
 let fontFamily
 
 async function loadIcons() {
-  console.debug('Loading fonticons ...')
   const json = await fetch('/static/icons/iconfont.json').then(resp => resp.json())
   fontFamily = json.font_family
   json.glyphs.forEach((icon) => {

@@ -51,7 +51,7 @@ const nodeFields = defineFields([{
       }
 
       if (!deviceType) {
-        console.debug('未选择设备类型')
+        // console.debug('未选择设备类型')
         this.options = []
         return
       }
@@ -59,18 +59,18 @@ const nodeFields = defineFields([{
       const list = data[deviceType]
 
       if (!list) {
-        console.debug('设备类型下没有设备')
+        // console.debug('设备类型下没有设备')
         this.options = []
         return
       }
 
       if (!keyword) {
-        console.debug('关键字为空')
+        // console.debug('关键字为空')
         this.options = list
         return
       }
 
-      console.debug('有数据')
+      // console.debug('有数据')
 
       this.options = list.filter(item => {
         return item.label.indexOf(keyword) !== -1 || item.value.indexOf(keyword) !== -1

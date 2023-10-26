@@ -83,9 +83,11 @@ export default {
       const nodes = this.$refs.board.findNode(node => {
         return node.ip.indexOf(keyword) !== -1 || node.label.indexOf(keyword) !== -1
       }, true)
+      // eslint-disable-next-line
       console.info(nodes)
     },
     onGraphChange(e) {
+      // eslint-disable-next-line
       console.info(e)
     }
   },
