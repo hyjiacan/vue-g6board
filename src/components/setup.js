@@ -325,6 +325,9 @@ G6.registerBehavior('add-edge', {
       }
     });
     this.edge.toFront()
+    graph.emit('custom:add-edge', {
+      item: this.edge
+    })
     // graph.setItemState(this.edge, 'selected', true);
     this.edge = null;
     this.addingEdge = false;

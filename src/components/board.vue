@@ -134,7 +134,11 @@ export default {
               if (handleResult === false) {
                 return
               }
-              if (handleResult !== undefined) {
+              if (handleResult === undefined) {
+                form = {
+                  ...data
+                }
+              } else {
                 form = handleResult
               }
             } else {
@@ -152,8 +156,13 @@ export default {
           command: 'remove-node',
           handler: (e) => {
             this.$confirm('您正在移除节点，此操作会同时移除与此节点相连接的边，是否继续？', '提示').then(() => {
-              const data = e.data
-              this.graph.removeItem(data)
+              const node = e.data
+              const data = node.getModel()
+              this.graph.removeItem(node)
+              this.emitChangeEvent('node-remove', {
+                item: node,
+                data: data
+              })
             }).catch(() => { })
           }
         }],
@@ -162,8 +171,13 @@ export default {
           command: 'remove-edge',
           handler: (e) => {
             this.$confirm('您正在移除连接，是否继续？', '提示').then(() => {
-              const data = e.data
-              this.graph.removeItem(data)
+              const edge = e.data
+              const data = edge.getModel()
+              this.graph.removeItem(edge)
+              this.emitChangeEvent('edge-remove', {
+                item: edge,
+                data: data
+              })
             }).catch(() => { })
           }
         }],
@@ -238,8 +252,13 @@ export default {
           command: 'remove-combo',
           handler: (e) => {
             this.$confirm('您正在解散分组，是否继续？', '提示').then(() => {
-              const data = e.data
-              this.graph.uncombo(data)
+              const combo = e.data
+              const data = combo.getModel()
+              this.graph.uncombo(combo)
+              this.emitChangeEvent('combo-remove', {
+                item: combo,
+                data: data
+              })
             }).catch(() => { })
           }
         }]
@@ -368,6 +387,10 @@ export default {
       const mode = this.editMode ? 'edit' : 'default'
       this.graph.setMode(mode)
 
+      if (!this.editMode) {
+        this.$refs.contextmenu.hide()
+      }
+
       // tooltip 插件，在编辑模式下禁用
       const tooltipEnabled = !this.editMode
       this.tooltipPlugins.forEach(tooltip => {
@@ -400,6 +423,9 @@ export default {
       EventBus.on('edge:contextmenu', this.onEdgeContextMenu)
       EventBus.on('combo:contextmenu', this.onComboContextMenu)
       this.graph.on('wheelzoom', this.onCanvasZoom)
+      this.graph.on('custom:add-edge', this.onEdgeAdded)
+      this.graph.on('node:dragend', this.onDragEnd)
+      this.graph.on('combo:dragend', this.onDragEnd)
     },
     unbindMethods() {
       EventBus.off('canvas:contextmenu', this.onCanvasContextMenu)
@@ -407,6 +433,21 @@ export default {
       EventBus.off('edge:contextmenu', this.onEdgeContextMenu)
       EventBus.off('combo:contextmenu', this.onComboContextMenu)
       this.graph.off('wheelzoom', this.onCanvasZoom)
+      this.graph.off('custom:add-edge', this.onEdgeAdded)
+      this.graph.off('node:dragend', this.onDragEnd)
+      this.graph.off('combo:dragend', this.onDragEnd)
+    },
+    onEdgeAdded(e) {
+      this.emitChangeEvent('edge-add', {
+        item: e.item,
+        data: e.item.getModel()
+      })
+    },
+    onDragEnd(e) {
+      this.emitChangeEvent('location', {
+        item: e.item,
+        data: e.item.getModel()
+      })
     },
     onCanvasZoom(e) {
       clearTimeout(this.zoom.handleTimer)
@@ -503,8 +544,8 @@ export default {
           return
         }
         this.graph.updateItem(editItem, form)
-        this.$emit('node-update', {
-          node: editItem,
+        this.emitChangeEvent('node-update', {
+          item: editItem,
           data: form
         })
       } else {
@@ -513,24 +554,28 @@ export default {
           this.$message.warning('添加失败，此数据已经存在')
           return
         }
-        this.$emit('node-add', {
-          node: null,
-          data: form
-        })
         const newItem = this.graph.addItem('node', form)
         newItem.toFront()
+        this.emitChangeEvent('node-add', {
+          item: null,
+          data: form
+        })
       }
       this.dialogs.node.visible = false
     },
-    onEdgeOk() {
-      const editItem = this.dialogs.node.editItem
-      const form = this.dialogs.node.form
-
-      if (editItem) {
-        this.graph.updateItem(editItem, form)
-      } else {
-        this.graph.addItem('node', form)
+    emitChangeEvent(type, e) {
+      if (!this.editMode) {
+        // 非编辑模式下，不触发变更事件
+        return
       }
+      this.$nextTick(() => {
+        e.type = type
+        e.graph = this.graph
+        this.$emit(type, e)
+        this.$emit('change', e)
+      })
+    },
+    onEdgeOk() {
     },
     async onComboOk() {
       const editItem = this.dialogs.combo.editItem
@@ -546,7 +591,7 @@ export default {
       const e = {
         type: 'combo',
         data: form,
-        node: editItem,
+        item: editItem,
         graph: this.graph
       }
 
@@ -577,8 +622,8 @@ export default {
         //   return
         // }
         this.graph.updateItem(editItem, form)
-        this.$emit('combo-update', {
-          node: editItem,
+        this.emitChangeEvent('combo-update', {
+          item: editItem,
           data: form
         })
       } else {
@@ -587,9 +632,9 @@ export default {
         //   this.$message.warning('添加失败，此数据已经存在')
         //   return
         // }
-        this.graph.addItem('combo', form)
-        this.$emit('combo-add', {
-          node: null,
+        const item = this.graph.addItem('combo', form)
+        this.emitChangeEvent('combo-add', {
+          item: item,
           data: form
         })
       }

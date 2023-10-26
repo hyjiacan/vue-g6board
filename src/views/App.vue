@@ -21,7 +21,7 @@
       </div>
 
     </div>
-    <g6-board ref="board" :options="options" :data="data" :edit-mode="editMode" />
+    <g6-board ref="board" :options="options" :data="data" :edit-mode="editMode" @change="onGraphChange" />
   </div>
 </template>
 <script>
@@ -84,6 +84,9 @@ export default {
         return node.ip.indexOf(keyword) !== -1 || node.label.indexOf(keyword) !== -1
       }, true)
       console.info(nodes)
+    },
+    onGraphChange(e) {
+      console.info(e)
     }
   },
 }

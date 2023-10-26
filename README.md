@@ -37,11 +37,11 @@ export default {
 
 ## 属性
 
-| 名称      | 类型    | 必填 | 默认值 | 描述                                            |
-| --------- | ------- | ---- | ------ | ----------------------------------------------- |
+| 名称      | 类型    | 必填 | 默认值 | 描述                                    |
+| --------- | ------- | ---- | ------ | --------------------------------------- |
 | options   | Object  | 是   | -      | 绘制的选项，使用 `defineOptions()` 定义 |
-| data      | Object  | 是   | -      | 绘制的数据，结构见上方示例的 `data`             |
-| edit-mode | boolean | 是   | -      | 是否启用编辑模式                                |
+| data      | Object  | 是   | -      | 绘制的数据，结构见上方示例的 `data`     |
+| edit-mode | boolean | 是   | -      | 是否启用编辑模式                        |
 
 ## 配置
 
@@ -106,6 +106,31 @@ export default {
 {
   value: 100,
   event: MouseWhellEvent,
+  graph: G6.Graph
+}
+```
+
+### change
+
+在编辑模式时，若发生了以下操作则会触发此事件:
+
+- 添加节点 `node-add`
+- 编辑节点 `node-edit`
+- 移除节点 `node-remove`
+- 添加分组 `combo-add`
+- 编辑分组 `combo-edit`
+- 移除分组 `combo-remove`
+- 添加边 `edge-add`
+- 移除边 `edge-remove`
+- 分组/节点/边的位置变更 `location`
+
+参数:
+
+```json
+{
+  type: '',
+  item: {},
+  data: {},
   graph: G6.Graph
 }
 ```

@@ -171,7 +171,7 @@ const BoardOptions = {
    * @type {Function}
    * @returns {Object|false} 返回 false 可以取消节点的操作
    */
-  beforeEditHandler: () => { },
+  beforeEditHandler: (e) => { return e.data },
   /**
    * 在编辑节点、分组或边时的数据处理函数
    * @type {Function}

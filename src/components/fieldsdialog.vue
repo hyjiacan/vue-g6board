@@ -68,7 +68,7 @@
           </el-radio-group>
 
           <component v-else-if="field.inputType === InputTypes.CUSTOM && field.component" v-model="form[field.name]"
-            :disabled="field.config.readonly" :style="field.style" :is="ColorPicker" @change="onChange(field)" />
+            :disabled="field.config.readonly" :style="field.style" :is="field.component" @change="onChange(field)" />
 
           <div class="input-tip" v-if="field.config.tip">
             {{ field.config.tip }}
