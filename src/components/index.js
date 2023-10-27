@@ -4,7 +4,8 @@ import {
   defineFields,
   defineTooltip,
   defineOptions,
-  InputTypes
+  InputTypes,
+  BUILTIN_FIELDS
 } from './models'
 
 function install(Vue) {
@@ -19,5 +20,6 @@ export {
   defineFields,
   defineTooltip,
   defineOptions,
-  InputTypes
+  InputTypes,
+  BUILTIN_FIELDS
 }

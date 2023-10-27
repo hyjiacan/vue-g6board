@@ -353,7 +353,6 @@ G6.registerBehavior('add-edge', {
       this.onEnd(model)
     } else {
       const option = {
-        type: 'polyline-ext',
         source: model.id,
         target: point,
         style: {

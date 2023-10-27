@@ -53,34 +53,30 @@ export default {
 
 ### getGraph
 
-获取当前图的实例。
+`this.$refs.board.getGraph()` 获取当前图的实例。
 
 ### getData
 
-获取当前图的数据。
+`this.$refs.board.getData()` 获取当前图的数据。通常在需要保存数据时调用。
 
 ### findNode
 
-`findNode(predicator, highlight)` 在图中查找节点，返回命中的项。
+`this.$refs.board.findNode(predicator, highlight)` 在图中查找节点，返回命中的项。
 
 - `predicator` 判定函数，返回 `true` 表示命中
 - `highlight` 是否在命中时高亮节点
 
 ### clearSelection
 
-清除节点的查找命中状态。
+`this.$refs.board.clearSelection()` 清除节点的查找命中状态。
 
 ### exportImage
 
-`exportImage(name, type, config)`
-
-导出图片。
+`this.$refs.board.exportImage(name, type, config)` 导出图片。
 
 ### exportImageURL
 
-`exportImageURL(name, type, config): Promise<String>`
-
-导出图片为 Data URL。
+`this.$refs.board.exportImageURL(name, type, config): Promise<String>` 导出图片为 Data URL。
 
 ## 事件
 

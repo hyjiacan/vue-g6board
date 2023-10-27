@@ -238,6 +238,13 @@ const BoardOptions = {
      * @type {defineTooltip}
      */
     edge: () => { },
+  },
+  contextmenu: {
+    /**
+     * 是否允许打开右键菜单
+     * @type {Boolean|Function}
+     */
+    visible: true
   }
 }
 

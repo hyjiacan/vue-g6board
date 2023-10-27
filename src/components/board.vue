@@ -114,13 +114,13 @@ export default {
           label: '编辑节点',
           command: 'edit-node',
           handler: (e) => {
-            const node = e.data
-            const data = node.getModel()
+            const item = e.item
+            const data = item.getModel()
 
             const e1 = {
               type: 'node',
               data: data,
-              item: node,
+              item: item,
               graph: this.graph
             }
 
@@ -148,7 +148,7 @@ export default {
             }
 
             this.dialogs.node.form = form
-            this.dialogs.node.editItem = node
+            this.dialogs.node.editItem = item
             this.dialogs.node.visible = true
           }
         }, {
@@ -156,11 +156,11 @@ export default {
           command: 'remove-node',
           handler: (e) => {
             this.$confirm('您正在移除节点，此操作会同时移除与此节点相连接的边，是否继续？', '提示').then(() => {
-              const node = e.data
-              const data = node.getModel()
-              this.graph.removeItem(node)
+              const item = e.item
+              const data = item.getModel()
+              this.graph.removeItem(item)
               this.emitChangeEvent('node-remove', {
-                item: node,
+                item: item,
                 data: data
               })
             }).catch(() => { })
@@ -171,11 +171,11 @@ export default {
           command: 'remove-edge',
           handler: (e) => {
             this.$confirm('您正在移除连接，是否继续？', '提示').then(() => {
-              const edge = e.data
-              const data = edge.getModel()
-              this.graph.removeItem(edge)
+              const item = e.item
+              const data = item.getModel()
+              this.graph.removeItem(item)
               this.emitChangeEvent('edge-remove', {
-                item: edge,
+                item: item,
                 data: data
               })
             }).catch(() => { })
@@ -185,7 +185,7 @@ export default {
           label: '添加节点',
           command: 'add-node',
           handler: (e) => {
-            const comboId = e.data.getID()
+            const comboId = e.item.getID()
             this.dialogs.node.editItem = null
             this.dialogs.node.form = {
               comboId
@@ -199,7 +199,7 @@ export default {
           label: '添加分组',
           command: 'add-combo',
           handler: (e) => {
-            const comboId = e.data.getID()
+            const comboId = e.item.getID()
             this.dialogs.combo.editItem = null
             this.dialogs.combo.form = {
               parentId: comboId
@@ -213,13 +213,13 @@ export default {
           label: '编辑分组',
           command: 'edit-combo',
           handler: (e) => {
-            const combo = e.data
-            const data = combo.getModel()
+            const item = e.item
+            const data = item.getModel()
 
             const e1 = {
               type: 'combo',
               data: data,
-              item: combo,
+              item: item,
               graph: this.graph
             }
 
@@ -243,7 +243,7 @@ export default {
             }
 
             this.dialogs.combo.form = form
-            this.dialogs.combo.editItem = combo
+            this.dialogs.combo.editItem = item
 
             this.dialogs.combo.visible = true
           }
@@ -252,11 +252,11 @@ export default {
           command: 'remove-combo',
           handler: (e) => {
             this.$confirm('您正在解散分组，是否继续？', '提示').then(() => {
-              const combo = e.data
-              const data = combo.getModel()
-              this.graph.uncombo(combo)
+              const item = e.item
+              const data = item.getModel()
+              this.graph.uncombo(item)
               this.emitChangeEvent('combo-remove', {
-                item: combo,
+                item: item,
                 data: data
               })
             }).catch(() => { })
@@ -270,6 +270,8 @@ export default {
         visible: false
       },
       tooltipPlugins: [],
+      gridPlugin: null,
+      snapLinePlugin: null
     }
   },
   mounted() {
@@ -282,6 +284,36 @@ export default {
     init() {
       const styles = this.options.styles
       const size = this.getBounds()
+      // const tc = document.createElement('div');
+      // tc.id = 'toolbarContainer';
+      // tc.style.position = 'absolute'
+      // tc.style.top = '60px'
+      // tc.style.right = '20px'
+      // tc.style.width = '400px'
+      // document.body.appendChild(tc);
+      // const toolbar = new G6.ToolBar({
+      //   container: tc,
+      //   getContent: () => {
+      //     return `
+      //       <ul>
+      //         <li code='add'>增加节点</li>
+      //         <li code='undo'>撤销</li>
+      //       </ul>
+      //     `
+      //   },
+      //   handleClick: (code, graph) => {
+      //     if (code === 'add') {
+      //       graph.addItem('node', {
+      //         id: 'node2',
+      //         label: 'node2',
+      //         x: 300,
+      //         y: 150
+      //       })
+      //     } else if (code === 'undo') {
+      //       toolbar.undo()
+      //     }
+      //   }
+      // })
 
       const plugins = []
       if (this.options.tooltipRenderers.node) {
@@ -391,6 +423,21 @@ export default {
         this.$refs.contextmenu.hide()
       }
 
+      // 网格插件
+      if (this.editMode) {
+        this.gridPlugin = new G6.Grid()
+        this.graph.addPlugin(this.gridPlugin)
+        this.snapLinePlugin = new G6.SnapLine()
+        this.graph.addPlugin(this.snapLinePlugin)
+      } else {
+        if (this.gridPlugin) {
+          this.graph.removePlugin(this.gridPlugin)
+        }
+        if (this.snapLinePlugin) {
+          this.graph.removePlugin(this.snapLinePlugin)
+        }
+      }
+
       // tooltip 插件，在编辑模式下禁用
       const tooltipEnabled = !this.editMode
       this.tooltipPlugins.forEach(tooltip => {
@@ -494,12 +541,27 @@ export default {
     showContextMenu(e, type) {
       let x = e.canvasX
       let y = e.canvasY
-      const data = e.item
+      const item = e.item
+
+      // 检查是否允许打开
+      if (this.options.contextmenu) {
+        let visible = this.options.contextmenu.visible
+        if (visible !== undefined) {
+          if (typeof visible === 'function') {
+            visible = visible.call(this.graph, { type, item, data: item?.getModel(), graph: this.graph })
+          }
+
+          if (!visible) {
+            this.$refs.contextmenu.hide()
+            return
+          }
+        }
+      }
 
       // const bounds = this.getBounds()
       // x += bounds.left
       // y += bounds.top
-      this.$refs.contextmenu.show(x, y, type, data)
+      this.$refs.contextmenu.show(x, y, type, item)
     },
     async onNodeOk() {
       const editItem = this.dialogs.node.editItem

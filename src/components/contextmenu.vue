@@ -50,7 +50,7 @@ export default {
         x: 0,
         y: 0
       },
-      data: null
+      item: null
     }
   },
   mounted() {
@@ -79,11 +79,11 @@ export default {
         top: rect.top
       }
     },
-    async show(x, y, active, data) {
+    async show(x, y, active, item) {
       this.position.x = x
       this.position.y = y
 
-      this.data = data
+      this.item = item
 
       if (this.visible) {
         this.visible = false
@@ -141,7 +141,7 @@ export default {
           command: item.command,
           x: this.position.x,
           y: this.position.y,
-          data: this.data,
+          item: this.item,
         }
         this.$emit(`command`, e)
         if (item.handler) {

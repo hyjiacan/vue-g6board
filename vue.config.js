@@ -3,7 +3,7 @@ const config = {
   filenameHashing: false,
   configureWebpack: {
     optimization: {
-      minimize: true,
+      minimize: false,
     },
     externals: process.env.NODE_ENV === 'production' ? [
       '@antv/g6',

@@ -104,6 +104,13 @@ export interface FieldConfig {
   onchange?: (e: FieldChangeEventArgs) => void;
 }
 
+export type EDGE_TYPE = {}
+export type EDGE_CURVE_OFFSET = {}
+export type EDGE_STYLE = {}
+export type EDGE_VISIBLE = {}
+
+export type BUILTIN_FIELDS = EDGE_TYPE | EDGE_CURVE_OFFSET | EDGE_STYLE | EDGE_VISIBLE;
+
 export interface FieldOption {
   /**
    * 名称
@@ -178,6 +185,13 @@ export type CustomComboStyle = Partial<{
     style: ModelStyle;
   };
 }>;
+
+export function ContextMenuVisibleHandler(
+  type: "node" | "edge" | "canvas",
+  item?: Object,
+  data?: Object,
+  graph: Graph
+): Boolean;
 
 export interface BoardOptions {
   /**
@@ -276,6 +290,13 @@ export interface BoardOptions {
      * 边的 Tooltip 渲染器
      */
     edge: typeof defineTooltip;
+  };
+  /**
+   * 右键菜单控制
+   */
+  contextmenu: {
+    // 是否可见
+    visible: Boolean | typeof ContextMenuVisibleHandler;
   };
 }
 
