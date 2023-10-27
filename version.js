@@ -7,7 +7,7 @@ const spawn = require('cross-spawn')
 let pkg = require('./package.json')
 
 function runCommand(...commands) {
-  console.info(commands.join(''))
+  console.info(commands.join(' '))
   let msg
   for (const command of commands) {
     const temp = typeof command === 'string' ? command.split(' ') : command
@@ -46,7 +46,7 @@ try {
 } catch (e) {
   // ignore
 }
-
+console.info('Update version ...')
 const LOCK = process.argv[2] === '--lock-version' || process.argv[2] === '-l'
 
 if (LOCK) {
