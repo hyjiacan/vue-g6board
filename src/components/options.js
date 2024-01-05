@@ -73,7 +73,7 @@ G6.registerBehavior('click-add-node', {
       y: ev.canvasY,
       id: `node-${addedCount}`, // 生成唯一的 id
       type: 'image',
-      img: '/static/images/star.png',
+      img: (window.$g6root || '') + '/static/images/star.png',
       label: data.deviceName
     });
     addedCount++;

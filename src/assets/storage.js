@@ -26,7 +26,7 @@ function getData() {
 }
 
 function getIcon(deviceType) {
-  return `/static/icons/${deviceType}.svg`
+  return `${window.$g6root || ''}/static/icons/${deviceType}.svg`
 }
 
 function setData(data) {
