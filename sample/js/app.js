@@ -155,3337 +155,443 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/cache-loader/dist/cjs.js?!./node_modules/babel-loader/lib/index.js!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/board.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/board.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ \"./node_modules/core-js/modules/es.array.for-each.js\");\n/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.some */ \"./node_modules/core-js/modules/es.array.some.js\");\n/* harmony import */ var core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_some__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ \"./node_modules/core-js/modules/es.object.to-string.js\");\n/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ \"./node_modules/core-js/modules/web.dom-collections.for-each.js\");\n/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! regenerator-runtime/runtime */ \"./node_modules/regenerator-runtime/runtime.js\");\n/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ \"./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js\");\n/* harmony import */ var D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/toConsumableArray */ \"./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/toConsumableArray.js\");\n/* harmony import */ var D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/objectSpread2 */ \"./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/objectSpread2.js\");\n/* harmony import */ var _antv_g6__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @antv/g6 */ \"./node_modules/@antv/g6/es/index.js\");\n/* harmony import */ var _fieldsdialog_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./fieldsdialog.vue */ \"./src/components/fieldsdialog.vue\");\n/* harmony import */ var _contextmenu__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./contextmenu */ \"./src/components/contextmenu.vue\");\n/* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./events */ \"./src/components/events.js\");\n/* harmony import */ var _setup__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./setup */ \"./src/components/setup.js\");\n\n\n\n\n\n\n\n\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  components: {\n    FieldsDialog: _fieldsdialog_vue__WEBPACK_IMPORTED_MODULE_9__[\"default\"],\n    contextmenu: _contextmenu__WEBPACK_IMPORTED_MODULE_10__[\"default\"]\n  },\n  props: {\n    title: {\n      type: String,\n      default: '图编辑器'\n    },\n    data: {\n      type: Object,\n      required: true\n    },\n    editMode: {\n      type: Boolean,\n      default: false\n    },\n\n    /**\n     * @type {BoardOptions}\n     */\n    options: {\n      type: Object,\n      required: true\n    }\n  },\n  watch: {\n    editMode: function editMode() {\n      if (!this.graph) {\n        return;\n      }\n\n      this.updateMode();\n    }\n  },\n  data: function data() {\n    var _this = this;\n\n    return {\n      /**\n       * @type {G6.Graph}\n       */\n      graph: null,\n      dialogs: {\n        node: {\n          editItem: null,\n          visible: false,\n          form: {},\n          position: {\n            x: 0,\n            y: 0\n          }\n        },\n        edge: {\n          visible: false,\n          form: {}\n        },\n        combo: {\n          editItem: null,\n          visible: false,\n          form: {},\n          position: {\n            x: 0,\n            y: 0\n          }\n        }\n      },\n      contextmenuTitle: '操作',\n      contextmenus: {\n        canvas: [{\n          label: '添加节点',\n          command: 'add-node',\n          handler: function handler(e) {\n            _this.dialogs.node.editItem = null;\n            _this.dialogs.node.form = {};\n            _this.dialogs.node.position.x = e.x;\n            _this.dialogs.node.position.y = e.y;\n            _this.dialogs.node.visible = true;\n          }\n        }, {\n          label: '添加分组',\n          command: 'add-combo',\n          handler: function handler(e) {\n            _this.dialogs.combo.editItem = null;\n            _this.dialogs.combo.form = {};\n            _this.dialogs.combo.position.x = e.x;\n            _this.dialogs.combo.position.y = e.y;\n            _this.dialogs.combo.visible = true;\n          }\n        }],\n        node: [{\n          label: '编辑节点',\n          command: 'edit-node',\n          handler: function handler(e) {\n            var item = e.item;\n            var data = item.getModel();\n            var e1 = {\n              type: 'node',\n              data: data,\n              item: item,\n              graph: _this.graph\n            };\n            var form;\n            var handler = _this.options.beforeEditHandler;\n\n            if (handler) {\n              // 如果有返回值，则使用返回值作为节点数据\n              var handleResult = handler(e1); // 返回 false 取消编辑\n\n              if (handleResult === false) {\n                return;\n              }\n\n              if (handleResult === undefined) {\n                form = Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_7__[\"default\"])({}, data);\n              } else {\n                form = handleResult;\n              }\n            } else {\n              form = Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_7__[\"default\"])({}, data);\n            }\n\n            _this.dialogs.node.form = form;\n            _this.dialogs.node.editItem = item;\n            _this.dialogs.node.visible = true;\n          }\n        }, {\n          label: '移除节点',\n          command: 'remove-node',\n          handler: function handler(e) {\n            _this.$confirm('您正在移除节点，此操作会同时移除与此节点相连接的边，是否继续？', '提示').then(function () {\n              var item = e.item;\n              var data = item.getModel();\n\n              _this.graph.removeItem(item);\n\n              _this.emitChangeEvent('node-remove', {\n                item: item,\n                data: data\n              });\n            }).catch(function () {});\n          }\n        }],\n        edge: [{\n          label: '移除边',\n          command: 'remove-edge',\n          handler: function handler(e) {\n            _this.$confirm('您正在移除连接，是否继续？', '提示').then(function () {\n              var item = e.item;\n              var data = item.getModel();\n\n              _this.graph.removeItem(item);\n\n              _this.emitChangeEvent('edge-remove', {\n                item: item,\n                data: data\n              });\n            }).catch(function () {});\n          }\n        }],\n        combo: [{\n          label: '添加节点',\n          command: 'add-node',\n          handler: function handler(e) {\n            var comboId = e.item.getID();\n            _this.dialogs.node.editItem = null;\n            _this.dialogs.node.form = {\n              comboId: comboId\n            };\n            _this.dialogs.node.position.x = e.x;\n            _this.dialogs.node.position.y = e.y;\n            _this.dialogs.node.visible = true;\n          }\n        }, {\n          label: '添加分组',\n          command: 'add-combo',\n          handler: function handler(e) {\n            var comboId = e.item.getID();\n            _this.dialogs.combo.editItem = null;\n            _this.dialogs.combo.form = {\n              parentId: comboId\n            };\n            _this.dialogs.combo.position.x = e.x;\n            _this.dialogs.combo.position.y = e.y;\n            _this.dialogs.combo.visible = true;\n          }\n        }, {}, {\n          label: '编辑分组',\n          command: 'edit-combo',\n          handler: function handler(e) {\n            var item = e.item;\n            var data = item.getModel();\n            var e1 = {\n              type: 'combo',\n              data: data,\n              item: item,\n              graph: _this.graph\n            };\n            var form;\n            var handler = _this.options.beforeEditHandler;\n\n            if (handler) {\n              // 如果有返回值，则使用返回值作为节点数据\n              var handleResult = handler(e1); // 返回 false 取消编辑\n\n              if (handleResult === false) {\n                return;\n              }\n\n              if (handleResult !== undefined) {\n                form = handleResult;\n              }\n            } else {\n              form = Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_7__[\"default\"])({}, data);\n            }\n\n            _this.dialogs.combo.form = form;\n            _this.dialogs.combo.editItem = item;\n            _this.dialogs.combo.visible = true;\n          }\n        }, {\n          label: '解散分组',\n          command: 'remove-combo',\n          handler: function handler(e) {\n            _this.$confirm('您正在解散分组，是否继续？', '提示').then(function () {\n              var item = e.item;\n              var data = item.getModel();\n\n              _this.graph.uncombo(item);\n\n              _this.emitChangeEvent('combo-remove', {\n                item: item,\n                data: data\n              });\n            }).catch(function () {});\n          }\n        }]\n      },\n      zoom: {\n        handleTimer: -1,\n        visibleTimer: -1,\n        value: 100,\n        visible: false\n      },\n      tooltipPlugins: [],\n      gridPlugin: null,\n      snapLinePlugin: null\n    };\n  },\n  mounted: function mounted() {\n    this.init();\n  },\n  beforeDestroy: function beforeDestroy() {\n    this.unbindMethods();\n  },\n  methods: {\n    init: function init() {\n      var styles = this.options.styles;\n      var size = this.getBounds(); // const tc = document.createElement('div');\n      // tc.id = 'toolbarContainer';\n      // tc.style.position = 'absolute'\n      // tc.style.top = '60px'\n      // tc.style.right = '20px'\n      // tc.style.width = '400px'\n      // document.body.appendChild(tc);\n      // const toolbar = new G6.ToolBar({\n      //   container: tc,\n      //   getContent: () => {\n      //     return `\n      //       <ul>\n      //         <li code='add'>增加节点</li>\n      //         <li code='undo'>撤销</li>\n      //       </ul>\n      //     `\n      //   },\n      //   handleClick: (code, graph) => {\n      //     if (code === 'add') {\n      //       graph.addItem('node', {\n      //         id: 'node2',\n      //         label: 'node2',\n      //         x: 300,\n      //         y: 150\n      //       })\n      //     } else if (code === 'undo') {\n      //       toolbar.undo()\n      //     }\n      //   }\n      // })\n\n      var plugins = [];\n\n      if (this.options.tooltipRenderers.node) {\n        // 允许出现 tooltip 的 item 类型\n        this.options.tooltipRenderers.node.itemTypes = ['node'];\n        var tooltipOption = this.options.tooltipRenderers.node;\n        tooltipOption.shouldBegin = tooltipOption.shouldBegin.bind(this);\n        tooltipOption.getContent = tooltipOption.getContent.bind(this);\n        this.tooltipPlugins.push(new _antv_g6__WEBPACK_IMPORTED_MODULE_8__[\"default\"].Tooltip(this.options.tooltipRenderers.node));\n      }\n\n      if (this.options.tooltipRenderers.edge) {\n        // 允许出现 tooltip 的 item 类型\n        this.options.tooltipRenderers.edge.itemTypes = ['edge'];\n        var _tooltipOption = this.options.tooltipRenderers.edge;\n        _tooltipOption.shouldBegin = _tooltipOption.shouldBegin.bind(this);\n        _tooltipOption.getContent = _tooltipOption.getContent.bind(this);\n        this.tooltipPlugins.push(new _antv_g6__WEBPACK_IMPORTED_MODULE_8__[\"default\"].Tooltip(this.options.tooltipRenderers.edge));\n      }\n\n      plugins.push.apply(plugins, Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_6__[\"default\"])(this.tooltipPlugins)); // 创建 G6 图实例\n\n      var graph = this.graph = new _antv_g6__WEBPACK_IMPORTED_MODULE_8__[\"default\"].Graph({\n        // 指定图画布的容器 id\n        container: this.$refs.canvas,\n        enabledStack: true,\n        groupByTypes: false,\n        plugins: plugins,\n        modes: {\n          // 支持的 behavior\n          default: ['zoom-canvas', 'click-select', // 'activate-relations',\n          'select-item', 'drag-canvas'],\n          edit: ['click-select', 'select-item', // 'zoom-canvas',\n          'drag-node', 'drag-combo', // 'create-edge',\n          'add-edge', 'contextmenu', 'drag-canvas']\n        },\n        // 画布宽高\n        width: size.width,\n        height: size.height,\n        defaultNode: Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_7__[\"default\"])({}, styles.node),\n        defaultEdge: Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_7__[\"default\"])({\n          style: {\n            lineAppendWidth: 5\n          }\n        }, styles.edge),\n        defaultCombo: Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_7__[\"default\"])({\n          type: 'rect-ext',\n          // padding: 0,\n          // style: {\n          // }\n          labelCfg: {\n            style: {\n              fontSize: 24\n            }\n          }\n        }, styles.combo),\n        nodeStateStyles: Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_7__[\"default\"])({}, styles.nodeStates),\n        edgeStateStyles: Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_7__[\"default\"])({}, styles.edgeStates)\n      });\n      graph.data(this.data);\n      graph.render();\n      window.G6 = graph; // // 处理多边场景\n      // const offsetDiff = 10;\n      // const multiEdgeType = 'quadratic';\n      // const singleEdgeType = 'polyline-ext';\n      // const loopEdgeType = 'loop';\n      // G6.Util.processParallelEdges(this.data.edges, offsetDiff, multiEdgeType, singleEdgeType, loopEdgeType);\n\n      this.bindMethods();\n      this.updateMode();\n      this.$emit('ready', {\n        graph: graph\n      });\n    },\n    updateMode: function updateMode() {\n      var mode = this.editMode ? 'edit' : 'default';\n      this.graph.setMode(mode);\n\n      if (!this.editMode) {\n        this.$refs.contextmenu.hide();\n      } // 网格插件\n\n\n      if (this.editMode) {\n        this.gridPlugin = new _antv_g6__WEBPACK_IMPORTED_MODULE_8__[\"default\"].Grid();\n        this.graph.addPlugin(this.gridPlugin);\n        this.snapLinePlugin = new _antv_g6__WEBPACK_IMPORTED_MODULE_8__[\"default\"].SnapLine();\n        this.graph.addPlugin(this.snapLinePlugin);\n      } else {\n        if (this.gridPlugin) {\n          this.graph.removePlugin(this.gridPlugin);\n        }\n\n        if (this.snapLinePlugin) {\n          this.graph.removePlugin(this.snapLinePlugin);\n        }\n      } // tooltip 插件，在编辑模式下禁用\n\n\n      var tooltipEnabled = !this.editMode;\n      this.tooltipPlugins.forEach(function (tooltip) {\n        tooltip.set('enabled', tooltipEnabled);\n      }); // 更新连线的箭头：\n      // 在编辑模式时展示，预览模式时隐藏\n\n      var showEndArrow = this.editMode;\n      this.data.edges.forEach(function (edge) {\n        if (!edge.style) {\n          edge.style = {};\n        }\n\n        edge.style.endArrow = showEndArrow;\n      });\n      this.graph.render();\n    },\n    getBounds: function getBounds() {\n      var rect = this.$refs.canvas.getClientRects()[0];\n      return {\n        width: rect.width,\n        height: rect.height,\n        left: rect.left,\n        top: rect.top\n      };\n    },\n    bindMethods: function bindMethods() {\n      _events__WEBPACK_IMPORTED_MODULE_11__[\"default\"].on('canvas:contextmenu', this.onCanvasContextMenu);\n      _events__WEBPACK_IMPORTED_MODULE_11__[\"default\"].on('node:contextmenu', this.onNodeContextMenu);\n      _events__WEBPACK_IMPORTED_MODULE_11__[\"default\"].on('edge:contextmenu', this.onEdgeContextMenu);\n      _events__WEBPACK_IMPORTED_MODULE_11__[\"default\"].on('combo:contextmenu', this.onComboContextMenu);\n      this.graph.on('wheelzoom', this.onCanvasZoom);\n      this.graph.on('custom:add-edge', this.onEdgeAdded);\n      this.graph.on('node:dragend', this.onDragEnd);\n      this.graph.on('combo:dragend', this.onDragEnd);\n    },\n    unbindMethods: function unbindMethods() {\n      _events__WEBPACK_IMPORTED_MODULE_11__[\"default\"].off('canvas:contextmenu', this.onCanvasContextMenu);\n      _events__WEBPACK_IMPORTED_MODULE_11__[\"default\"].off('node:contextmenu', this.onNodeContextMenu);\n      _events__WEBPACK_IMPORTED_MODULE_11__[\"default\"].off('edge:contextmenu', this.onEdgeContextMenu);\n      _events__WEBPACK_IMPORTED_MODULE_11__[\"default\"].off('combo:contextmenu', this.onComboContextMenu);\n      this.graph.off('wheelzoom', this.onCanvasZoom);\n      this.graph.off('custom:add-edge', this.onEdgeAdded);\n      this.graph.off('node:dragend', this.onDragEnd);\n      this.graph.off('combo:dragend', this.onDragEnd);\n    },\n    onEdgeAdded: function onEdgeAdded(e) {\n      this.emitChangeEvent('edge-add', {\n        item: e.item,\n        data: e.item.getModel()\n      });\n    },\n    onDragEnd: function onDragEnd(e) {\n      this.emitChangeEvent('location', {\n        item: e.item,\n        data: e.item.getModel()\n      });\n    },\n    onCanvasZoom: function onCanvasZoom(e) {\n      var _this2 = this;\n\n      clearTimeout(this.zoom.handleTimer);\n      clearTimeout(this.zoom.visibleTimer);\n      this.zoom.handleTimer = requestAnimationFrame(function () {\n        var zoom = _this2.graph.getZoom();\n\n        _this2.zoom.value = Math.round(zoom * 100);\n        _this2.zoom.visible = true;\n\n        _this2.$emit('zoom', {\n          type: 'zoom',\n          value: zoom,\n          event: e,\n          graph: _this2.graph\n        });\n\n        _this2.zoom.visibleTimer = setTimeout(function () {\n          _this2.zoom.visible = false;\n        }, 1000);\n      });\n    },\n    onCanvasContextMenu: function onCanvasContextMenu(e) {\n      this.contextmenuTitle = '操作';\n      this.clearSelectedNode();\n      this.showContextMenu(e, 'canvas');\n    },\n    onNodeContextMenu: function onNodeContextMenu(e) {\n      this.contextmenuTitle = '节点操作';\n      this.clearSelectedNode();\n      this.graph.setItemState(e.item, 'selected', true);\n      this.showContextMenu(e, 'node');\n    },\n    onComboContextMenu: function onComboContextMenu(e) {\n      this.contextmenuTitle = '分组操作';\n      this.graph.setItemState(e.item, 'selected', true);\n      this.showContextMenu(e, 'combo');\n    },\n    onEdgeContextMenu: function onEdgeContextMenu(e) {\n      this.contextmenuTitle = '边操作';\n      this.clearSelectedNode();\n      this.showContextMenu(e, 'edge');\n    },\n    showContextMenu: function showContextMenu(e, type) {\n      var x = e.canvasX;\n      var y = e.canvasY;\n      var item = e.item; // 检查是否允许打开\n\n      if (this.options.contextmenu) {\n        var visible = this.options.contextmenu.visible;\n\n        if (visible !== undefined) {\n          if (typeof visible === 'function') {\n            visible = visible.call(this.graph, {\n              type: type,\n              item: item,\n              data: item === null || item === void 0 ? void 0 : item.getModel(),\n              graph: this.graph\n            });\n          }\n\n          if (!visible) {\n            this.$refs.contextmenu.hide();\n            return;\n          }\n        }\n      } // const bounds = this.getBounds()\n      // x += bounds.left\n      // y += bounds.top\n\n\n      this.$refs.contextmenu.show(x, y, type, item);\n    },\n    onNodeOk: function onNodeOk() {\n      var _this3 = this;\n\n      return Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_5__[\"default\"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {\n        var editItem, form, e, editHandler, handleResult, oldData, newItem;\n        return regeneratorRuntime.wrap(function _callee$(_context) {\n          while (1) {\n            switch (_context.prev = _context.next) {\n              case 0:\n                editItem = _this3.dialogs.node.editItem;\n                form = _this3.dialogs.node.form; // 添加时，要设置节点的位置\n\n                if (!editItem) {\n                  form.x = _this3.dialogs.node.position.x;\n                  form.y = _this3.dialogs.node.position.y;\n                }\n\n                e = {\n                  type: 'node',\n                  data: form,\n                  item: editItem,\n                  graph: _this3.graph\n                };\n                editHandler = _this3.options.editHandler;\n\n                if (!editHandler) {\n                  _context.next = 19;\n                  break;\n                }\n\n                _context.prev = 6;\n                _context.next = 9;\n                return editHandler(e);\n\n              case 9:\n                handleResult = _context.sent;\n                _context.next = 16;\n                break;\n\n              case 12:\n                _context.prev = 12;\n                _context.t0 = _context[\"catch\"](6);\n\n                _this3.$message.warning(_context.t0.message);\n\n                return _context.abrupt(\"return\");\n\n              case 16:\n                if (!(handleResult === false)) {\n                  _context.next = 18;\n                  break;\n                }\n\n                return _context.abrupt(\"return\");\n\n              case 18:\n                if (handleResult !== undefined) {\n                  form = handleResult;\n                }\n\n              case 19:\n                if (!editItem) {\n                  _context.next = 28;\n                  break;\n                }\n\n                oldData = editItem.getModel(); // 检查数据是否重复\n\n                if (!(oldData.id !== form.id && _this3.data.nodes.some(function (node) {\n                  return node.id === form.id;\n                }))) {\n                  _context.next = 24;\n                  break;\n                }\n\n                _this3.$message.warning('编辑失败，此数据已经存在');\n\n                return _context.abrupt(\"return\");\n\n              case 24:\n                _this3.graph.updateItem(editItem, form);\n\n                _this3.emitChangeEvent('node-update', {\n                  item: editItem,\n                  data: form\n                });\n\n                _context.next = 34;\n                break;\n\n              case 28:\n                if (!_this3.data.nodes.some(function (node) {\n                  return node.id === form.id;\n                })) {\n                  _context.next = 31;\n                  break;\n                }\n\n                _this3.$message.warning('添加失败，此数据已经存在');\n\n                return _context.abrupt(\"return\");\n\n              case 31:\n                newItem = _this3.graph.addItem('node', form);\n                newItem.toFront();\n\n                _this3.emitChangeEvent('node-add', {\n                  item: null,\n                  data: form\n                });\n\n              case 34:\n                _this3.dialogs.node.visible = false;\n\n              case 35:\n              case \"end\":\n                return _context.stop();\n            }\n          }\n        }, _callee, null, [[6, 12]]);\n      }))();\n    },\n    emitChangeEvent: function emitChangeEvent(type, e) {\n      var _this4 = this;\n\n      if (!this.editMode) {\n        // 非编辑模式下，不触发变更事件\n        return;\n      }\n\n      this.$nextTick(function () {\n        e.type = type;\n        e.graph = _this4.graph;\n\n        _this4.$emit(type, e);\n\n        _this4.$emit('change', e);\n      });\n    },\n    onEdgeOk: function onEdgeOk() {},\n    onComboOk: function onComboOk() {\n      var _this5 = this;\n\n      return Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_5__[\"default\"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {\n        var editItem, form, e, editHandler, handleResult, item;\n        return regeneratorRuntime.wrap(function _callee2$(_context2) {\n          while (1) {\n            switch (_context2.prev = _context2.next) {\n              case 0:\n                editItem = _this5.dialogs.combo.editItem;\n                form = _this5.dialogs.combo.form; // form.type = 'rect-ext'\n                // form.type = 'rect'\n                // 添加时，要设置分组的位置\n\n                if (!editItem) {\n                  form.x = _this5.dialogs.combo.position.x;\n                  form.y = _this5.dialogs.combo.position.y;\n                }\n\n                e = {\n                  type: 'combo',\n                  data: form,\n                  item: editItem,\n                  graph: _this5.graph\n                };\n                editHandler = _this5.options.editHandler;\n\n                if (!editHandler) {\n                  _context2.next = 19;\n                  break;\n                }\n\n                _context2.prev = 6;\n                _context2.next = 9;\n                return editHandler(e);\n\n              case 9:\n                handleResult = _context2.sent;\n                _context2.next = 16;\n                break;\n\n              case 12:\n                _context2.prev = 12;\n                _context2.t0 = _context2[\"catch\"](6);\n\n                _this5.$message.warning(_context2.t0.message);\n\n                return _context2.abrupt(\"return\");\n\n              case 16:\n                if (!(handleResult === false)) {\n                  _context2.next = 18;\n                  break;\n                }\n\n                return _context2.abrupt(\"return\");\n\n              case 18:\n                if (handleResult !== undefined) {\n                  form = handleResult;\n                }\n\n              case 19:\n                if (editItem) {\n                  // const oldData = editItem.getModel()\n                  // // 检查数据是否重复\n                  // if (oldData.id !== form.id && this.data.combos.some(node => node.id === form.id)) {\n                  //   this.$message.warning('编辑失败，此数据已经存在')\n                  //   return\n                  // }\n                  _this5.graph.updateItem(editItem, form);\n\n                  _this5.emitChangeEvent('combo-update', {\n                    item: editItem,\n                    data: form\n                  });\n                } else {\n                  // // 检查数据是否重复\n                  // if (this.data.combos.some(combo => combo.id === form.id)) {\n                  //   this.$message.warning('添加失败，此数据已经存在')\n                  //   return\n                  // }\n                  item = _this5.graph.addItem('combo', form);\n\n                  _this5.emitChangeEvent('combo-add', {\n                    item: item,\n                    data: form\n                  });\n                }\n\n                _this5.dialogs.combo.visible = false;\n\n              case 21:\n              case \"end\":\n                return _context2.stop();\n            }\n          }\n        }, _callee2, null, [[6, 12]]);\n      }))();\n    },\n    clearSelectedNode: function clearSelectedNode() {\n      var _this6 = this;\n\n      var nodes = this.graph.findAllByState('node', 'selected');\n      nodes.forEach(function (node) {\n        _this6.graph.clearItemStates(node, 'selected');\n      });\n    },\n    highlightNode: function highlightNode(node) {\n      this.graph.setItemState(node, 'highlight', true);\n    },\n    clearHighlightNodes: function clearHighlightNodes() {\n      var _this7 = this;\n\n      var nodes = this.graph.getNodes();\n      nodes.forEach(function (node) {\n        _this7.graph.clearItemStates(node, 'highlight');\n      });\n    },\n    // ---------- 以下是公开接口 --------------\n    getData: function getData() {\n      return this.graph.save();\n    },\n    getGraph: function getGraph() {\n      return this.graph;\n    },\n    undo: function undo() {\n      this.graph.undo();\n    },\n    redo: function redo() {\n      this.graph.redo();\n    },\n    clearSelection: function clearSelection() {\n      this.clearHighlightNodes();\n    },\n    findNode: function findNode(predicator, highlight) {\n      var _this8 = this;\n\n      if (highlight) {\n        this.clearHighlightNodes();\n      }\n\n      return this.graph.findAll('node', function (node) {\n        var data = node.getModel();\n        var hit = predicator(data);\n\n        if (hit && highlight) {\n          _this8.highlightNode(node);\n        }\n\n        return hit;\n      });\n    },\n\n    /**\n     * 将图导出为图片\n     * @param {String} [name=graph] 图片的名称\n     * @param {'image/png'|'image/jpeg'|'image/webp'|'image/bmp'} [type] 图片的类型。图的 renderer 为默认的 'canvas' 时生效，图的 renderer 为 'svg' 时将导出 svg 文件\n     * @param {Object} [imageConfig] 图片的配置项，可选，具体字段见下方\n     * @param {String} [imageConfig.backgroundColor] 图片的背景色，可选，不传值时将导出透明背景的图片\n     * @param {Number|Number[]} [imageConfig.padding] 导出图片的上左下右 padding 值。当 padding 为 number 类型时，四周 padding 相等\n     * @param {Number} [pixelRatio=window.devicePixelRatio] 控制导出图片的清晰度。默认使用 window.devicePixelRatio\n     */\n    exportImage: function exportImage(name, type, imageConfig, pixelRatio) {\n      // 处理导出清晰度\n      // 参考 https://github.com/antvis/G6/issues/2979\n      var oldRatio;\n\n      if (pixelRatio) {\n        oldRatio = window.devicePixelRatio;\n        window.devicePixelRatio = pixelRatio;\n      }\n\n      this.graph.downloadFullImage(name, type, imageConfig);\n\n      if (pixelRatio) {\n        setTimeout(function () {\n          window.devicePixelRatio = oldRatio;\n        }, 100);\n      }\n    },\n\n    /**\n     * 将画布上元素生成为图片的 URL\n     * @param {'image/png'|'image/jpeg'|'image/webp'|'image/bmp'} [type] 图片的类型。图的 renderer 为默认的 'canvas' 时生效，图的 renderer 为 'svg' 时将导出 svg 文件\n     * @param {Object} [imageConfig] 图片的配置项，可选，具体字段见下方\n     * @param {String} [imageConfig.backgroundColor] 图片的背景色，可选，不传值时将导出透明背景的图片\n     * @param {Number|Number[]} [imageConfig.padding] 导出图片的上左下右 padding 值。当 padding 为 number 类型时，四周 padding 相等\n     * @param {Number} [pixelRatio=window.devicePixelRatio] 控制导出图片的清晰度。默认使用 window.devicePixelRatio\n     */\n    exportImageURL: function exportImageURL(type, imageConfig, pixelRatio) {\n      var _this9 = this;\n\n      return Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_5__[\"default\"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {\n        return regeneratorRuntime.wrap(function _callee3$(_context3) {\n          while (1) {\n            switch (_context3.prev = _context3.next) {\n              case 0:\n                return _context3.abrupt(\"return\", new Promise(function (resolve) {\n                  // 处理导出清晰度\n                  // 参考 https://github.com/antvis/G6/issues/2979\n                  var oldRatio;\n\n                  if (pixelRatio) {\n                    oldRatio = window.devicePixelRatio;\n                    window.devicePixelRatio = pixelRatio;\n                  }\n\n                  _this9.graph.toFullDataURL(function (response) {\n                    if (pixelRatio) {\n                      setTimeout(function () {\n                        window.devicePixelRatio = oldRatio;\n                      }, 100);\n                    }\n\n                    resolve(response);\n                  }, type, imageConfig);\n                }));\n\n              case 1:\n              case \"end\":\n                return _context3.stop();\n            }\n          }\n        }, _callee3);\n      }))();\n    }\n  }\n});\n\n//# sourceURL=webpack:///./src/components/board.vue?./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
+/***/ "./node_modules/cache-loader/dist/cjs.js?!./node_modules/babel-loader/lib/index.js!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/contextmenu.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/contextmenu.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! regenerator-runtime/runtime */ \"./node_modules/regenerator-runtime/runtime.js\");\n/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ \"./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js\");\n\n\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  props: {\n    title: {\n      type: String,\n      default: '操作'\n    },\n\n    /**\n     * 数组表示菜单不复用\n     * 对象表示菜单要复用，此时对象的每个 value 为数组\n     * 空对象表示为分隔线\n     * {\n     * key1: [{\n     *  command: 'xxx',\n     *  label: 'xxx',\n     *  title: 'xxx',\n     * }],\n     * key2: [{\n     *\n     * }]\n     * }\n     */\n    items: {\n      type: [Array, Object],\n      required: true\n    }\n  },\n  data: function data() {\n    return {\n      visible: false,\n      style: {\n        left: 0,\n        top: 0\n      },\n      active: null,\n      position: {\n        x: 0,\n        y: 0\n      },\n      item: null\n    };\n  },\n  mounted: function mounted() {\n    window.addEventListener('click', this.hide);\n    window.addEventListener('keydown', this.hide);\n  },\n  beforeDestroy: function beforeDestroy() {\n    window.removeEventListener('click', this.hide);\n    window.removeEventListener('keydown', this.hide);\n  },\n  computed: {\n    activeMenu: function activeMenu() {\n      if (Array.isArray(this.items)) {\n        return this.items;\n      }\n\n      return this.items[this.active];\n    }\n  },\n  methods: {\n    getBounds: function getBounds() {\n      var rect = this.$el.getBoundingClientRect();\n      return {\n        width: rect.width,\n        height: rect.height,\n        left: rect.left,\n        top: rect.top\n      };\n    },\n    show: function show(x, y, active, item) {\n      var _this = this;\n\n      return Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__[\"default\"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {\n        return regeneratorRuntime.wrap(function _callee$(_context) {\n          while (1) {\n            switch (_context.prev = _context.next) {\n              case 0:\n                _this.position.x = x;\n                _this.position.y = y;\n                _this.item = item;\n\n                if (!_this.visible) {\n                  _context.next = 7;\n                  break;\n                }\n\n                _this.visible = false;\n                _context.next = 7;\n                return _this.$nextTick();\n\n              case 7:\n                _this.style.left = \"\".concat(x, \"px\");\n                _this.style.top = \"\".concat(y, \"px\");\n                _this.active = active;\n                _this.visible = true;\n\n                _this.$nextTick(function () {\n                  // 修正位置\n                  var bounds = _this.getBounds();\n\n                  var winBounds = {\n                    width: window.innerWidth,\n                    height: window.innerHeight\n                  };\n                  var fixRequired = false;\n\n                  if (bounds.left + bounds.width > winBounds.width) {\n                    x = winBounds.width - bounds.width;\n                    fixRequired = true;\n                  }\n\n                  if (bounds.top + bounds.height > winBounds.height) {\n                    y = winBounds.height - bounds.height;\n                    fixRequired = true;\n                  }\n\n                  if (!fixRequired) {\n                    return;\n                  }\n\n                  _this.style.left = \"\".concat(x, \"px\");\n                  _this.style.top = \"\".concat(y, \"px\");\n                });\n\n              case 12:\n              case \"end\":\n                return _context.stop();\n            }\n          }\n        }, _callee);\n      }))();\n    },\n    hide: function hide(e) {\n      if (e instanceof KeyboardEvent) {\n        // ESC 关闭\n        if (e.keyCode !== 27) {\n          return;\n        }\n      }\n\n      this.visible = false;\n    },\n    onItemClick: function onItemClick(item) {\n      var _this2 = this;\n\n      this.hide();\n      this.$nextTick(function () {\n        var e = {\n          active: _this2.active,\n          command: item.command,\n          x: _this2.position.x,\n          y: _this2.position.y,\n          item: _this2.item\n        };\n\n        _this2.$emit(\"command\", e);\n\n        if (item.handler) {\n          item.handler(e);\n        }\n      });\n    }\n  }\n});\n\n//# sourceURL=webpack:///./src/components/contextmenu.vue?./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
+/***/ "./node_modules/cache-loader/dist/cjs.js?!./node_modules/babel-loader/lib/index.js!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/fieldsdialog.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/fieldsdialog.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.concat */ \"./node_modules/core-js/modules/es.array.concat.js\");\n/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.filter */ \"./node_modules/core-js/modules/es.array.filter.js\");\n/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ \"./node_modules/core-js/modules/es.array.for-each.js\");\n/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.function.name */ \"./node_modules/core-js/modules/es.function.name.js\");\n/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ \"./node_modules/core-js/modules/es.object.to-string.js\");\n/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ \"./node_modules/core-js/modules/web.dom-collections.for-each.js\");\n/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_5__);\n/* harmony import */ var D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/objectSpread2 */ \"./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/objectSpread2.js\");\n/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! regenerator-runtime/runtime */ \"./node_modules/regenerator-runtime/runtime.js\");\n/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_7__);\n/* harmony import */ var D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ \"./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js\");\n/* harmony import */ var D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/toConsumableArray */ \"./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/toConsumableArray.js\");\n/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./models */ \"./src/components/models.js\");\n\n\n\n\n\n\n\n\n\n\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  props: {\n    // 属性列表，使用类型 Fields 传入\n    fields: {\n      type: Array,\n      required: true\n    },\n    // 标题\n    title: {\n      type: String,\n      required: true\n    },\n    // 是否可见\n    visible: {\n      type: Boolean,\n      required: true\n    },\n    // 表单数据\n    value: {\n      type: Object,\n      required: true\n    },\n    width: {\n      type: String,\n      default: \"600px\"\n    },\n    styles: {\n      type: [Object, String],\n      default: function _default() {\n        return {\n          padding: \"0 40px 0 0\"\n        };\n      }\n    },\n    graph: Object\n  },\n  data: function data() {\n    return {\n      InputTypes: _models__WEBPACK_IMPORTED_MODULE_10__[\"InputTypes\"],\n      isVisible: false,\n      data: [],\n      form: {},\n      rules: {},\n      // 标记量，用于在触发事件时，不执行 watch，以避免数据被循环处理\n      noWatch: false,\n      fieldsMap: {}\n    };\n  },\n  watch: {\n    value: {\n      deep: true,\n      handler: function handler() {\n        if (this.noWatch) {\n          this.noWatch = false;\n          return;\n        }\n\n        this.processFields();\n      }\n    },\n    visible: function visible(val) {\n      this.isVisible = val;\n    }\n  },\n  mounted: function mounted() {\n    this.processFields();\n  },\n  computed: {},\n  methods: {\n    processFields: function processFields() {\n      var _this = this;\n\n      // 处理校验规则和表单字段\n      var rules = {};\n      var form = {\n        id: \"g6-data-\".concat(new Date().getTime(), \"-\").concat(Math.round(Math.random() * 10000))\n      };\n      var map = {};\n      this.fields.forEach(function (field) {\n        field.config = Object.assign({}, _models__WEBPACK_IMPORTED_MODULE_10__[\"FieldConfig\"], field.config);\n        field.style = Object.assign({}, field.style);\n        field._id = \"g6-\".concat(new Date().getTime(), \"-\").concat(Math.round(Math.random() * 10000));\n        map[field.name] = field;\n        var isVisible = field.config.isVisible;\n\n        field.config.isVisible = function () {\n          if (typeof isVisible === 'boolean') {\n            return isVisible;\n          }\n\n          return isVisible({\n            data: _this.form,\n            fields: _this.fieldsMap\n          });\n        };\n\n        var config = field.config;\n        var defaultValue = config.default;\n\n        if (field.inputType === _models__WEBPACK_IMPORTED_MODULE_10__[\"InputTypes\"].CHECKBOX) {\n          // 当输入类型为 checkbox 时，默认值应当为 []\n          if (!defaultValue) {\n            defaultValue = [];\n          }\n        } else if (field.inputType === _models__WEBPACK_IMPORTED_MODULE_10__[\"InputTypes\"].SWITCH) {\n          // 当输入类型为 switch 时，默认值应当为 false\n          if (!defaultValue) {\n            defaultValue = false;\n          }\n        } else if (field.inputType === _models__WEBPACK_IMPORTED_MODULE_10__[\"InputTypes\"].NUMBER) {\n          if (!field.config.minlength) {\n            field.config.minlength = 0;\n          }\n\n          if (!field.config.maxlength) {\n            field.config.maxlength = Infinity;\n          }\n        }\n\n        form[field.name] = defaultValue;\n        var validators = [];\n\n        if (config.validators) {\n          validators.push.apply(validators, Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_9__[\"default\"])(config.validators));\n        }\n\n        if (config.required) {\n          validators.push({\n            required: true,\n            message: \"不能为空\"\n          });\n        }\n\n        if (validators.length) {\n          rules[field.name] = validators;\n        }\n      });\n      this.fieldsMap = map;\n      this.data = this.fields;\n      this.form = Object.assign({}, form, this.value);\n      this.rules = rules;\n    },\n    onClose: function onClose() {\n      this.$emit(\"update:visible\", this.isVisible);\n    },\n    getSelectIcon: function getSelectIcon(field) {\n      var value = this.form[field.name];\n\n      if (!value) {\n        return \"\";\n      }\n\n      var item = field.options.filter(function (opt) {\n        return opt.value === value;\n      })[0];\n\n      if (!item) {\n        return \"\";\n      }\n\n      return item.icon || \"\";\n    },\n    onCancel: function onCancel() {\n      this.isVisible = false;\n      this.form = {};\n      this.data = [];\n    },\n    onOk: function onOk() {\n      var _this2 = this;\n\n      return Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_8__[\"default\"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {\n        var form;\n        return regeneratorRuntime.wrap(function _callee$(_context) {\n          while (1) {\n            switch (_context.prev = _context.next) {\n              case 0:\n                _context.prev = 0;\n                _context.next = 3;\n                return new Promise(function (resolve, reject) {\n                  _this2.$refs.form.validate(function (result) {\n                    if (result) {\n                      resolve();\n                    } else {\n                      reject();\n                    }\n                  });\n                });\n\n              case 3:\n                _context.next = 8;\n                break;\n\n              case 5:\n                _context.prev = 5;\n                _context.t0 = _context[\"catch\"](0);\n                return _context.abrupt(\"return\");\n\n              case 8:\n                form = Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[\"default\"])({}, _this2.form);\n                _this2.noWatch = true;\n\n                _this2.$emit(\"input\", form);\n\n                _this2.$emit(\"ok\", form);\n\n              case 12:\n              case \"end\":\n                return _context.stop();\n            }\n          }\n        }, _callee, null, [[0, 5]]);\n      }))();\n    },\n    onChange: function onChange(field) {\n      field.config.onchange.call(field, {\n        type: 'change',\n        field: field,\n        value: this.form[field.name],\n        data: this.form,\n        fields: this.fieldsMap,\n        graph: this.graph\n      });\n    }\n  }\n});\n\n//# sourceURL=webpack:///./src/components/fieldsdialog.vue?./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
+/***/ "./node_modules/cache-loader/dist/cjs.js?!./node_modules/babel-loader/lib/index.js!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/views/App.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/App.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.index-of */ \"./node_modules/core-js/modules/es.array.index-of.js\");\n/* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.map */ \"./node_modules/core-js/modules/es.array.map.js\");\n/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.regexp.exec */ \"./node_modules/core-js/modules/es.regexp.exec.js\");\n/* harmony import */ var core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_regexp_exec__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.string.search */ \"./node_modules/core-js/modules/es.string.search.js\");\n/* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _assets_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/storage */ \"./src/assets/storage.js\");\n/* harmony import */ var _assets_options__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../assets/options */ \"./src/assets/options.js\");\n\n\n\n\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  data: function data() {\n    var _storage$get = _assets_storage__WEBPACK_IMPORTED_MODULE_4__[\"default\"].get(),\n        nodes = _storage$get.nodes,\n        edges = _storage$get.edges,\n        combos = _storage$get.combos;\n\n    return {\n      options: _assets_options__WEBPACK_IMPORTED_MODULE_5__[\"default\"],\n      deviceTypes: _assets_storage__WEBPACK_IMPORTED_MODULE_4__[\"default\"].getDeviceTypes(),\n      data: {\n        nodes: nodes,\n        combos: combos,\n        edges: edges.map(function (edge) {\n          if (edge.state === '正常') {\n            edge.style = {\n              stroke: 'green'\n            };\n          } else if (edge.state === '断开') {\n            edge.style = {\n              stroke: 'gray'\n            };\n          } else if (edge.state === '卡顿') {\n            edge.style = {\n              stroke: 'red'\n            };\n          } else {\n            edge.style = {\n              stroke: 'black'\n            };\n          } // link.label = meta.state\n\n\n          return edge;\n        }) // combos: Object.values(combos)\n\n      },\n      search: {\n        keyword: '192.168.1.1'\n      },\n      editMode: true\n    };\n  },\n  mounted: function mounted() {},\n  methods: {\n    saveData: function saveData() {\n      var data = this.$refs.board.getData();\n      _assets_storage__WEBPACK_IMPORTED_MODULE_4__[\"default\"].set(data);\n      this.$message.success('数据已保存');\n    },\n    onSearch: function onSearch() {\n      var keyword = this.search.keyword;\n\n      if (!keyword) {\n        this.$refs.board.clearSelection();\n        return;\n      }\n\n      var nodes = this.$refs.board.findNode(function (node) {\n        return node.ip.indexOf(keyword) !== -1 || node.label.indexOf(keyword) !== -1;\n      }, true); // eslint-disable-next-line\n\n      console.info(nodes);\n    },\n    onGraphChange: function onGraphChange(e) {\n      // eslint-disable-next-line\n      console.info(e);\n    }\n  }\n});\n\n//# sourceURL=webpack:///./src/views/App.vue?./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
+/***/ "./node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"node_modules/.cache/vue-loader\",\"cacheIdentifier\":\"17ca64e2-vue-loader-template\"}!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/board.vue?vue&type=template&id=1796d806&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"17ca64e2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/board.vue?vue&type=template&id=1796d806& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"div\",\n    { staticClass: \"g6-board\" },\n    [\n      _c(\"div\", {\n        ref: \"canvas\",\n        staticClass: \"g6-board--body\",\n        on: {\n          contextmenu: function($event) {\n            $event.preventDefault()\n          }\n        }\n      }),\n      _c(\n        \"div\",\n        {\n          directives: [\n            {\n              name: \"show\",\n              rawName: \"v-show\",\n              value: _vm.zoom.visible,\n              expression: \"zoom.visible\"\n            }\n          ],\n          staticClass: \"g6-board--zoom-tip\"\n        },\n        [_vm._v(_vm._s(_vm.zoom.value))]\n      ),\n      _c(\"fields-dialog\", {\n        attrs: {\n          fields: _vm.options.nodeFields,\n          title: _vm.dialogs.node.editItem ? \"编辑节点\" : \"添加节点\",\n          visible: _vm.dialogs.node.visible,\n          graph: _vm.graph\n        },\n        on: {\n          \"update:visible\": function($event) {\n            return _vm.$set(_vm.dialogs.node, \"visible\", $event)\n          },\n          ok: _vm.onNodeOk\n        },\n        model: {\n          value: _vm.dialogs.node.form,\n          callback: function($$v) {\n            _vm.$set(_vm.dialogs.node, \"form\", $$v)\n          },\n          expression: \"dialogs.node.form\"\n        }\n      }),\n      _c(\"fields-dialog\", {\n        attrs: {\n          fields: _vm.options.edgeFields,\n          title: \"编辑连接\",\n          visible: _vm.dialogs.edge.visible,\n          graph: _vm.graph\n        },\n        on: {\n          \"update:visible\": function($event) {\n            return _vm.$set(_vm.dialogs.edge, \"visible\", $event)\n          },\n          ok: _vm.onEdgeOk\n        },\n        model: {\n          value: _vm.dialogs.edge.form,\n          callback: function($$v) {\n            _vm.$set(_vm.dialogs.edge, \"form\", $$v)\n          },\n          expression: \"dialogs.edge.form\"\n        }\n      }),\n      _c(\"fields-dialog\", {\n        attrs: {\n          fields: _vm.options.comboFields,\n          title: _vm.dialogs.combo.editItem ? \"编辑分组\" : \"添加分组\",\n          visible: _vm.dialogs.combo.visible,\n          graph: _vm.graph\n        },\n        on: {\n          \"update:visible\": function($event) {\n            return _vm.$set(_vm.dialogs.combo, \"visible\", $event)\n          },\n          ok: _vm.onComboOk\n        },\n        model: {\n          value: _vm.dialogs.combo.form,\n          callback: function($$v) {\n            _vm.$set(_vm.dialogs.combo, \"form\", $$v)\n          },\n          expression: \"dialogs.combo.form\"\n        }\n      }),\n      _c(\"contextmenu\", {\n        ref: \"contextmenu\",\n        attrs: { items: _vm.contextmenus, title: _vm.contextmenuTitle }\n      })\n    ],\n    1\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./src/components/board.vue?./node_modules/cache-loader/dist/cjs.js?%7B%22cacheDirectory%22:%22node_modules/.cache/vue-loader%22,%22cacheIdentifier%22:%2217ca64e2-vue-loader-template%22%7D!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
+/***/ "./node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"node_modules/.cache/vue-loader\",\"cacheIdentifier\":\"17ca64e2-vue-loader-template\"}!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/contextmenu.vue?vue&type=template&id=2129eaae&":
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"17ca64e2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/contextmenu.vue?vue&type=template&id=2129eaae& ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _vm.visible\n    ? _c(\n        \"div\",\n        {\n          staticClass: \"g6-board--contextmenu\",\n          style: _vm.style,\n          on: {\n            contextmenu: function($event) {\n              $event.preventDefault()\n            },\n            click: function($event) {\n              $event.stopPropagation()\n            }\n          }\n        },\n        [\n          _vm.title\n            ? _c(\"div\", { staticClass: \"g6-board--contextmenu-title\" }, [\n                _vm._v(_vm._s(_vm.title))\n              ])\n            : _vm._e(),\n          _c(\n            \"ul\",\n            { staticClass: \"g6-board--contextmenu-items\" },\n            _vm._l(_vm.activeMenu, function(item, i) {\n              return _c(\n                \"li\",\n                {\n                  key: i,\n                  class: {\n                    \"g6-board--contextmenu-separator\": !Object.keys(item).length\n                  },\n                  attrs: { title: item.title },\n                  on: {\n                    click: function($event) {\n                      return _vm.onItemClick(item)\n                    }\n                  }\n                },\n                [\n                  _c(\"i\"),\n                  _c(\n                    \"span\",\n                    { staticClass: \"g6-board--contextmenu-item-label\" },\n                    [_vm._v(_vm._s(item.label))]\n                  )\n                ]\n              )\n            }),\n            0\n          )\n        ]\n      )\n    : _vm._e()\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./src/components/contextmenu.vue?./node_modules/cache-loader/dist/cjs.js?%7B%22cacheDirectory%22:%22node_modules/.cache/vue-loader%22,%22cacheIdentifier%22:%2217ca64e2-vue-loader-template%22%7D!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
+/***/ "./node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"node_modules/.cache/vue-loader\",\"cacheIdentifier\":\"17ca64e2-vue-loader-template\"}!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/fieldsdialog.vue?vue&type=template&id=db3ad65e&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"17ca64e2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/fieldsdialog.vue?vue&type=template&id=db3ad65e& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"el-dialog\",\n    {\n      attrs: {\n        title: _vm.title,\n        visible: _vm.isVisible,\n        width: _vm.width,\n        \"close-on-click-modal\": false,\n        \"close-on-press-escape\": false,\n        \"custom-class\": \"g6-board--dialog\",\n        \"append-to-body\": \"\"\n      },\n      on: {\n        \"update:visible\": function($event) {\n          _vm.isVisible = $event\n        },\n        closed: _vm.onClose\n      },\n      scopedSlots: _vm._u([\n        {\n          key: \"footer\",\n          fn: function() {\n            return [\n              _c(\"el-button\", { on: { click: _vm.onCancel } }, [\n                _vm._v(\"取消\")\n              ]),\n              _c(\n                \"el-button\",\n                { attrs: { type: \"primary\" }, on: { click: _vm.onOk } },\n                [_vm._v(\"确定\")]\n              )\n            ]\n          },\n          proxy: true\n        }\n      ])\n    },\n    [\n      _c(\n        \"el-form\",\n        {\n          ref: \"form\",\n          style: _vm.styles,\n          attrs: {\n            size: \"small\",\n            model: _vm.form,\n            rules: _vm.rules,\n            \"label-width\": \"100px\"\n          }\n        },\n        [\n          _vm._l(_vm.data, function(field) {\n            return [\n              _c(\n                \"el-form-item\",\n                {\n                  directives: [\n                    {\n                      name: \"show\",\n                      rawName: \"v-show\",\n                      value: field.config.isVisible(),\n                      expression: \"field.config.isVisible()\"\n                    }\n                  ],\n                  key: field._id,\n                  attrs: { label: field.label, prop: field.name }\n                },\n                [\n                  field.inputType === _vm.InputTypes.TEXT\n                    ? _c(\"el-input\", {\n                        style: field.style,\n                        attrs: {\n                          minlength: field.config.minlength,\n                          maxlength: field.config.maxlength,\n                          placeholder: field.config.placeholder,\n                          readonly: field.config.readonly\n                        },\n                        on: {\n                          change: function($event) {\n                            return _vm.onChange(field)\n                          }\n                        },\n                        model: {\n                          value: _vm.form[field.name],\n                          callback: function($$v) {\n                            _vm.$set(\n                              _vm.form,\n                              field.name,\n                              typeof $$v === \"string\" ? $$v.trim() : $$v\n                            )\n                          },\n                          expression: \"form[field.name]\"\n                        }\n                      })\n                    : field.inputType === _vm.InputTypes.LONGTEXT\n                    ? _c(\"el-input\", {\n                        style: field.style,\n                        attrs: {\n                          type: \"textarea\",\n                          minlength: field.config.minlength,\n                          maxlength: field.config.maxlength,\n                          rows: 5,\n                          placeholder: field.config.placeholder,\n                          readonly: field.config.readonly,\n                          \"show-word-limit\": \"\"\n                        },\n                        on: {\n                          change: function($event) {\n                            return _vm.onChange(field)\n                          }\n                        },\n                        model: {\n                          value: _vm.form[field.name],\n                          callback: function($$v) {\n                            _vm.$set(\n                              _vm.form,\n                              field.name,\n                              typeof $$v === \"string\" ? $$v.trim() : $$v\n                            )\n                          },\n                          expression: \"form[field.name]\"\n                        }\n                      })\n                    : field.inputType === _vm.InputTypes.NUMBER\n                    ? _c(\"el-input-number\", {\n                        style: field.style,\n                        attrs: {\n                          max: field.config.maxlength,\n                          min: field.config.minlength,\n                          precision: field.config.precision,\n                          placeholder: field.config.placeholder,\n                          readonly: field.config.readonly,\n                          controls: false\n                        },\n                        on: {\n                          change: function($event) {\n                            return _vm.onChange(field)\n                          }\n                        },\n                        model: {\n                          value: _vm.form[field.name],\n                          callback: function($$v) {\n                            _vm.$set(_vm.form, field.name, _vm._n($$v))\n                          },\n                          expression: \"form[field.name]\"\n                        }\n                      })\n                    : field.inputType === _vm.InputTypes.SWITCH\n                    ? _c(\"el-switch\", {\n                        style: field.style,\n                        attrs: {\n                          readonly: field.config.readonly,\n                          \"active-text\": \"\",\n                          \"inactive-text\": \"\"\n                        },\n                        on: {\n                          change: function($event) {\n                            return _vm.onChange(field)\n                          }\n                        },\n                        model: {\n                          value: _vm.form[field.name],\n                          callback: function($$v) {\n                            _vm.$set(_vm.form, field.name, _vm._n($$v))\n                          },\n                          expression: \"form[field.name]\"\n                        }\n                      })\n                    : field.inputType === _vm.InputTypes.SELECT &&\n                      field.config.optionsLoader\n                    ? _c(\n                        \"el-select\",\n                        {\n                          style: field.style,\n                          attrs: {\n                            placeholder: field.config.placeholder,\n                            loading: field.config.optionsLoading,\n                            \"remote-method\": field.config.optionsLoader.bind(\n                              field,\n                              {\n                                data: _vm.form,\n                                fields: _vm.fieldsMap\n                              }\n                            ),\n                            disabled: field.config.readonly,\n                            \"popper-class\": \"g6-board--dialog-select-opions\",\n                            filterable: \"\",\n                            remote: \"\"\n                          },\n                          on: {\n                            change: function($event) {\n                              return _vm.onChange(field)\n                            }\n                          },\n                          scopedSlots: _vm._u(\n                            [\n                              _vm.getSelectIcon(field)\n                                ? {\n                                    key: \"prefix\",\n                                    fn: function() {\n                                      return [\n                                        _c(\"img\", {\n                                          staticClass: \"select-icon\",\n                                          attrs: {\n                                            src: _vm.getSelectIcon(field)\n                                          }\n                                        })\n                                      ]\n                                    },\n                                    proxy: true\n                                  }\n                                : null\n                            ],\n                            null,\n                            true\n                          ),\n                          model: {\n                            value: _vm.form[field.name],\n                            callback: function($$v) {\n                              _vm.$set(_vm.form, field.name, $$v)\n                            },\n                            expression: \"form[field.name]\"\n                          }\n                        },\n                        _vm._l(field.options, function(item) {\n                          return _c(\n                            \"el-option\",\n                            {\n                              key: item.value,\n                              attrs: {\n                                label: item.label,\n                                value: item.value,\n                                title: item.title\n                              }\n                            },\n                            [\n                              item.icon\n                                ? _c(\"img\", {\n                                    staticClass: \"select-icon\",\n                                    attrs: { src: item.icon }\n                                  })\n                                : _vm._e(),\n                              _c(\"span\", [_vm._v(_vm._s(item.label))])\n                            ]\n                          )\n                        }),\n                        1\n                      )\n                    : field.inputType === _vm.InputTypes.SELECT\n                    ? _c(\n                        \"el-select\",\n                        {\n                          style: field.style,\n                          attrs: {\n                            placeholder: field.config.placeholder,\n                            disabled: field.config.readonly,\n                            \"popper-class\": \"g6-board--dialog-select-opions\",\n                            filterable: \"\"\n                          },\n                          on: {\n                            change: function($event) {\n                              return _vm.onChange(field)\n                            }\n                          },\n                          scopedSlots: _vm._u(\n                            [\n                              _vm.getSelectIcon(field)\n                                ? {\n                                    key: \"prefix\",\n                                    fn: function() {\n                                      return [\n                                        _c(\"img\", {\n                                          staticClass: \"select-icon\",\n                                          attrs: {\n                                            src: _vm.getSelectIcon(field)\n                                          }\n                                        })\n                                      ]\n                                    },\n                                    proxy: true\n                                  }\n                                : null\n                            ],\n                            null,\n                            true\n                          ),\n                          model: {\n                            value: _vm.form[field.name],\n                            callback: function($$v) {\n                              _vm.$set(_vm.form, field.name, $$v)\n                            },\n                            expression: \"form[field.name]\"\n                          }\n                        },\n                        _vm._l(field.options, function(item) {\n                          return _c(\n                            \"el-option\",\n                            {\n                              key: item.value,\n                              attrs: {\n                                label: item.label,\n                                value: item.value,\n                                title: item.title\n                              }\n                            },\n                            [\n                              item.icon\n                                ? _c(\"img\", {\n                                    staticClass: \"select-icon\",\n                                    attrs: { src: item.icon }\n                                  })\n                                : _vm._e(),\n                              _c(\"span\", [_vm._v(_vm._s(item.label))])\n                            ]\n                          )\n                        }),\n                        1\n                      )\n                    : field.inputType === _vm.InputTypes.CHECKBOX\n                    ? _c(\n                        \"el-checkbox-group\",\n                        {\n                          style: field.style,\n                          attrs: { disabled: field.config.readonly },\n                          on: {\n                            change: function($event) {\n                              return _vm.onChange(field)\n                            }\n                          },\n                          model: {\n                            value: _vm.form[field.name],\n                            callback: function($$v) {\n                              _vm.$set(_vm.form, field.name, $$v)\n                            },\n                            expression: \"form[field.name]\"\n                          }\n                        },\n                        _vm._l(field.options, function(item) {\n                          return _c(\"el-checkbox\", {\n                            key: item.value,\n                            attrs: {\n                              label: item.label,\n                              title: item.title,\n                              value: item.value\n                            }\n                          })\n                        }),\n                        1\n                      )\n                    : field.inputType === _vm.InputTypes.RADIO\n                    ? _c(\n                        \"el-radio-group\",\n                        {\n                          style: field.style,\n                          attrs: { disabled: field.config.readonly },\n                          on: {\n                            change: function($event) {\n                              return _vm.onChange(field)\n                            }\n                          },\n                          model: {\n                            value: _vm.form[field.name],\n                            callback: function($$v) {\n                              _vm.$set(_vm.form, field.name, $$v)\n                            },\n                            expression: \"form[field.name]\"\n                          }\n                        },\n                        _vm._l(field.options, function(item) {\n                          return _c(\n                            \"el-radio\",\n                            {\n                              key: item.value,\n                              attrs: { label: item.value, title: item.title }\n                            },\n                            [_vm._v(_vm._s(item.label))]\n                          )\n                        }),\n                        1\n                      )\n                    : field.inputType === _vm.InputTypes.CUSTOM &&\n                      field.component\n                    ? _c(field.component, {\n                        tag: \"component\",\n                        style: field.style,\n                        attrs: { disabled: field.config.readonly },\n                        on: {\n                          change: function($event) {\n                            return _vm.onChange(field)\n                          }\n                        },\n                        model: {\n                          value: _vm.form[field.name],\n                          callback: function($$v) {\n                            _vm.$set(_vm.form, field.name, $$v)\n                          },\n                          expression: \"form[field.name]\"\n                        }\n                      })\n                    : _vm._e(),\n                  field.config.tip\n                    ? _c(\"div\", { staticClass: \"input-tip\" }, [\n                        _vm._v(\" \" + _vm._s(field.config.tip) + \" \")\n                      ])\n                    : _vm._e()\n                ],\n                1\n              )\n            ]\n          })\n        ],\n        2\n      )\n    ],\n    1\n  )\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./src/components/fieldsdialog.vue?./node_modules/cache-loader/dist/cjs.js?%7B%22cacheDirectory%22:%22node_modules/.cache/vue-loader%22,%22cacheIdentifier%22:%2217ca64e2-vue-loader-template%22%7D!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
+/***/ "./node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"node_modules/.cache/vue-loader\",\"cacheIdentifier\":\"17ca64e2-vue-loader-template\"}!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/views/App.vue?vue&type=template&id=e920d152&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"17ca64e2-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/App.vue?vue&type=template&id=e920d152& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return render; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return staticRenderFns; });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\n    \"div\",\n    { staticClass: \"app\" },\n    [\n      _c(\"div\", { staticClass: \"toolbar\" }, [\n        _vm._m(0),\n        _c(\n          \"div\",\n          { staticStyle: { gap: \"20px\", display: \"flex\" } },\n          [\n            _c(\n              \"div\",\n              { staticClass: \"search\" },\n              [\n                _c(\"span\", [_vm._v(\"查找节点\")]),\n                _c(\"el-input\", {\n                  staticStyle: { width: \"200px\" },\n                  attrs: { size: \"small\" },\n                  model: {\n                    value: _vm.search.keyword,\n                    callback: function($$v) {\n                      _vm.$set(_vm.search, \"keyword\", $$v)\n                    },\n                    expression: \"search.keyword\"\n                  }\n                }),\n                _c(\n                  \"el-button\",\n                  { attrs: { size: \"small\" }, on: { click: _vm.onSearch } },\n                  [_vm._v(\"查找\")]\n                )\n              ],\n              1\n            ),\n            _c(\n              \"span\",\n              [\n                _c(\"span\", [_vm._v(\"编辑模式\")]),\n                _c(\"el-switch\", {\n                  model: {\n                    value: _vm.editMode,\n                    callback: function($$v) {\n                      _vm.editMode = $$v\n                    },\n                    expression: \"editMode\"\n                  }\n                })\n              ],\n              1\n            ),\n            _c(\n              \"el-button\",\n              { attrs: { size: \"small\" }, on: { click: _vm.saveData } },\n              [_vm._v(\"保存\")]\n            )\n          ],\n          1\n        )\n      ]),\n      _c(\"g6-board\", {\n        ref: \"board\",\n        attrs: {\n          options: _vm.options,\n          data: _vm.data,\n          \"edit-mode\": _vm.editMode\n        },\n        on: { change: _vm.onGraphChange }\n      })\n    ],\n    1\n  )\n}\nvar staticRenderFns = [\n  function() {\n    var _vm = this\n    var _h = _vm.$createElement\n    var _c = _vm._self._c || _h\n    return _c(\"div\", { staticClass: \"g6-board--title\" }, [\n      _c(\"span\", [_vm._v(\"图编辑器\")])\n    ])\n  }\n]\nrender._withStripped = true\n\n\n\n//# sourceURL=webpack:///./src/views/App.vue?./node_modules/cache-loader/dist/cjs.js?%7B%22cacheDirectory%22:%22node_modules/.cache/vue-loader%22,%22cacheIdentifier%22:%2217ca64e2-vue-loader-template%22%7D!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/less-loader/dist/cjs.js?!./src/components/board.less":
+/*!***********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--10-oneOf-3-1!./node_modules/postcss-loader/src??ref--10-oneOf-3-2!./node_modules/less-loader/dist/cjs.js??ref--10-oneOf-3-3!./src/components/board.less ***!
+  \***********************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \".g6-board {\\n  position: relative;\\n  width: 100%;\\n  height: 100%;\\n  --contextmenu-color: #000;\\n  --contextmenu-background: #fff;\\n  --contextmenu-shadow: 2px 2px 5px 1px #e6e5e5;\\n  --contextmenu-title-color: #000;\\n  --contextmenu-title-background: none;\\n  --contextmenu-title-border-color: #dbdadaaa;\\n  --contextmenu-font-size: 0.8rem;\\n  --contextmenu-hover-color: blue;\\n  --contextmenu-hover-background: #d7eff7;\\n  --contextmenu-gutter-background: #dbdada88;\\n  --contextmenu-separeator-color: #ebebeb transparent #fffefec7 transparent;\\n  --input-tip-color: gray;\\n  --zoom-tip-color: gray;\\n}\\n.g6-board--body {\\n  width: 100%;\\n  height: 100%;\\n}\\n.g6-board--contextmenu {\\n  position: absolute;\\n  -webkit-user-select: none;\\n     -moz-user-select: none;\\n      -ms-user-select: none;\\n          user-select: none;\\n  color: var(--contextmenu-color);\\n  background: var(--contextmenu-background);\\n  -webkit-box-shadow: var(--contextmenu-shadow);\\n          box-shadow: var(--contextmenu-shadow);\\n  min-width: 160px;\\n  z-index: 5;\\n}\\n.g6-board--contextmenu-title {\\n  padding: 5px;\\n  font-size: var(-contextmenu-font-size);\\n  color: var(--contextmenu-title-color);\\n  background: var(--contextmenu-title-background);\\n  border-bottom: 1px solid var(--contextmenu-title-border-color);\\n  font-weight: bold;\\n}\\n.g6-board--contextmenu-items {\\n  list-style: none;\\n  padding: 0;\\n  margin: 0;\\n}\\n.g6-board--contextmenu-items li {\\n  display: -webkit-box;\\n  display: -ms-flexbox;\\n  display: flex;\\n  font-size: var(-contextmenu-font-size);\\n}\\n.g6-board--contextmenu-items li i {\\n  display: block;\\n  width: 30px;\\n  background: var(--contextmenu-gutter-background);\\n}\\n.g6-board--contextmenu-items li span {\\n  display: block;\\n  -webkit-box-flex: 1;\\n      -ms-flex: 1 1;\\n          flex: 1 1;\\n}\\n.g6-board--contextmenu-items li:not(.g6-board--contextmenu-separator) {\\n  cursor: default;\\n}\\n.g6-board--contextmenu-items li:not(.g6-board--contextmenu-separator):hover {\\n  color: var(--contextmenu-hover-color);\\n  background: var(--contextmenu-hover-background);\\n}\\n.g6-board--contextmenu-items li:not(.g6-board--contextmenu-separator) span {\\n  padding: 5px 10px 5px 5px;\\n}\\n.g6-board--contextmenu-separator span {\\n  display: block;\\n  border-width: 1px 0;\\n  border-style: solid none;\\n  border-color: var(--contextmenu-separeator-color);\\n  margin: 2px 0;\\n}\\n.g6-board--dialog .input-tip {\\n  color: var(--input-tip-color);\\n  font-size: x-small;\\n  line-height: 1.5;\\n  word-break: break-all;\\n  word-wrap: break-word;\\n  white-space: pre;\\n}\\n.g6-board--dialog .select-icon {\\n  width: 20px;\\n  height: 20px;\\n  vertical-align: middle;\\n  margin-right: 5px;\\n}\\n.g6-board--dialog-select-opions .select-icon {\\n  width: 20px;\\n  height: 20px;\\n  vertical-align: middle;\\n  margin-right: 5px;\\n}\\n.g6-board--zoom-tip {\\n  position: absolute;\\n  top: 0;\\n  left: 0;\\n  width: 100%;\\n  height: 100%;\\n  color: var(--zoom-tip-color);\\n  font-weight: bold;\\n  z-index: 999;\\n  font-size: 8em;\\n  -webkit-user-select: none;\\n     -moz-user-select: none;\\n      -ms-user-select: none;\\n          user-select: none;\\n  pointer-events: none;\\n  display: -webkit-box;\\n  display: -ms-flexbox;\\n  display: flex;\\n  -webkit-box-pack: center;\\n      -ms-flex-pack: center;\\n          justify-content: center;\\n  -webkit-box-align: center;\\n      -ms-flex-align: center;\\n          align-items: center;\\n}\\n.g6-board--zoom-tip:after {\\n  content: \\\"%\\\";\\n}\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./src/components/board.less?./node_modules/css-loader/dist/cjs.js??ref--10-oneOf-3-1!./node_modules/postcss-loader/src??ref--10-oneOf-3-2!./node_modules/less-loader/dist/cjs.js??ref--10-oneOf-3-3");
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/views/App.vue?vue&type=style&index=0&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-oneOf-1-2!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/App.vue?vue&type=style&index=0&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// Imports\nvar ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ \"./node_modules/css-loader/dist/runtime/api.js\");\nexports = ___CSS_LOADER_API_IMPORT___(false);\n// Module\nexports.push([module.i, \"\\nhtml,\\nbody {\\n  margin: 0;\\n  padding: 0;\\n}\\n.app {\\n  height: 100vh;\\n}\\n.toolbar {\\n  position: absolute;\\n  left: 0;\\n  width: 100%;\\n  z-index: 2;\\n  display: -webkit-box;\\n  display: -ms-flexbox;\\n  display: flex;\\n  -webkit-box-pack: justify;\\n      -ms-flex-pack: justify;\\n          justify-content: space-between;\\n  -webkit-box-align: center;\\n      -ms-flex-align: center;\\n          align-items: center;\\n  background-color: #fff;\\n  border-bottom: 1px solid #ccc;\\n  padding: 5px 10px;\\n  -webkit-box-sizing: border-box;\\n          box-sizing: border-box;\\n}\\n\", \"\"]);\n// Exports\nmodule.exports = exports;\n\n\n//# sourceURL=webpack:///./src/views/App.vue?./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-oneOf-1-2!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js?!./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/views/App.vue?vue&type=style&index=0&lang=css&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-oneOf-1-2!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/App.vue?vue&type=style&index=0&lang=css& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/postcss-loader/src??ref--6-oneOf-1-2!../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=style&index=0&lang=css& */ \"./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/views/App.vue?vue&type=style&index=0&lang=css&\");\nif(typeof content === 'string') content = [[module.i, content, '']];\nif(content.locals) module.exports = content.locals;\n// add the styles to the DOM\nvar add = __webpack_require__(/*! ../../node_modules/vue-style-loader/lib/addStylesClient.js */ \"./node_modules/vue-style-loader/lib/addStylesClient.js\").default\nvar update = add(\"ed695a8a\", content, false, {\"sourceMap\":false,\"shadowMode\":false});\n// Hot Module Replacement\nif(false) {}\n\n//# sourceURL=webpack:///./src/views/App.vue?./node_modules/vue-style-loader??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-oneOf-1-2!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options");
+
+/***/ }),
+
+/***/ "./src/assets/deviceTypes.js":
+/*!***********************************!*\
+  !*** ./src/assets/deviceTypes.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nvar deviceTypes = [{\n  label: '终端',\n  value: 'pc',\n  size: 20\n}, {\n  label: '交换机',\n  value: 'switch',\n  size: 30\n}, {\n  label: '防火墙',\n  value: 'firewall',\n  size: 40\n}, {\n  label: '服务器',\n  value: 'server',\n  size: 40\n}];\n/* harmony default export */ __webpack_exports__[\"default\"] = (deviceTypes);\n\n//# sourceURL=webpack:///./src/assets/deviceTypes.js?");
+
+/***/ }),
+
+/***/ "./src/assets/edges.js":
+/*!*****************************!*\
+  !*** ./src/assets/edges.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nvar edges = [{\n  \"source\": '192.168.1.1',\n  \"target\": '192.168.1.2',\n  \"speed\": \"100M/s\",\n  \"traffic\": \"78M/s\",\n  \"state\": \"正常\"\n}, {\n  \"source\": '192.168.1.3',\n  \"target\": '192.168.1.1',\n  \"speed\": \"100M/s\",\n  \"traffic\": \"78M/s\",\n  \"state\": \"正常\"\n}, {\n  \"source\": '192.168.1.4',\n  \"target\": '192.168.1.1',\n  \"speed\": \"100M/s\",\n  \"traffic\": \"78M/s\",\n  \"state\": \"正常\"\n}, {\n  \"source\": '192.168.1.11',\n  \"target\": '192.168.1.1',\n  \"speed\": \"100M/s\",\n  \"traffic\": \"78M/s\",\n  \"state\": \"正常\"\n}, {\n  \"source\": '192.168.1.13',\n  \"target\": '192.168.1.11',\n  \"speed\": \"10M/s\",\n  \"traffic\": \"2.5M/s\",\n  \"state\": \"卡顿\"\n}, {\n  \"source\": '192.168.1.14',\n  \"target\": '192.168.1.11',\n  \"speed\": \"1000M/s\",\n  \"traffic\": \"0\",\n  \"state\": \"断开\"\n}];\n/* harmony default export */ __webpack_exports__[\"default\"] = (edges);\n\n//# sourceURL=webpack:///./src/assets/edges.js?");
+
+/***/ }),
+
+/***/ "./src/assets/fields.js":
+/*!******************************!*\
+  !*** ./src/assets/fields.js ***!
+  \******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter */ \"./node_modules/core-js/modules/es.array.filter.js\");\n/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.index-of */ \"./node_modules/core-js/modules/es.array.index-of.js\");\n/* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var core_js_modules_es_string_fixed__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.string.fixed */ \"./node_modules/core-js/modules/es.string.fixed.js\");\n/* harmony import */ var core_js_modules_es_string_fixed__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_fixed__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var _components_models__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../components/models */ \"./src/components/models.js\");\n/* harmony import */ var _assets_storage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../assets/storage */ \"./src/assets/storage.js\");\n/* harmony import */ var element_ui__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! element-ui */ \"./node_modules/element-ui/lib/element-ui.common.js\");\n/* harmony import */ var element_ui__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(element_ui__WEBPACK_IMPORTED_MODULE_5__);\n\n\n\n\n // import lineTypes from \"./lineTypes\"\n\n\nvar nodeFields = Object(_components_models__WEBPACK_IMPORTED_MODULE_3__[\"defineFields\"])([{\n  label: '设备类型',\n  name: 'deviceType',\n  inputType: _components_models__WEBPACK_IMPORTED_MODULE_3__[\"InputTypes\"].SELECT,\n  options: _assets_storage__WEBPACK_IMPORTED_MODULE_4__[\"default\"].getDeviceTypes(),\n  config: {\n    required: true,\n    tip: '不同的设备类型，有不同有图标和含义',\n    onchange: function onchange(e) {\n      e.data.device = null;\n      e.fields.device.options = [];\n    }\n  }\n}, {\n  label: '选择设备',\n  name: 'device',\n  inputType: _components_models__WEBPACK_IMPORTED_MODULE_3__[\"InputTypes\"].SELECT,\n  options: [],\n  config: {\n    tip: '输入 IP 地址以选择设备',\n    required: true,\n    optionsLoader: function optionsLoader(e, keyword) {\n      var deviceType = e.data.deviceType;\n      var data = {\n        pc: [{\n          label: '终端1111',\n          value: '192.168.11.11'\n        }, {\n          label: '终端2222',\n          value: '192.168.11.12'\n        }, {\n          label: '终端3333',\n          value: '192.168.11.13'\n        }],\n        server: [{\n          label: '服务器1111',\n          value: '192.168.12.11'\n        }, {\n          label: '服务器2222',\n          value: '192.168.12.12'\n        }, {\n          label: '服务器3333',\n          value: '192.168.12.13'\n        }]\n      };\n\n      if (!deviceType) {\n        // console.debug('未选择设备类型')\n        this.options = [];\n        return;\n      }\n\n      var list = data[deviceType];\n\n      if (!list) {\n        // console.debug('设备类型下没有设备')\n        this.options = [];\n        return;\n      }\n\n      if (!keyword) {\n        // console.debug('关键字为空')\n        this.options = list;\n        return;\n      } // console.debug('有数据')\n\n\n      this.options = list.filter(function (item) {\n        return item.label.indexOf(keyword) !== -1 || item.value.indexOf(keyword) !== -1;\n      }); // },\n      // onchange(e) {\n      //   console.info(e)\n    }\n  }\n}, {\n  label: '设备 IP',\n  name: 'ip',\n  inputType: _components_models__WEBPACK_IMPORTED_MODULE_3__[\"InputTypes\"].TEXT,\n  config: {\n    required: true,\n    tip: 'IP 是一个设备的唯一标识'\n  }\n}, {\n  label: '设备名称',\n  name: 'label',\n  inputType: _components_models__WEBPACK_IMPORTED_MODULE_3__[\"InputTypes\"].TEXT // }, {\n  //   label: '速率',\n  //   name: 'speed',\n  //   inputType: InputTypes.NUMBER,\n  // }, {\n  //   label: '可用',\n  //   name: 'enabled',\n  //   inputType: InputTypes.SWITCH,\n\n}, {\n  label: '标签颜色',\n  name: 'labelColor',\n  inputType: _components_models__WEBPACK_IMPORTED_MODULE_3__[\"InputTypes\"].CUSTOM,\n  component: element_ui__WEBPACK_IMPORTED_MODULE_5__[\"ColorPicker\"]\n}, {\n  label: '备注',\n  name: 'remark',\n  inputType: _components_models__WEBPACK_IMPORTED_MODULE_3__[\"InputTypes\"].LONGTEXT // }, {\n  //   label: '连接类型',\n  //   name: 'lineType',\n  //   inputType: InputTypes.RADIO,\n  //   options: lineTypes,\n  //   config: {\n  //     default: lineTypes[0].value\n  //   }\n\n}, _components_models__WEBPACK_IMPORTED_MODULE_3__[\"BUILTIN_FIELDS\"].EDGE_TYPE, _components_models__WEBPACK_IMPORTED_MODULE_3__[\"BUILTIN_FIELDS\"].EDGE_CURVE_OFFSET, _components_models__WEBPACK_IMPORTED_MODULE_3__[\"BUILTIN_FIELDS\"].EDGE_STYLE, _components_models__WEBPACK_IMPORTED_MODULE_3__[\"BUILTIN_FIELDS\"].EDGE_VISIBLE]);\nvar edgeFields = Object(_components_models__WEBPACK_IMPORTED_MODULE_3__[\"defineFields\"])();\nvar comboFields = Object(_components_models__WEBPACK_IMPORTED_MODULE_3__[\"defineFields\"])([{\n  label: '名称',\n  name: 'name',\n  inputType: _components_models__WEBPACK_IMPORTED_MODULE_3__[\"InputTypes\"].TEXT,\n  config: {\n    required: true\n  }\n}, {\n  label: '固定大小',\n  name: 'fixed',\n  inputType: _components_models__WEBPACK_IMPORTED_MODULE_3__[\"InputTypes\"].SWITCH,\n  config: {\n    tip: '当不启用固定大小时，分组会根据包含元素的数量和位置自动计算其大小',\n    required: true\n  }\n}, {\n  label: '宽度',\n  name: 'width',\n  inputType: _components_models__WEBPACK_IMPORTED_MODULE_3__[\"InputTypes\"].NUMBER,\n  config: {\n    tip: '单位为像素',\n    minlength: 0,\n    maxlength: 2000,\n    default: 200,\n    isVisible: function isVisible(e) {\n      return e.data.fixed;\n    }\n  }\n}, {\n  label: '高度',\n  name: 'height',\n  inputType: _components_models__WEBPACK_IMPORTED_MODULE_3__[\"InputTypes\"].NUMBER,\n  config: {\n    minlength: 0,\n    maxlength: 2000,\n    default: 200,\n    tip: '单位为像素',\n    isVisible: function isVisible(e) {\n      return e.data.fixed;\n    }\n  }\n}]);\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  nodeFields: nodeFields,\n  edgeFields: edgeFields,\n  comboFields: comboFields\n});\n\n//# sourceURL=webpack:///./src/assets/fields.js?");
+
+/***/ }),
+
+/***/ "./src/assets/nodes.js":
+/*!*****************************!*\
+  !*** ./src/assets/nodes.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ \"./node_modules/core-js/modules/es.array.for-each.js\");\n/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);\n\nvar nodes = [{\n  label: \"交换机1\",\n  ip: \"192.168.1.1\",\n  deviceType: \"switch\",\n  color: 'red',\n  group: '第一个域',\n  resp_person: '张三',\n  dept: '安全运维'\n}, {\n  label: \"防火墙\",\n  ip: \"192.168.1.2\",\n  deviceType: \"firewall\",\n  color: '#007acc',\n  resp_person: '张三',\n  dept: '安全运维'\n}, {\n  label: \"服务器A\",\n  ip: \"192.168.1.3\",\n  deviceType: \"server\",\n  group: '第一个域',\n  resp_person: '张三',\n  dept: '安全运维'\n}, {\n  label: \"服务器B\",\n  ip: \"192.168.1.4\",\n  deviceType: \"server\",\n  group: '第一个域',\n  resp_person: '张三',\n  dept: '安全运维'\n}, {\n  label: \"交换机2\",\n  ip: \"192.168.1.11\",\n  deviceType: \"switch\",\n  color: 'darkgreen',\n  group: '第二个域',\n  resp_person: '张三',\n  dept: '安全运维'\n}, {\n  label: \"服务器C\",\n  ip: \"192.168.1.13\",\n  deviceType: \"server\",\n  color: 'blue',\n  group: '第二个域',\n  resp_person: '张三',\n  dept: '安全运维'\n}, {\n  label: \"服务器D\",\n  ip: \"192.168.1.14\",\n  deviceType: \"server\",\n  color: 'purple',\n  group: '第二个域',\n  resp_person: '张三',\n  dept: '安全运维'\n}]; // const nodeSet = [{\n//   \"id\": 4,\n//   \"nodes\": ['192.168.1.3', '192.168.1.4']\n// }]\n// 默认情况下，使用 ip 作为数据 id\n\nnodes.forEach(function (node) {\n  node.id = node.ip;\n});\n/* harmony default export */ __webpack_exports__[\"default\"] = (nodes);\n\n//# sourceURL=webpack:///./src/assets/nodes.js?");
+
+/***/ }),
+
+/***/ "./src/assets/options.js":
+/*!*******************************!*\
+  !*** ./src/assets/options.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name */ \"./node_modules/core-js/modules/es.function.name.js\");\n/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var core_js_modules_es_string_fixed__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.fixed */ \"./node_modules/core-js/modules/es.string.fixed.js\");\n/* harmony import */ var core_js_modules_es_string_fixed__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_fixed__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/objectSpread2 */ \"./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/objectSpread2.js\");\n/* harmony import */ var _assets_fields__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/assets/fields */ \"./src/assets/fields.js\");\n/* harmony import */ var _components_models__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../components/models */ \"./src/components/models.js\");\n/* harmony import */ var _assets_storage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/assets/storage */ \"./src/assets/storage.js\");\n\n\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(_components_models__WEBPACK_IMPORTED_MODULE_4__[\"defineOptions\"])({\n  nodeFields: _assets_fields__WEBPACK_IMPORTED_MODULE_3__[\"default\"].nodeFields,\n  edgeFields: _assets_fields__WEBPACK_IMPORTED_MODULE_3__[\"default\"].edgeFields,\n  comboFields: _assets_fields__WEBPACK_IMPORTED_MODULE_3__[\"default\"].comboFields,\n  styles: {\n    edge: {\n      type: 'polyline',\n      style: {\n        stroke: 'purple'\n      }\n    },\n    combo: {\n      type: 'rect-ext',\n      style: {\n        stroke: 'red',\n        lineDash: [10, 2]\n      },\n      labelCfg: {\n        style: {\n          fontSize: 10,\n          stroke: 'red',\n          fill: 'blue',\n          backgroundColor: 'red'\n        }\n      },\n      title: {\n        style: {\n          stroke: 'blue'\n        }\n      },\n      background: {\n        style: {\n          fill: 'yellow'\n        }\n      }\n    },\n    nodeStates: {\n      highlight: {\n        'highlight-border': {\n          fill: 'green',\n          fillOpacity: 0.1,\n          stroke: 'green',\n          strokeOpacity: 0.3,\n          lineWidth: 2\n        }\n      },\n      selected: {\n        'select-border': {\n          stroke: 'blue',\n          lineWidth: 3\n        }\n      },\n      hover: {\n        'select-border': {\n          stroke: 'green'\n        }\n      }\n    },\n    edgeStates: {\n      selected: {\n        stroke: 'blue',\n        lineWidth: 3\n      },\n      hover: {\n        lineWidth: 3\n      }\n    }\n  },\n  beforeEditHandler: function beforeEditHandler(e) {\n    if (e.type !== 'combo') {\n      return;\n    }\n\n    var data = Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_2__[\"default\"])({}, e.data), {}, {\n      type: 'rect-ext'\n    }); // 有个 21 的 padding\n\n\n    var bounds = e.item.getBBox();\n    var padding = 21 * 2;\n    data.width = bounds.width - padding;\n    data.height = bounds.height - padding;\n\n    if (data.fixSize) {\n      data.fixed = true;\n    } else {\n      data.fixed = false;\n    }\n\n    return data;\n  },\n  editHandler: function editHandler(e) {\n    var data = e.data;\n\n    if (e.type === 'node') {\n      data.id = data.ip;\n\n      if (!data.type) {\n        data.type = 'image-ext';\n      }\n\n      data.img = _assets_storage__WEBPACK_IMPORTED_MODULE_5__[\"default\"].getIcon(data.deviceType);\n      data.size = _assets_storage__WEBPACK_IMPORTED_MODULE_5__[\"default\"].getSize(data.deviceType);\n    } else if (e.type === 'combo') {\n      data.label = data.name;\n\n      if (data.fixed) {\n        data.fixSize = [data.width, data.height];\n      } else {\n        delete data.fixSize;\n      }\n    }\n\n    return data;\n  },\n  tooltipRenderers: {\n    node: Object(_components_models__WEBPACK_IMPORTED_MODULE_4__[\"defineTooltip\"])(function (node) {\n      var table = document.createElement('table');\n      var data = [['名称', 'IP', '分组', '责任人'], [node.label, node.ip, node.group, node.resp_person + '/' + node.dept]];\n\n      for (var i = 0; i < data[0].length; i++) {\n        var row = document.createElement('tr');\n\n        for (var j = 0; j < data.length; j++) {\n          var cell = document.createElement('td');\n          cell.innerText = data[j][i];\n          row.appendChild(cell);\n        }\n\n        table.appendChild(row);\n      }\n\n      return table;\n    }),\n    edge: Object(_components_models__WEBPACK_IMPORTED_MODULE_4__[\"defineTooltip\"])(function (edge) {\n      var table = document.createElement('table');\n      var data = [['速率', '流量', '状态'], [edge.speed, edge.traffic, edge.state]];\n\n      for (var i = 0; i < data[0].length; i++) {\n        var row = document.createElement('tr');\n\n        for (var j = 0; j < data.length; j++) {\n          var cell = document.createElement('td');\n          cell.innerText = data[j][i];\n          row.appendChild(cell);\n        }\n\n        table.appendChild(row);\n      }\n\n      return table;\n    })\n  }\n}));\n\n//# sourceURL=webpack:///./src/assets/options.js?");
+
+/***/ }),
+
+/***/ "./src/assets/storage.js":
+/*!*******************************!*\
+  !*** ./src/assets/storage.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter */ \"./node_modules/core-js/modules/es.array.filter.js\");\n/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ \"./node_modules/core-js/modules/es.array.for-each.js\");\n/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.map */ \"./node_modules/core-js/modules/es.array.map.js\");\n/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ \"./node_modules/core-js/modules/web.dom-collections.for-each.js\");\n/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _nodes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./nodes */ \"./src/assets/nodes.js\");\n/* harmony import */ var _edges__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./edges */ \"./src/assets/edges.js\");\n/* harmony import */ var _deviceTypes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./deviceTypes */ \"./src/assets/deviceTypes.js\");\n\n\n\n\n\n\n\nvar storeKey = 'graph-data';\nvar combos = [];\n\nfunction getData() {\n  var store = localStorage.getItem(storeKey);\n\n  if (store) {\n    store = JSON.parse(store);\n  } else {\n    _nodes__WEBPACK_IMPORTED_MODULE_4__[\"default\"].forEach(function (node) {\n      node.type = 'image-ext';\n      node.img = getIcon(node.deviceType);\n      node.size = getSize(node.deviceType);\n    });\n    store = {\n      nodes: _nodes__WEBPACK_IMPORTED_MODULE_4__[\"default\"],\n      edges: _edges__WEBPACK_IMPORTED_MODULE_5__[\"default\"],\n      combos: combos\n    };\n  }\n\n  return store;\n}\n\nfunction getIcon(deviceType) {\n  return \"/static/icons/\".concat(deviceType, \".svg\");\n}\n\nfunction setData(data) {\n  localStorage.setItem(storeKey, JSON.stringify(data));\n}\n\nfunction getDeviceTypes() {\n  return _deviceTypes__WEBPACK_IMPORTED_MODULE_6__[\"default\"].map(function (dt) {\n    dt.icon = getIcon(dt.value);\n    return dt;\n  });\n}\n\nfunction getSize(deviceType) {\n  return _deviceTypes__WEBPACK_IMPORTED_MODULE_6__[\"default\"].filter(function (dt) {\n    return dt.value === deviceType;\n  })[0].size;\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  get: getData,\n  set: setData,\n  getDeviceTypes: getDeviceTypes,\n  getIcon: getIcon,\n  getSize: getSize\n});\n\n//# sourceURL=webpack:///./src/assets/storage.js?");
+
+/***/ }),
+
+/***/ "./src/components/board.less":
+/*!***********************************!*\
+  !*** ./src/components/board.less ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("// style-loader: Adds some css to the DOM by adding a <style> tag\n\n// load the styles\nvar content = __webpack_require__(/*! !../../node_modules/css-loader/dist/cjs.js??ref--10-oneOf-3-1!../../node_modules/postcss-loader/src??ref--10-oneOf-3-2!../../node_modules/less-loader/dist/cjs.js??ref--10-oneOf-3-3!./board.less */ \"./node_modules/css-loader/dist/cjs.js?!./node_modules/postcss-loader/src/index.js?!./node_modules/less-loader/dist/cjs.js?!./src/components/board.less\");\nif(typeof content === 'string') content = [[module.i, content, '']];\nif(content.locals) module.exports = content.locals;\n// add the styles to the DOM\nvar add = __webpack_require__(/*! ../../node_modules/vue-style-loader/lib/addStylesClient.js */ \"./node_modules/vue-style-loader/lib/addStylesClient.js\").default\nvar update = add(\"16cc6bea\", content, false, {\"sourceMap\":false,\"shadowMode\":false});\n// Hot Module Replacement\nif(false) {}\n\n//# sourceURL=webpack:///./src/components/board.less?");
+
+/***/ }),
+
+/***/ "./src/components/board.vue":
+/*!**********************************!*\
+  !*** ./src/components/board.vue ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _board_vue_vue_type_template_id_1796d806___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./board.vue?vue&type=template&id=1796d806& */ \"./src/components/board.vue?vue&type=template&id=1796d806&\");\n/* harmony import */ var _board_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./board.vue?vue&type=script&lang=js& */ \"./src/components/board.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _board_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _board_vue_vue_type_template_id_1796d806___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _board_vue_vue_type_template_id_1796d806___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/board.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./src/components/board.vue?");
+
+/***/ }),
+
+/***/ "./src/components/board.vue?vue&type=script&lang=js&":
+/*!***********************************************************!*\
+  !*** ./src/components/board.vue?vue&type=script&lang=js& ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_babel_loader_lib_index_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_board_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/cache-loader/dist/cjs.js??ref--12-0!../../node_modules/babel-loader/lib!../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../node_modules/vue-loader/lib??vue-loader-options!./board.vue?vue&type=script&lang=js& */ \"./node_modules/cache-loader/dist/cjs.js?!./node_modules/babel-loader/lib/index.js!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/board.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_babel_loader_lib_index_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_board_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./src/components/board.vue?");
+
+/***/ }),
+
+/***/ "./src/components/board.vue?vue&type=template&id=1796d806&":
+/*!*****************************************************************!*\
+  !*** ./src/components/board.vue?vue&type=template&id=1796d806& ***!
+  \*****************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_cache_loader_dist_cjs_js_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_17ca64e2_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_board_vue_vue_type_template_id_1796d806___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"node_modules/.cache/vue-loader\",\"cacheIdentifier\":\"17ca64e2-vue-loader-template\"}!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../node_modules/vue-loader/lib??vue-loader-options!./board.vue?vue&type=template&id=1796d806& */ \"./node_modules/cache-loader/dist/cjs.js?{\\\"cacheDirectory\\\":\\\"node_modules/.cache/vue-loader\\\",\\\"cacheIdentifier\\\":\\\"17ca64e2-vue-loader-template\\\"}!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/board.vue?vue&type=template&id=1796d806&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_cache_loader_dist_cjs_js_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_17ca64e2_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_board_vue_vue_type_template_id_1796d806___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_cache_loader_dist_cjs_js_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_17ca64e2_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_board_vue_vue_type_template_id_1796d806___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./src/components/board.vue?");
+
+/***/ }),
+
+/***/ "./src/components/contextmenu.vue":
+/*!****************************************!*\
+  !*** ./src/components/contextmenu.vue ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _contextmenu_vue_vue_type_template_id_2129eaae___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./contextmenu.vue?vue&type=template&id=2129eaae& */ \"./src/components/contextmenu.vue?vue&type=template&id=2129eaae&\");\n/* harmony import */ var _contextmenu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./contextmenu.vue?vue&type=script&lang=js& */ \"./src/components/contextmenu.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _contextmenu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _contextmenu_vue_vue_type_template_id_2129eaae___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _contextmenu_vue_vue_type_template_id_2129eaae___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/contextmenu.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./src/components/contextmenu.vue?");
+
+/***/ }),
+
+/***/ "./src/components/contextmenu.vue?vue&type=script&lang=js&":
+/*!*****************************************************************!*\
+  !*** ./src/components/contextmenu.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_babel_loader_lib_index_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_contextmenu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/cache-loader/dist/cjs.js??ref--12-0!../../node_modules/babel-loader/lib!../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../node_modules/vue-loader/lib??vue-loader-options!./contextmenu.vue?vue&type=script&lang=js& */ \"./node_modules/cache-loader/dist/cjs.js?!./node_modules/babel-loader/lib/index.js!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/contextmenu.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_babel_loader_lib_index_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_contextmenu_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./src/components/contextmenu.vue?");
+
+/***/ }),
+
+/***/ "./src/components/contextmenu.vue?vue&type=template&id=2129eaae&":
+/*!***********************************************************************!*\
+  !*** ./src/components/contextmenu.vue?vue&type=template&id=2129eaae& ***!
+  \***********************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_cache_loader_dist_cjs_js_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_17ca64e2_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_contextmenu_vue_vue_type_template_id_2129eaae___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"node_modules/.cache/vue-loader\",\"cacheIdentifier\":\"17ca64e2-vue-loader-template\"}!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../node_modules/vue-loader/lib??vue-loader-options!./contextmenu.vue?vue&type=template&id=2129eaae& */ \"./node_modules/cache-loader/dist/cjs.js?{\\\"cacheDirectory\\\":\\\"node_modules/.cache/vue-loader\\\",\\\"cacheIdentifier\\\":\\\"17ca64e2-vue-loader-template\\\"}!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/contextmenu.vue?vue&type=template&id=2129eaae&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_cache_loader_dist_cjs_js_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_17ca64e2_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_contextmenu_vue_vue_type_template_id_2129eaae___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_cache_loader_dist_cjs_js_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_17ca64e2_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_contextmenu_vue_vue_type_template_id_2129eaae___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./src/components/contextmenu.vue?");
+
+/***/ }),
+
+/***/ "./src/components/events.js":
+/*!**********************************!*\
+  !*** ./src/components/events.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter */ \"./node_modules/core-js/modules/es.array.filter.js\");\n/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/createForOfIteratorHelper */ \"./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/createForOfIteratorHelper.js\");\n/* harmony import */ var D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/classCallCheck */ \"./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/classCallCheck.js\");\n/* harmony import */ var D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/createClass */ \"./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/createClass.js\");\n\n\n\n\n\nvar EventBus = /*#__PURE__*/function () {\n  function EventBus() {\n    Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_classCallCheck__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(this, EventBus);\n\n    this.handlers = {};\n  }\n\n  Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(EventBus, [{\n    key: \"on\",\n    value: function on(eventType, handler) {\n      if (!this.handlers[eventType]) {\n        this.handlers[eventType] = [];\n      }\n\n      this.handlers[eventType].push(handler);\n    }\n  }, {\n    key: \"off\",\n    value: function off(eventType, handler) {\n      if (!this.handlers[eventType]) {\n        return;\n      }\n\n      this.handlers[eventType] = this.handlers[eventType].filter(function (h) {\n        return h !== handler;\n      });\n    }\n  }, {\n    key: \"emit\",\n    value: function emit(eventType, eventArgs) {\n      if (!this.handlers[eventType]) {\n        return;\n      }\n\n      var _iterator = Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(this.handlers[eventType]),\n          _step;\n\n      try {\n        for (_iterator.s(); !(_step = _iterator.n()).done;) {\n          var handler = _step.value;\n          handler(eventArgs);\n        }\n      } catch (err) {\n        _iterator.e(err);\n      } finally {\n        _iterator.f();\n      }\n    }\n  }]);\n\n  return EventBus;\n}();\n\nvar instance = new EventBus();\nEventBus.on = instance.on.bind(instance);\nEventBus.off = instance.off.bind(instance);\nEventBus.emit = instance.emit.bind(instance);\n/* harmony default export */ __webpack_exports__[\"default\"] = (EventBus);\n\n//# sourceURL=webpack:///./src/components/events.js?");
+
+/***/ }),
+
+/***/ "./src/components/fieldsdialog.vue":
+/*!*****************************************!*\
+  !*** ./src/components/fieldsdialog.vue ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _fieldsdialog_vue_vue_type_template_id_db3ad65e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./fieldsdialog.vue?vue&type=template&id=db3ad65e& */ \"./src/components/fieldsdialog.vue?vue&type=template&id=db3ad65e&\");\n/* harmony import */ var _fieldsdialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./fieldsdialog.vue?vue&type=script&lang=js& */ \"./src/components/fieldsdialog.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(\n  _fieldsdialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _fieldsdialog_vue_vue_type_template_id_db3ad65e___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _fieldsdialog_vue_vue_type_template_id_db3ad65e___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/components/fieldsdialog.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./src/components/fieldsdialog.vue?");
+
+/***/ }),
+
+/***/ "./src/components/fieldsdialog.vue?vue&type=script&lang=js&":
+/*!******************************************************************!*\
+  !*** ./src/components/fieldsdialog.vue?vue&type=script&lang=js& ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_babel_loader_lib_index_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_fieldsdialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/cache-loader/dist/cjs.js??ref--12-0!../../node_modules/babel-loader/lib!../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../node_modules/vue-loader/lib??vue-loader-options!./fieldsdialog.vue?vue&type=script&lang=js& */ \"./node_modules/cache-loader/dist/cjs.js?!./node_modules/babel-loader/lib/index.js!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/fieldsdialog.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_babel_loader_lib_index_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_fieldsdialog_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./src/components/fieldsdialog.vue?");
+
+/***/ }),
+
+/***/ "./src/components/fieldsdialog.vue?vue&type=template&id=db3ad65e&":
+/*!************************************************************************!*\
+  !*** ./src/components/fieldsdialog.vue?vue&type=template&id=db3ad65e& ***!
+  \************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_cache_loader_dist_cjs_js_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_17ca64e2_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_fieldsdialog_vue_vue_type_template_id_db3ad65e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"node_modules/.cache/vue-loader\",\"cacheIdentifier\":\"17ca64e2-vue-loader-template\"}!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../node_modules/vue-loader/lib??vue-loader-options!./fieldsdialog.vue?vue&type=template&id=db3ad65e& */ \"./node_modules/cache-loader/dist/cjs.js?{\\\"cacheDirectory\\\":\\\"node_modules/.cache/vue-loader\\\",\\\"cacheIdentifier\\\":\\\"17ca64e2-vue-loader-template\\\"}!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/components/fieldsdialog.vue?vue&type=template&id=db3ad65e&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_cache_loader_dist_cjs_js_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_17ca64e2_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_fieldsdialog_vue_vue_type_template_id_db3ad65e___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_cache_loader_dist_cjs_js_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_17ca64e2_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_fieldsdialog_vue_vue_type_template_id_db3ad65e___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./src/components/fieldsdialog.vue?");
+
+/***/ }),
+
+/***/ "./src/components/index.js":
+/*!*********************************!*\
+  !*** ./src/components/index.js ***!
+  \*********************************/
+/*! exports provided: default, defineFields, defineTooltip, defineOptions, InputTypes, BUILTIN_FIELDS */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _board_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./board.vue */ \"./src/components/board.vue\");\n/* harmony import */ var _board_less__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./board.less */ \"./src/components/board.less\");\n/* harmony import */ var _board_less__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_board_less__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _models__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./models */ \"./src/components/models.js\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"defineFields\", function() { return _models__WEBPACK_IMPORTED_MODULE_2__[\"defineFields\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"defineTooltip\", function() { return _models__WEBPACK_IMPORTED_MODULE_2__[\"defineTooltip\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"defineOptions\", function() { return _models__WEBPACK_IMPORTED_MODULE_2__[\"defineOptions\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"InputTypes\", function() { return _models__WEBPACK_IMPORTED_MODULE_2__[\"InputTypes\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"BUILTIN_FIELDS\", function() { return _models__WEBPACK_IMPORTED_MODULE_2__[\"BUILTIN_FIELDS\"]; });\n\n\n\n\n\nfunction install(Vue) {\n  Vue.component('G6Board', _board_vue__WEBPACK_IMPORTED_MODULE_0__[\"default\"]);\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = ({\n  install: install\n});\n\n\n//# sourceURL=webpack:///./src/components/index.js?");
+
+/***/ }),
+
+/***/ "./src/components/models.js":
+/*!**********************************!*\
+  !*** ./src/components/models.js ***!
+  \**********************************/
+/*! exports provided: InputTypes, FieldConfig, FieldOption, Field, BoardOptions, defineFields, defineOptions, defineTooltip, BUILTIN_FIELDS */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"InputTypes\", function() { return InputTypes; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"FieldConfig\", function() { return FieldConfig; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"FieldOption\", function() { return FieldOption; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"Field\", function() { return Field; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"BoardOptions\", function() { return BoardOptions; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"defineFields\", function() { return defineFields; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"defineOptions\", function() { return defineOptions; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"defineTooltip\", function() { return defineTooltip; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"BUILTIN_FIELDS\", function() { return BUILTIN_FIELDS; });\n/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ \"./node_modules/core-js/modules/es.object.to-string.js\");\n/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_0__);\n\n\n/**\n * 输入框类型\n */\nvar InputTypes = {\n  /**\n   * 文本\n   */\n  TEXT: 1,\n\n  /**\n   * 长文本(多行)\n   */\n  LONGTEXT: 2,\n\n  /**\n   * 下拉选择框\n   */\n  SELECT: 3,\n\n  /**\n   * 复选\n   */\n  CHECKBOX: 4,\n\n  /**\n   * 单选\n   */\n  RADIO: 5,\n\n  /**\n   * 数值输入\n   */\n  NUMBER: 6,\n\n  /**\n   * 开关样式\n   */\n  SWITCH: 7 // /**\n  //  * 图片选择器\n  //  */\n  // IMAGE: 8,\n\n};\nvar FieldConfig = {\n  /**\n   * 默认值\n   */\n  default: null,\n\n  /**\n   * 输入提示文本\n   */\n  tip: '',\n\n  /**\n   * 字段校验器，见 Element-UI 的 表单校验\n   */\n  validators: [],\n\n  /**\n   * 对于数值或文本输入类型，限制其输入的最小长度\n   */\n  minlength: 0,\n\n  /**\n   * 对于数值或文本输入类型，限制其输入的最大长度\n   */\n  maxlength: 255,\n\n  /**\n   * 数值的精度\n   */\n  precision: 0,\n\n  /**\n   * 是否只读\n   */\n  readonly: false,\n\n  /**\n   * 是否可见\n   * @type {Boolean | Function(e: {data: Object, fields: Object})}\n   */\n  isVisible: true,\n\n  /**\n   * 是否必填\n   */\n  required: false,\n\n  /**\n   * 占位文本\n   */\n  placeholder: '',\n\n  /**\n   * 远程数据加载函数\n   */\n  optionsLoader: null,\n\n  /**\n   * 是否正在从远程加载数据\n   */\n  optionsLoading: false,\n\n  /**\n   * 变更事件\n   */\n  onchange: function onchange() {}\n};\nvar FieldOption = {\n  /**\n   * 名称\n   */\n  label: '',\n\n  /**\n   * 值\n   */\n  value: null,\n\n  /**\n   * 图标，目前仅支持图片\n   */\n  icon: null,\n\n  /**\n   * 选项上展示的提示文本\n   */\n  title: ''\n};\n/**\n * 字段定义\n */\n\nvar Field = {\n  /**\n   * 字段标签\n   */\n  label: '',\n\n  /**\n   * 字段名\n   */\n  name: '',\n\n  /**\n   * 输入控件的类型，参考 G6Board.InputTypes\n   * 默认值 G6Board.InputTypes.TEXT: 1\n   */\n  inputType: 1,\n\n  /**\n   * 当 inputType 为 select/checkbox/radio 时的选项\n   * @type {FieldOption}\n   */\n  options: [],\n\n  /**\n   * 选项\n   * @type {FieldConfig}\n   */\n  config: {},\n\n  /**\n   * 控件样式\n   * @type {FieldStyle}\n   */\n  style: {},\n\n  /**\n   * 自定义渲染组件\n   */\n  component: null\n};\nvar BoardOptions = {\n  /**\n   * 编辑节点时的字段\n   * @type {Field[]}\n   */\n  nodeFields: [],\n\n  /**\n   * 编辑边时的字段\n   * @type {Field[]}\n   */\n  edgeFields: [],\n\n  /**\n   * 编辑分组时的字段\n   * @type {Field[]}\n   */\n  comboFields: [],\n\n  /**\n   * 在编辑节点、分组或边前的数据处理函数\n   * @type {Function}\n   * @returns {Object|false} 返回 false 可以取消节点的操作\n   */\n  beforeEditHandler: function beforeEditHandler(e) {\n    return e.data;\n  },\n\n  /**\n   * 在编辑节点、分组或边时的数据处理函数\n   * @type {Function}\n   * @returns {Object|false} 返回 false 可以取消节点的操作\n   */\n  editHandler: function editHandler() {},\n  styles: {\n    /**\n     * 节点的样式\n     */\n    node: {},\n\n    /**\n     * 边的样式\n     */\n    edge: {},\n\n    /**\n     * 分组的样式\n     */\n    combo: {},\n\n    /**\n     * 节点不同状态的样式\n     */\n    nodeStates: {\n      /**\n       * 节点被选中时的样式\n       */\n      selected: {\n        'select-border': {}\n      },\n\n      /**\n       * 节点高亮时的样式（在搜索节点命中时生效）\n       */\n      highlight: {\n        'highlight-border': {}\n      }\n    },\n    edgeStates: {\n      /**\n       * 边被选中时的样式\n       */\n      selected: {}\n    },\n    comboStates: {\n      /**\n        * 分组被选中时的样式\n        */\n      selected: {\n        'select-border': {}\n      }\n    }\n  },\n\n  /**\n   * Tooltip 渲染器\n   */\n  tooltipRenderers: {\n    /**\n     * 节点的 Tooltip 渲染器\n     * @type {defineTooltip}\n     */\n    node: function node() {},\n\n    /**\n     * 边的 Tooltip 渲染器\n     * @type {defineTooltip}\n     */\n    edge: function edge() {}\n  },\n  contextmenu: {\n    /**\n     * 是否允许打开右键菜单\n     * @type {Boolean|Function}\n     */\n    visible: true\n  }\n};\n/**\n * 定义编辑器的选项\n *\n * @param {BoardOptions} options\n * @returns {BoardOptions}\n */\n\nfunction defineOptions(options) {\n  return options;\n}\n/**\n * 构造数据的工具函数\n * @param {Field[]} fields\n * @returns {Field[]}\n */\n\n\nfunction defineFields(fields) {\n  return fields || [];\n}\n/**\n *\n * @param {Function<object>} renderer\n * @param {{x: number, y: number}} offset\n * @param {string} [trigger=click]\n * @returns\n */\n\n\nfunction defineTooltip(renderer, offset, trigger) {\n  offset = Object.assign({\n    x: 10,\n    y: 10\n  }, offset);\n  return {\n    // offsetX 与 offsetY 需要加上父容器的 padding\n    offsetX: offset.x,\n    offsetY: offset.y,\n    trigger: trigger || 'click',\n    shouldBegin: function shouldBegin() {\n      // 仅在非编辑模式下才允许 tooltip 弹出\n      if (this.editMode) {\n        return false;\n      }\n\n      return true;\n    },\n    getContent: function getContent(e) {\n      // 仅在非编辑模式下才允许 tooltip 弹出\n      if (this.editMode) {\n        return '';\n      }\n\n      var data = e.item.getModel();\n      var id = data.id; // 缓存数据\n\n      var cache = window.__g6board_tooltip_cache || {};\n      var now = new Date().getTime();\n\n      if (cache[id]) {\n        // 状态缓存 10 秒\n        if (cache[id].time && now - cache[id].time < 10000) {\n          return cache[id].element;\n        }\n      }\n\n      var container = document.createElement('div');\n      cache[id] = {\n        time: now,\n        element: container\n      };\n      container.classList.add('g6-board--tooltip');\n      var result = renderer(data, container); // 添加对异步的支持\n\n      if (result instanceof Promise) {\n        container.innerHTML = '<span>加载中 ...</span>';\n        result.then(function (content) {\n          if (typeof content === 'string') {\n            container.innerHTML = content;\n          } else {\n            container.innerHTML = '';\n            container.appendChild(content);\n          }\n        });\n      } else {\n        if (typeof result === 'string') {\n          container.innerHTML = result;\n        } else {\n          container.appendChild(result);\n        }\n      }\n\n      return container;\n    }\n  };\n}\n\nvar BUILTIN_FIELDS = {\n  /**\n   * 节点间连接边的绘制类型\n   * @type {Field}\n   */\n  EDGE_TYPE: {\n    label: '边类型',\n    name: '_lineType',\n    inputType: InputTypes.RADIO,\n    options: [{\n      label: '直线',\n      value: 'line'\n    }, {\n      label: '折线',\n      value: 'polyline'\n    }, {\n      label: '圆弧线',\n      value: 'arc' // }, {\n      //   label: '二阶贝塞尔曲线',\n      //   value: 'quadratic'\n      // }, {\n      //   label: '三阶贝塞尔曲线',\n      //   value: 'cubic'\n      // }, {\n      //   label: '垂直方向的三阶贝塞尔曲线',\n      //   value: 'cubic-vertical'\n      // }, {\n      //   label: '水平方向的三阶贝塞尔曲线',\n      //   value: 'cubic-horizontal'\n      // }, {\n      //   label: '自环',\n      //   value: 'loop'\n\n    }],\n    config: {\n      default: 'polyline'\n    }\n  },\n\n  /**\n   * 节点间连接边的绘制类型为圆弧时，调整其弧度\n   * @type {Field}\n   */\n  EDGE_CURVE_OFFSET: {\n    label: '边弧度',\n    name: '_curveOffset',\n    inputType: InputTypes.NUMBER,\n    config: {\n      tip: '指定弧的弯曲程度，其正负影响弧弯曲的方向。取值范围 -100 ~ 100',\n      maxlength: 100,\n      minlength: -100,\n      default: 20,\n      isVisible: function isVisible(e) {\n        return e.data._lineType === 'arc';\n      }\n    }\n  },\n  EDGE_STYLE: {\n    label: '边样式',\n    name: '_lineStyle',\n    inputType: InputTypes.RADIO,\n    options: [{\n      label: '实线',\n      value: 'solid',\n      title: '节点间使用实线连接'\n    }, {\n      label: '点线',\n      value: 'dotted',\n      title: '节点间使用点线连接'\n    }, {\n      label: '虚线',\n      value: 'dashed',\n      title: '节点间使用虚线连接'\n    }],\n    config: {\n      default: 'solid'\n    }\n  },\n  EDGE_VISIBLE: {\n    label: '边可见',\n    name: 'lineVisible',\n    inputType: InputTypes.SWITCH,\n    config: {\n      default: true,\n      tip: '在预览图时，边是否可见'\n    }\n  }\n};\n\n\n//# sourceURL=webpack:///./src/components/models.js?");
+
+/***/ }),
+
+/***/ "./src/components/setup.js":
+/*!*********************************!*\
+  !*** ./src/components/setup.js ***!
+  \*********************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.concat */ \"./node_modules/core-js/modules/es.array.concat.js\");\n/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.find */ \"./node_modules/core-js/modules/es.array.find.js\");\n/* harmony import */ var core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_find__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ \"./node_modules/core-js/modules/es.array.for-each.js\");\n/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.index-of */ \"./node_modules/core-js/modules/es.array.index-of.js\");\n/* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ \"./node_modules/core-js/modules/web.dom-collections.for-each.js\");\n/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_4__);\n/* harmony import */ var D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/createForOfIteratorHelper */ \"./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/createForOfIteratorHelper.js\");\n/* harmony import */ var D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/objectSpread2 */ \"./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/objectSpread2.js\");\n/* harmony import */ var _antv_g6__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @antv/g6 */ \"./node_modules/@antv/g6/es/index.js\");\n/* harmony import */ var _events__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./events */ \"./src/components/events.js\");\n\n\n\n\n\n\n\n\n\n_antv_g6__WEBPACK_IMPORTED_MODULE_7__[\"default\"].registerNode('image-ext', {\n  afterDraw: function afterDraw(cfg, group, img) {\n    // 获取图形组中的第一个图形\n    // 获取路径图形的中点坐标\n    var _img$attr = img.attr(),\n        x = _img$attr.x,\n        y = _img$attr.y,\n        height = _img$attr.height,\n        width = _img$attr.width; // 选择框\n\n\n    var offset = 8;\n    group.addShape('rect', {\n      attrs: {\n        width: width + offset,\n        height: height + offset,\n        x: x - offset / 2,\n        y: y - offset / 2,\n        radius: 4\n      },\n      name: 'select-border'\n    }); // 高亮框\n\n    var size = Math.max(height, width);\n    group.addShape('circle', {\n      attrs: {\n        r: size,\n        x: 0,\n        y: 0\n      },\n      name: 'highlight-border'\n    });\n  }\n}, 'image');\n_antv_g6__WEBPACK_IMPORTED_MODULE_7__[\"default\"].registerEdge('polyline-ext', {// afterDraw(cfg, group, line) {\n  //   line.at\n  // }\n}, 'polyline');\n_antv_g6__WEBPACK_IMPORTED_MODULE_7__[\"default\"].registerCombo('rect-ext', {\n  drawShape: function drawShape(cfg, group) {\n    var style = this.getShapeStyle(cfg);\n    var rect = group.addShape('rect', {\n      attrs: Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[\"default\"])({}, style),\n      name: 'key-shape'\n    });\n    var titleKey = 'title';\n    var titleCfg = cfg[titleKey];\n\n    if (titleCfg) {\n      var width = style.width,\n          height = style.height;\n      group.addShape('rect', {\n        attrs: Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[\"default\"])({\n          width: width,\n          height: 30,\n          x: -width / 2,\n          y: -height / 2 - 5\n        }, titleCfg.style),\n        draggable: titleCfg.draggable,\n        name: titleKey\n      });\n    }\n\n    var bgKey = 'background';\n    var bgCfg = cfg[bgKey];\n\n    if (cfg[bgKey]) {\n      var _width = style.width,\n          _height = style.height;\n      group.addShape(bgCfg.shape || 'rect', {\n        attrs: Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[\"default\"])({\n          x: -_width / 2,\n          y: -_height / 2 - 5 + 30,\n          width: _width,\n          height: _height - 30\n        }, bgCfg.style),\n        draggable: bgCfg.draggable,\n        name: bgKey\n      });\n    }\n\n    return rect;\n  },\n  afterUpdate: function afterUpdate(cfg, item) {\n    var group = item.get('group');\n    var shapes = group.getChildren();\n    var style = this.getShapeStyle(cfg);\n    var width = style.width,\n        height = style.height;\n    shapes.forEach(function (shape) {\n      var shapeName = shape.get('name');\n\n      if (shapeName === 'title') {\n        shape.attr({\n          width: width,\n          x: -width / 2,\n          y: -height / 2 - 5\n        });\n        return;\n      }\n\n      if (shapeName === 'background') {\n        shape.attr({\n          x: -width / 2,\n          y: -height / 2 - 5 + 30,\n          width: width,\n          height: height - 30\n        });\n        return;\n      }\n    });\n  }\n}, 'rect'); // G6.registerCombo('rect-ext', {\n//   afterDraw(cfg, group, combo) {\n//     let { width, height } = cfg\n//     const handleSize = 50\n//     const handleHeight = 2\n//     const padding = 40\n//     const color = 'green'\n//     width += padding\n//     height += padding\n//     const origin = {\n//       x: -width / 2,\n//       y: -height / 2\n//     }\n//     const offset = {\n//       x: (width - handleSize) / 2,\n//       y: (height - handleSize) / 2,\n//     }\n//     // 允许分组拖动以调整大小\n//     // top\n//     const top = group.addShape('rect', {\n//       attrs: {\n//         x: origin.x + offset.x,\n//         y: origin.y - 6,\n//         height: handleHeight,\n//         width: handleSize,\n//         fill: color,\n//         cursor: 'ns-resize'\n//       },\n//       name: 'resize-handle-top'\n//     })\n//     // right\n//     const right = group.addShape('rect', {\n//       attrs: {\n//         x: origin.x + width - 1,\n//         y: origin.y + offset.y,\n//         width: handleHeight,\n//         height: handleSize,\n//         fill: color,\n//         cursor: 'ew-resize'\n//       },\n//       name: 'resize-handle-right'\n//     })\n//     // bottom\n//     const bottom = group.addShape('rect', {\n//       attrs: {\n//         x: origin.x + offset.x,\n//         y: origin.y + height - 6,\n//         height: handleHeight,\n//         width: handleSize,\n//         fill: color,\n//         cursor: 'ns-resize'\n//       },\n//       name: 'resize-handle-bottom'\n//     })\n//     // left\n//     const left = group.addShape('rect', {\n//       attrs: {\n//         x: origin.x - 1,\n//         y: origin.y + offset.y,\n//         width: handleHeight,\n//         height: handleSize,\n//         fill: color,\n//         cursor: 'ew-resize'\n//       },\n//       name: 'resize-handle-left'\n//     })\n//     // 事件设定\n//     let mouseDown = false\n//     let resizeDir = ''\n//     const pos = {\n//       x: 0,\n//       y: 0\n//     }\n//     function onMouseUp(e) {\n//       window.removeEventListener('mouseup', onMouseUp)\n//       if (!mouseDown) {\n//         return\n//       }\n//       mouseDown = false\n//       const { x, y } = e\n//       const attrs = combo.getBBox()\n//       console.info(attrs)\n//       const bounds = {\n//         x: attrs.canvasX,\n//         y: attrs.canvasY,\n//         width: attrs.width,\n//         height: attrs.height,\n//       }\n//       const boundsOffset = {\n//         x: x - pos.x,\n//         y: y - pos.y\n//       }\n//       if (resizeDir === 'top' || resizeDir === 'bottom') {\n//         bounds.y += boundsOffset.y\n//         bounds.height += boundsOffset.y\n//       } else {\n//         bounds.x += boundsOffset.x\n//         bounds.width += boundsOffset.x\n//       }\n//       console.info(boundsOffset, bounds)\n//       const graph = window.G6\n//       window.G6.updateItem(graph.findById(cfg.id), bounds)\n//     }\n//     function onMouseDown(dir, e) {\n//       e.preventDefault();\n//       resizeDir = dir\n//       const { x, y } = e\n//       mouseDown = true\n//       pos.x = x\n//       pos.y = y\n//       window.addEventListener('mouseup', onMouseUp)\n//     }\n//     top.on('mousedown', onMouseDown.bind(null, 'top'))\n//     right.on('mousedown', onMouseDown.bind(null, 'right'))\n//     bottom.on('mousedown', onMouseDown.bind(null, 'bottom'))\n//     left.on('mousedown', onMouseDown.bind(null, 'left'))\n//   }\n// }, 'rect')\n\n_antv_g6__WEBPACK_IMPORTED_MODULE_7__[\"default\"].registerBehavior('select-item', {\n  getEvents: function getEvents() {\n    return {\n      'edge:click': 'onClick',\n      'edge:mouseover': 'onHover',\n      'edge:mouseleave': 'onLeave',\n      'node:click': 'onClick',\n      'node:mouseover': 'onHover',\n      'node:mouseleave': 'onLeave'\n    };\n  },\n  onClick: function onClick(e) {\n    var item = e.item; // 在连线时，如果点击空白处取消会报错\n\n    try {\n      item.setState('selected', true);\n    } catch (e) {// ignore\n    }\n  },\n  onHover: function onHover(e) {\n    var item = e.item;\n    item.setState('hover', true);\n  },\n  onLeave: function onLeave(e) {\n    var graph = this.graph;\n    var item = e.item;\n    var states = item.getStates();\n\n    if (states.indexOf('hover') !== -1) {\n      graph.clearItemStates(item, 'hover');\n    }\n  }\n}); // TODO 添加连线到分组的支持\n\n_antv_g6__WEBPACK_IMPORTED_MODULE_7__[\"default\"].registerBehavior('add-edge', {\n  getEvents: function getEvents() {\n    return {\n      'node:click': 'onClick',\n      mousemove: 'onMousemove',\n      // 点击空白处，取消边\n      'edge:click': 'onEdgeClick'\n    };\n  },\n  onEnd: function onEnd(model) {\n    var graph = this.graph;\n    var source = this.edge.getModel().source;\n    var target = model.id; // 不允许连线自环\n\n    if (source === target) {\n      // eslint-disable-next-line\n      console.debug(\"The edge is a loop, abort!\");\n      graph.removeItem(this.edge);\n      this.edge = null;\n      this.addingEdge = false;\n      return;\n    } // 如果边已经存在，则取消此操作\n    // 禁止两个节点间连接多条线\n\n\n    if (graph.find('edge', function (item) {\n      var itemModel = item.getModel();\n      return itemModel.source === source && itemModel.target === target || itemModel.source === target && itemModel.target === source;\n    })) {\n      // eslint-disable-next-line\n      console.debug(\"The edge from \".concat(source, \" to \").concat(target, \" is duplicated, abort!\"));\n      graph.removeItem(this.edge);\n      this.edge = null;\n      this.addingEdge = false;\n      return;\n    }\n\n    var defaultStyle = graph.cfg.defaultEdge.style;\n    graph.updateItem(this.edge, {\n      target: target,\n      style: Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[\"default\"])({}, defaultStyle)\n    });\n    this.edge.toFront();\n    graph.emit('custom:add-edge', {\n      item: this.edge\n    }); // graph.setItemState(this.edge, 'selected', true);\n\n    this.edge = null;\n    this.addingEdge = false;\n  },\n  onClick: function onClick(ev) {\n    var node = ev.item;\n    var graph = this.graph;\n    var point = {\n      x: ev.x,\n      y: ev.y\n    }; // function cancel(e) {\n    //   if (e.keyCode === 27) {\n    //     window.removeEventListener('keydown', cancel)\n    //     // ESC 取消连线\n    //     graph.removeItem(this.edge);\n    //     this.edge = null;\n    //     this.addingEdge = false;\n    //   }\n    // }\n\n    var model = node.getModel();\n\n    if (this.addingEdge && this.edge) {\n      this.onEnd(model);\n    } else {\n      var option = {\n        source: model.id,\n        target: point,\n        style: Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[\"default\"])(Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_6__[\"default\"])({}, this.graph.cfg.defaultEdge.style), {}, {\n          endArrow: true\n        })\n      };\n\n      if (model._lineType) {\n        option.type = model._lineType;\n      }\n\n      if (model._lineStyle === 'dotted') {\n        option.style.lineDash = [2, 2];\n      } else if (model._lineStyle === 'dashed') {\n        option.style.lineDash = [10, 2];\n      }\n\n      this.edge = graph.addItem('edge', option);\n      this.addingEdge = true; // window.addEventListener('keydown', cancel)\n    }\n  },\n  onMousemove: function onMousemove(ev) {\n    var point = {\n      x: ev.x,\n      y: ev.y\n    };\n\n    if (this.addingEdge && this.edge) {\n      this.graph.updateItem(this.edge, {\n        target: point\n      });\n    }\n  },\n  onEdgeClick: function onEdgeClick(ev) {\n    // 拖拽过程中，点击会点击到新增的边上\n    if (!this.addingEdge || this.edge !== ev.item) {\n      return;\n    } // 突然出现鼠标始终会点击在线上的问题，在此添加代码片段以处理\n\n\n    var graph = this.graph;\n\n    var _graph$getPointByClie = graph.getPointByClient(ev.clientX, ev.clientY),\n        x = _graph$getPointByClie.x,\n        y = _graph$getPointByClie.y;\n\n    var targetItem;\n    var nodes = graph.getNodes();\n\n    var _iterator = Object(D_vue_g6board_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper__WEBPACK_IMPORTED_MODULE_5__[\"default\"])(nodes),\n        _step;\n\n    try {\n      for (_iterator.s(); !(_step = _iterator.n()).done;) {\n        var node = _step.value;\n        var bbox = node.getBBox();\n\n        if (x >= bbox.minX && x <= bbox.maxX && y >= bbox.minY && y <= bbox.maxY) {\n          targetItem = node;\n          break;\n        }\n      }\n    } catch (err) {\n      _iterator.e(err);\n    } finally {\n      _iterator.f();\n    }\n\n    if (targetItem) {\n      this.onEnd(targetItem.getModel());\n      return;\n    } // eslint-disable-next-line\n\n\n    console.debug(\"The edge adding is canceled!\");\n    this.graph.removeItem(this.edge);\n    this.edge = null;\n    this.addingEdge = false;\n  }\n});\n_antv_g6__WEBPACK_IMPORTED_MODULE_7__[\"default\"].registerBehavior('contextmenu', {\n  getEvents: function getEvents() {\n    return {\n      'canvas:contextmenu': 'onCanvasContextMenu',\n      'node:contextmenu': 'onNodeContextMenu',\n      'edge:contextmenu': 'onEdgeContextMenu',\n      'combo:contextmenu': 'onComboContextMenu'\n    };\n  },\n  onCanvasContextMenu: function onCanvasContextMenu(e) {\n    _events__WEBPACK_IMPORTED_MODULE_8__[\"default\"].emit('canvas:contextmenu', e);\n  },\n  onNodeContextMenu: function onNodeContextMenu(e) {\n    _events__WEBPACK_IMPORTED_MODULE_8__[\"default\"].emit('node:contextmenu', e);\n  },\n  onEdgeContextMenu: function onEdgeContextMenu(e) {\n    _events__WEBPACK_IMPORTED_MODULE_8__[\"default\"].emit('edge:contextmenu', e);\n  },\n  onComboContextMenu: function onComboContextMenu(e) {\n    _events__WEBPACK_IMPORTED_MODULE_8__[\"default\"].emit('combo:contextmenu', e);\n  }\n});\n\n//# sourceURL=webpack:///./src/components/setup.js?");
+
+/***/ }),
+
+/***/ "./src/main.js":
+/*!*********************!*\
+  !*** ./src/main.js ***!
+  \*********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var D_vue_g6board_node_modules_core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/core-js/modules/es.array.iterator.js */ \"./node_modules/core-js/modules/es.array.iterator.js\");\n/* harmony import */ var D_vue_g6board_node_modules_core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(D_vue_g6board_node_modules_core_js_modules_es_array_iterator_js__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var D_vue_g6board_node_modules_core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/core-js/modules/es.promise.js */ \"./node_modules/core-js/modules/es.promise.js\");\n/* harmony import */ var D_vue_g6board_node_modules_core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(D_vue_g6board_node_modules_core_js_modules_es_promise_js__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var D_vue_g6board_node_modules_core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/core-js/modules/es.object.assign.js */ \"./node_modules/core-js/modules/es.object.assign.js\");\n/* harmony import */ var D_vue_g6board_node_modules_core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(D_vue_g6board_node_modules_core_js_modules_es_object_assign_js__WEBPACK_IMPORTED_MODULE_2__);\n/* harmony import */ var D_vue_g6board_node_modules_core_js_modules_es_promise_finally_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/core-js/modules/es.promise.finally.js */ \"./node_modules/core-js/modules/es.promise.finally.js\");\n/* harmony import */ var D_vue_g6board_node_modules_core_js_modules_es_promise_finally_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(D_vue_g6board_node_modules_core_js_modules_es_promise_finally_js__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.runtime.esm.js\");\n/* harmony import */ var element_ui__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! element-ui */ \"./node_modules/element-ui/lib/element-ui.common.js\");\n/* harmony import */ var element_ui__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(element_ui__WEBPACK_IMPORTED_MODULE_5__);\n/* harmony import */ var element_ui_lib_theme_chalk_index_css__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! element-ui/lib/theme-chalk/index.css */ \"./node_modules/element-ui/lib/theme-chalk/index.css\");\n/* harmony import */ var element_ui_lib_theme_chalk_index_css__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(element_ui_lib_theme_chalk_index_css__WEBPACK_IMPORTED_MODULE_6__);\n/* harmony import */ var _views_App__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/views/App */ \"./src/views/App.vue\");\n/* harmony import */ var _components__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @/components */ \"./src/components/index.js\");\n\n\n\n\n\n\n\n\n\nvue__WEBPACK_IMPORTED_MODULE_4__[\"default\"].use(element_ui__WEBPACK_IMPORTED_MODULE_5___default.a);\nvue__WEBPACK_IMPORTED_MODULE_4__[\"default\"].use(_components__WEBPACK_IMPORTED_MODULE_8__[\"default\"]);\nnew vue__WEBPACK_IMPORTED_MODULE_4__[\"default\"]({\n  render: function render(h) {\n    return h(_views_App__WEBPACK_IMPORTED_MODULE_7__[\"default\"]);\n  }\n}).$mount('#app');\n\n//# sourceURL=webpack:///./src/main.js?");
+
+/***/ }),
+
+/***/ "./src/views/App.vue":
+/*!***************************!*\
+  !*** ./src/views/App.vue ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App_vue_vue_type_template_id_e920d152___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App.vue?vue&type=template&id=e920d152& */ \"./src/views/App.vue?vue&type=template&id=e920d152&\");\n/* harmony import */ var _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./App.vue?vue&type=script&lang=js& */ \"./src/views/App.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport *//* harmony import */ var _App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./App.vue?vue&type=style&index=0&lang=css& */ \"./src/views/App.vue?vue&type=style&index=0&lang=css&\");\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n\n/* normalize component */\n\nvar component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(\n  _App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[\"default\"],\n  _App_vue_vue_type_template_id_e920d152___WEBPACK_IMPORTED_MODULE_0__[\"render\"],\n  _App_vue_vue_type_template_id_e920d152___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"],\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"src/views/App.vue\"\n/* harmony default export */ __webpack_exports__[\"default\"] = (component.exports);\n\n//# sourceURL=webpack:///./src/views/App.vue?");
+
+/***/ }),
+
+/***/ "./src/views/App.vue?vue&type=script&lang=js&":
+/*!****************************************************!*\
+  !*** ./src/views/App.vue?vue&type=script&lang=js& ***!
+  \****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_babel_loader_lib_index_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/cache-loader/dist/cjs.js??ref--12-0!../../node_modules/babel-loader/lib!../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=script&lang=js& */ \"./node_modules/cache-loader/dist/cjs.js?!./node_modules/babel-loader/lib/index.js!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/views/App.vue?vue&type=script&lang=js&\");\n/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_cache_loader_dist_cjs_js_ref_12_0_node_modules_babel_loader_lib_index_js_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[\"default\"]); \n\n//# sourceURL=webpack:///./src/views/App.vue?");
+
+/***/ }),
+
+/***/ "./src/views/App.vue?vue&type=style&index=0&lang=css&":
+/*!************************************************************!*\
+  !*** ./src/views/App.vue?vue&type=style&index=0&lang=css& ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/vue-style-loader??ref--6-oneOf-1-0!../../node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../node_modules/postcss-loader/src??ref--6-oneOf-1-2!../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=style&index=0&lang=css& */ \"./node_modules/vue-style-loader/index.js?!./node_modules/css-loader/dist/cjs.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/views/App.vue?vue&type=style&index=0&lang=css&\");\n/* harmony import */ var _node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);\n/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if([\"default\"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));\n /* harmony default export */ __webpack_exports__[\"default\"] = (_node_modules_vue_style_loader_index_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); \n\n//# sourceURL=webpack:///./src/views/App.vue?");
+
+/***/ }),
+
+/***/ "./src/views/App.vue?vue&type=template&id=e920d152&":
+/*!**********************************************************!*\
+  !*** ./src/views/App.vue?vue&type=template&id=e920d152& ***!
+  \**********************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _node_modules_cache_loader_dist_cjs_js_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_17ca64e2_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_e920d152___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../node_modules/cache-loader/dist/cjs.js?{\"cacheDirectory\":\"node_modules/.cache/vue-loader\",\"cacheIdentifier\":\"17ca64e2-vue-loader-template\"}!../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../node_modules/cache-loader/dist/cjs.js??ref--0-0!../../node_modules/vue-loader/lib??vue-loader-options!./App.vue?vue&type=template&id=e920d152& */ \"./node_modules/cache-loader/dist/cjs.js?{\\\"cacheDirectory\\\":\\\"node_modules/.cache/vue-loader\\\",\\\"cacheIdentifier\\\":\\\"17ca64e2-vue-loader-template\\\"}!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/cache-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./src/views/App.vue?vue&type=template&id=e920d152&\");\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"render\", function() { return _node_modules_cache_loader_dist_cjs_js_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_17ca64e2_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_e920d152___WEBPACK_IMPORTED_MODULE_0__[\"render\"]; });\n\n/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, \"staticRenderFns\", function() { return _node_modules_cache_loader_dist_cjs_js_cacheDirectory_node_modules_cache_vue_loader_cacheIdentifier_17ca64e2_vue_loader_template_node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_template_id_e920d152___WEBPACK_IMPORTED_MODULE_0__[\"staticRenderFns\"]; });\n\n\n\n//# sourceURL=webpack:///./src/views/App.vue?");
+
+/***/ }),
+
 /***/ 0:
+/*!***************************!*\
+  !*** multi ./src/main.js ***!
+  \***************************/
+/*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__("56d7");
-
-
-/***/ }),
-
-/***/ "1145":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("1485");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
- /* unused harmony default export */ var _unused_webpack_default_export = (_node_modules_mini_css_extract_plugin_dist_loader_js_ref_6_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_6_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_oneOf_1_2_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_App_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
-
-/***/ }),
-
-/***/ "1485":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
-/***/ "336c":
-/***/ (function(module, exports) {
-
-module.exports = @antv/g6;
-
-/***/ }),
-
-/***/ "56d7":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.iterator.js
-var es_array_iterator = __webpack_require__("e260");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.js
-var es_promise = __webpack_require__("e6cf");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.assign.js
-var es_object_assign = __webpack_require__("cca6");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.promise.finally.js
-var es_promise_finally = __webpack_require__("a79d");
-
-// EXTERNAL MODULE: ./node_modules/vue/dist/vue.runtime.esm.js
-var vue_runtime_esm = __webpack_require__("2b0e");
-
-// EXTERNAL MODULE: external "element-ui"
-var external_element_ui_ = __webpack_require__("5f72");
-var external_element_ui_default = /*#__PURE__*/__webpack_require__.n(external_element_ui_);
-
-// EXTERNAL MODULE: ./node_modules/element-ui/lib/theme-chalk/index.css
-var theme_chalk = __webpack_require__("0fae");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"51a94007-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/App.vue?vue&type=template&id=14dde052&
-var Appvue_type_template_id_14dde052_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"app"},[_c('div',{staticClass:"toolbar"},[_vm._m(0),_c('div',{staticStyle:{"gap":"20px","display":"flex"}},[_c('div',{staticClass:"search"},[_c('span',[_vm._v("查找节点")]),_c('el-input',{staticStyle:{"width":"200px"},attrs:{"size":"small"},model:{value:(_vm.search.keyword),callback:function ($$v) {_vm.$set(_vm.search, "keyword", $$v)},expression:"search.keyword"}}),_c('el-button',{attrs:{"size":"small"},on:{"click":_vm.onSearch}},[_vm._v("查找")])],1),_c('span',[_c('span',[_vm._v("编辑模式")]),_c('el-switch',{model:{value:(_vm.editMode),callback:function ($$v) {_vm.editMode=$$v},expression:"editMode"}})],1),_c('el-button',{attrs:{"size":"small"},on:{"click":_vm.saveData}},[_vm._v("保存")])],1)]),_c('g6-board',{ref:"board",attrs:{"options":_vm.options,"data":_vm.data,"edit-mode":_vm.editMode},on:{"change":_vm.onGraphChange}})],1)}
-var staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"g6-board--title"},[_c('span',[_vm._v("图编辑器")])])}]
-
-
-// CONCATENATED MODULE: ./src/views/App.vue?vue&type=template&id=14dde052&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.index-of.js
-var es_array_index_of = __webpack_require__("c975");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
-var es_array_map = __webpack_require__("d81d");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.regexp.exec.js
-var es_regexp_exec = __webpack_require__("ac1f");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.search.js
-var es_string_search = __webpack_require__("841c");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.filter.js
-var es_array_filter = __webpack_require__("4de4");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.for-each.js
-var es_array_for_each = __webpack_require__("4160");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.for-each.js
-var web_dom_collections_for_each = __webpack_require__("159b");
-
-// CONCATENATED MODULE: ./src/assets/nodes.js
-
-var nodes_nodes = [{
-  label: "交换机1",
-  ip: "192.168.1.1",
-  deviceType: "switch",
-  color: 'red',
-  group: '第一个域',
-  resp_person: '张三',
-  dept: '安全运维'
-}, {
-  label: "防火墙",
-  ip: "192.168.1.2",
-  deviceType: "firewall",
-  color: '#007acc',
-  resp_person: '张三',
-  dept: '安全运维'
-}, {
-  label: "服务器A",
-  ip: "192.168.1.3",
-  deviceType: "server",
-  group: '第一个域',
-  resp_person: '张三',
-  dept: '安全运维'
-}, {
-  label: "服务器B",
-  ip: "192.168.1.4",
-  deviceType: "server",
-  group: '第一个域',
-  resp_person: '张三',
-  dept: '安全运维'
-}, {
-  label: "交换机2",
-  ip: "192.168.1.11",
-  deviceType: "switch",
-  color: 'darkgreen',
-  group: '第二个域',
-  resp_person: '张三',
-  dept: '安全运维'
-}, {
-  label: "服务器C",
-  ip: "192.168.1.13",
-  deviceType: "server",
-  color: 'blue',
-  group: '第二个域',
-  resp_person: '张三',
-  dept: '安全运维'
-}, {
-  label: "服务器D",
-  ip: "192.168.1.14",
-  deviceType: "server",
-  color: 'purple',
-  group: '第二个域',
-  resp_person: '张三',
-  dept: '安全运维'
-}]; // const nodeSet = [{
-//   "id": 4,
-//   "nodes": ['192.168.1.3', '192.168.1.4']
-// }]
-// 默认情况下，使用 ip 作为数据 id
-
-nodes_nodes.forEach(function (node) {
-  node.id = node.ip;
-});
-/* harmony default export */ var assets_nodes = (nodes_nodes);
-// CONCATENATED MODULE: ./src/assets/edges.js
-var edges_edges = [{
-  "source": '192.168.1.1',
-  "target": '192.168.1.2',
-  "speed": "100M/s",
-  "traffic": "78M/s",
-  "state": "正常"
-}, {
-  "source": '192.168.1.3',
-  "target": '192.168.1.1',
-  "speed": "100M/s",
-  "traffic": "78M/s",
-  "state": "正常"
-}, {
-  "source": '192.168.1.4',
-  "target": '192.168.1.1',
-  "speed": "100M/s",
-  "traffic": "78M/s",
-  "state": "正常"
-}, {
-  "source": '192.168.1.11',
-  "target": '192.168.1.1',
-  "speed": "100M/s",
-  "traffic": "78M/s",
-  "state": "正常"
-}, {
-  "source": '192.168.1.13',
-  "target": '192.168.1.11',
-  "speed": "10M/s",
-  "traffic": "2.5M/s",
-  "state": "卡顿"
-}, {
-  "source": '192.168.1.14',
-  "target": '192.168.1.11',
-  "speed": "1000M/s",
-  "traffic": "0",
-  "state": "断开"
-}];
-/* harmony default export */ var assets_edges = (edges_edges);
-// CONCATENATED MODULE: ./src/assets/deviceTypes.js
-var deviceTypes = [{
-  label: '终端',
-  value: 'pc',
-  size: 20
-}, {
-  label: '交换机',
-  value: 'switch',
-  size: 30
-}, {
-  label: '防火墙',
-  value: 'firewall',
-  size: 40
-}, {
-  label: '服务器',
-  value: 'server',
-  size: 40
-}];
-/* harmony default export */ var assets_deviceTypes = (deviceTypes);
-// CONCATENATED MODULE: ./src/assets/storage.js
-
-
-
-
-
-
-
-var storeKey = 'graph-data';
-var storage_combos = [];
-
-function getData() {
-  var store = localStorage.getItem(storeKey);
-
-  if (store) {
-    store = JSON.parse(store);
-  } else {
-    assets_nodes.forEach(function (node) {
-      node.type = 'image-ext';
-      node.img = getIcon(node.deviceType);
-      node.size = getSize(node.deviceType);
-    });
-    store = {
-      nodes: assets_nodes,
-      edges: assets_edges,
-      combos: storage_combos
-    };
-  }
-
-  return store;
-}
-
-function getIcon(deviceType) {
-  return "/static/icons/".concat(deviceType, ".svg");
-}
-
-function setData(data) {
-  localStorage.setItem(storeKey, JSON.stringify(data));
-}
-
-function getDeviceTypes() {
-  return assets_deviceTypes.map(function (dt) {
-    dt.icon = getIcon(dt.value);
-    return dt;
-  });
-}
-
-function getSize(deviceType) {
-  return assets_deviceTypes.filter(function (dt) {
-    return dt.value === deviceType;
-  })[0].size;
-}
-
-/* harmony default export */ var storage = ({
-  get: getData,
-  set: setData,
-  getDeviceTypes: getDeviceTypes,
-  getIcon: getIcon,
-  getSize: getSize
-});
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
-var es_function_name = __webpack_require__("b0c0");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.fixed.js
-var es_string_fixed = __webpack_require__("c7cd");
-
-// EXTERNAL MODULE: ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/objectSpread2.js + 1 modules
-var objectSpread2 = __webpack_require__("f3f3");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
-var es_object_to_string = __webpack_require__("d3b7");
-
-// CONCATENATED MODULE: ./src/components/models.js
-
-
-
-
-/**
- * 输入框类型
- */
-var InputTypes = {
-  /**
-   * 文本
-   */
-  TEXT: 1,
-
-  /**
-   * 长文本(多行)
-   */
-  LONGTEXT: 2,
-
-  /**
-   * 下拉选择框
-   */
-  SELECT: 3,
-
-  /**
-   * 复选
-   */
-  CHECKBOX: 4,
-
-  /**
-   * 单选
-   */
-  RADIO: 5,
-
-  /**
-   * 数值输入
-   */
-  NUMBER: 6,
-
-  /**
-   * 开关样式
-   */
-  SWITCH: 7 // /**
-  //  * 图片选择器
-  //  */
-  // IMAGE: 8,
-
-};
-var FieldConfig = {
-  /**
-   * 默认值
-   */
-  default: null,
-
-  /**
-   * 输入提示文本
-   */
-  tip: '',
-
-  /**
-   * 字段校验器，见 Element-UI 的 表单校验
-   */
-  validators: [],
-
-  /**
-   * 对于数值或文本输入类型，限制其输入的最小长度
-   */
-  minlength: 0,
-
-  /**
-   * 对于数值或文本输入类型，限制其输入的最大长度
-   */
-  maxlength: 255,
-
-  /**
-   * 数值的精度
-   */
-  precision: 0,
-
-  /**
-   * 是否只读
-   */
-  readonly: false,
-
-  /**
-   * 是否可见
-   * @type {Boolean | Function(e: {data: Object, fields: Object})}
-   */
-  isVisible: true,
-
-  /**
-   * 是否必填
-   */
-  required: false,
-
-  /**
-   * 占位文本
-   */
-  placeholder: '',
-
-  /**
-   * 远程数据加载函数
-   */
-  optionsLoader: null,
-
-  /**
-   * 是否正在从远程加载数据
-   */
-  optionsLoading: false,
-
-  /**
-   * 变更事件
-   */
-  onchange: function onchange() {}
-};
-var FieldOption = {
-  /**
-   * 名称
-   */
-  label: '',
-
-  /**
-   * 值
-   */
-  value: null,
-
-  /**
-   * 图标，目前仅支持图片
-   */
-  icon: null,
-
-  /**
-   * 选项上展示的提示文本
-   */
-  title: ''
-};
-/**
- * 字段定义
- */
-
-var Field = {
-  /**
-   * 字段标签
-   */
-  label: '',
-
-  /**
-   * 字段名
-   */
-  name: '',
-
-  /**
-   * 输入控件的类型，参考 G6Board.InputTypes
-   * 默认值 G6Board.InputTypes.TEXT: 1
-   */
-  inputType: 1,
-
-  /**
-   * 当 inputType 为 select/checkbox/radio 时的选项
-   * @type {FieldOption}
-   */
-  options: [],
-
-  /**
-   * 选项
-   * @type {FieldConfig}
-   */
-  config: {},
-
-  /**
-   * 控件样式
-   * @type {FieldStyle}
-   */
-  style: {},
-
-  /**
-   * 自定义渲染组件
-   */
-  component: null
-};
-var BoardOptions = {
-  /**
-   * 编辑节点时的字段
-   * @type {Field[]}
-   */
-  nodeFields: [],
-
-  /**
-   * 编辑边时的字段
-   * @type {Field[]}
-   */
-  edgeFields: [],
-
-  /**
-   * 编辑分组时的字段
-   * @type {Field[]}
-   */
-  comboFields: [],
-
-  /**
-   * 在编辑节点、分组或边前的数据处理函数
-   * @type {Function}
-   * @returns {Object|false} 返回 false 可以取消节点的操作
-   */
-  beforeEditHandler: function beforeEditHandler(e) {
-    return e.data;
-  },
-
-  /**
-   * 在编辑节点、分组或边时的数据处理函数
-   * @type {Function}
-   * @returns {Object|false} 返回 false 可以取消节点的操作
-   */
-  editHandler: function editHandler() {},
-  styles: {
-    /**
-     * 节点的样式
-     */
-    node: {},
-
-    /**
-     * 边的样式
-     */
-    edge: {},
-
-    /**
-     * 分组的样式
-     */
-    combo: {},
-
-    /**
-     * 节点不同状态的样式
-     */
-    nodeStates: {
-      /**
-       * 节点被选中时的样式
-       */
-      selected: {
-        'select-border': {}
-      },
-
-      /**
-       * 节点高亮时的样式（在搜索节点命中时生效）
-       */
-      highlight: {
-        'highlight-border': {}
-      }
-    },
-    edgeStates: {
-      /**
-       * 边被选中时的样式
-       */
-      selected: {}
-    },
-    comboStates: {
-      /**
-        * 分组被选中时的样式
-        */
-      selected: {
-        'select-border': {}
-      }
-    }
-  },
-
-  /**
-   * Tooltip 渲染器
-   */
-  tooltipRenderers: {
-    /**
-     * 节点的 Tooltip 渲染器
-     * @type {defineTooltip}
-     */
-    node: function node() {},
-
-    /**
-     * 边的 Tooltip 渲染器
-     * @type {defineTooltip}
-     */
-    edge: function edge() {}
-  },
-  contextmenu: {
-    /**
-     * 是否允许打开右键菜单
-     * @type {Boolean|Function}
-     */
-    visible: true
-  }
-};
-/**
- * 定义编辑器的选项
- *
- * @param {BoardOptions} options
- * @returns {BoardOptions}
- */
-
-function defineOptions(options) {
-  return options;
-}
-/**
- * 构造数据的工具函数
- * @param {Field[]} fields
- * @returns {Field[]}
- */
-
-
-function defineFields(fields) {
-  return fields || [];
-}
-/**
- *
- * @param {Function<object>} renderer
- * @param {{x: number, y: number}} offset
- * @param {string} [trigger=click]
- * @returns
- */
-
-
-function defineTooltip(renderer, offset, trigger) {
-  offset = Object.assign({
-    x: 10,
-    y: 10
-  }, offset);
-  return {
-    // offsetX 与 offsetY 需要加上父容器的 padding
-    offsetX: offset.x,
-    offsetY: offset.y,
-    trigger: trigger || 'click',
-    shouldBegin: function shouldBegin() {
-      // 仅在非编辑模式下才允许 tooltip 弹出
-      if (this.editMode) {
-        return false;
-      }
-
-      return true;
-    },
-    getContent: function getContent(e) {
-      // 仅在非编辑模式下才允许 tooltip 弹出
-      if (this.editMode) {
-        return '';
-      }
-
-      var data = e.item.getModel();
-      var id = data.id; // 缓存数据
-
-      var cache = window.__g6board_tooltip_cache || {};
-      var now = new Date().getTime();
-
-      if (cache[id]) {
-        // 状态缓存 10 秒
-        if (cache[id].time && now - cache[id].time < 10000) {
-          return cache[id].element;
-        }
-      }
-
-      var container = document.createElement('div');
-      cache[id] = {
-        time: now,
-        element: container
-      };
-      container.classList.add('g6-board--tooltip');
-      var result = renderer(data, container); // 添加对异步的支持
-
-      if (result instanceof Promise) {
-        container.innerHTML = '<span>加载中 ...</span>';
-        result.then(function (content) {
-          if (typeof content === 'string') {
-            container.innerHTML = content;
-          } else {
-            container.innerHTML = '';
-            container.appendChild(content);
-          }
-        });
-      } else {
-        if (typeof result === 'string') {
-          container.innerHTML = result;
-        } else {
-          container.appendChild(result);
-        }
-      }
-
-      return container;
-    }
-  };
-}
-
-var BUILTIN_FIELDS = {
-  /**
-   * 节点间连接边的绘制类型
-   * @type {Field}
-   */
-  EDGE_TYPE: {
-    label: '边类型',
-    name: '_lineType',
-    inputType: InputTypes.RADIO,
-    options: [{
-      label: '直线',
-      value: 'line'
-    }, {
-      label: '折线',
-      value: 'polyline'
-    }, {
-      label: '圆弧线',
-      value: 'arc' // }, {
-      //   label: '二阶贝塞尔曲线',
-      //   value: 'quadratic'
-      // }, {
-      //   label: '三阶贝塞尔曲线',
-      //   value: 'cubic'
-      // }, {
-      //   label: '垂直方向的三阶贝塞尔曲线',
-      //   value: 'cubic-vertical'
-      // }, {
-      //   label: '水平方向的三阶贝塞尔曲线',
-      //   value: 'cubic-horizontal'
-      // }, {
-      //   label: '自环',
-      //   value: 'loop'
-
-    }],
-    config: {
-      default: 'polyline'
-    }
-  },
-
-  /**
-   * 节点间连接边的绘制类型为圆弧时，调整其弧度
-   * @type {Field}
-   */
-  EDGE_CURVE_OFFSET: {
-    label: '边弧度',
-    name: '_curveOffset',
-    inputType: InputTypes.NUMBER,
-    config: {
-      tip: '指定弧的弯曲程度，其正负影响弧弯曲的方向。取值范围 -100 ~ 100',
-      maxlength: 100,
-      minlength: -100,
-      default: 20,
-      isVisible: function isVisible(e) {
-        return e.data._lineType === 'arc';
-      }
-    }
-  },
-  EDGE_STYLE: {
-    label: '边样式',
-    name: '_lineStyle',
-    inputType: InputTypes.RADIO,
-    options: [{
-      label: '实线',
-      value: 'solid',
-      title: '节点间使用实线连接'
-    }, {
-      label: '点线',
-      value: 'dotted',
-      title: '节点间使用点线连接'
-    }, {
-      label: '虚线',
-      value: 'dashed',
-      title: '节点间使用虚线连接'
-    }],
-    config: {
-      default: 'solid'
-    }
-  },
-  EDGE_VISIBLE: {
-    label: '边可见',
-    name: 'lineVisible',
-    inputType: InputTypes.SWITCH,
-    config: {
-      default: true,
-      tip: '在预览图时，边是否可见'
-    }
-  }
-};
-
-// CONCATENATED MODULE: ./src/assets/fields.js
-
-
-
-
- // import lineTypes from "./lineTypes"
-
-
-var nodeFields = defineFields([{
-  label: '设备类型',
-  name: 'deviceType',
-  inputType: InputTypes.SELECT,
-  options: storage.getDeviceTypes(),
-  config: {
-    required: true,
-    tip: '不同的设备类型，有不同有图标和含义',
-    onchange: function onchange(e) {
-      e.data.device = null;
-      e.fields.device.options = [];
-    }
-  }
-}, {
-  label: '选择设备',
-  name: 'device',
-  inputType: InputTypes.SELECT,
-  options: [],
-  config: {
-    tip: '输入 IP 地址以选择设备',
-    required: true,
-    optionsLoader: function optionsLoader(e, keyword) {
-      var deviceType = e.data.deviceType;
-      var data = {
-        pc: [{
-          label: '终端1111',
-          value: '192.168.11.11'
-        }, {
-          label: '终端2222',
-          value: '192.168.11.12'
-        }, {
-          label: '终端3333',
-          value: '192.168.11.13'
-        }],
-        server: [{
-          label: '服务器1111',
-          value: '192.168.12.11'
-        }, {
-          label: '服务器2222',
-          value: '192.168.12.12'
-        }, {
-          label: '服务器3333',
-          value: '192.168.12.13'
-        }]
-      };
-
-      if (!deviceType) {
-        // console.debug('未选择设备类型')
-        this.options = [];
-        return;
-      }
-
-      var list = data[deviceType];
-
-      if (!list) {
-        // console.debug('设备类型下没有设备')
-        this.options = [];
-        return;
-      }
-
-      if (!keyword) {
-        // console.debug('关键字为空')
-        this.options = list;
-        return;
-      } // console.debug('有数据')
-
-
-      this.options = list.filter(function (item) {
-        return item.label.indexOf(keyword) !== -1 || item.value.indexOf(keyword) !== -1;
-      }); // },
-      // onchange(e) {
-      //   console.info(e)
-    }
-  }
-}, {
-  label: '设备 IP',
-  name: 'ip',
-  inputType: InputTypes.TEXT,
-  config: {
-    required: true,
-    tip: 'IP 是一个设备的唯一标识'
-  }
-}, {
-  label: '设备名称',
-  name: 'label',
-  inputType: InputTypes.TEXT // }, {
-  //   label: '速率',
-  //   name: 'speed',
-  //   inputType: InputTypes.NUMBER,
-  // }, {
-  //   label: '可用',
-  //   name: 'enabled',
-  //   inputType: InputTypes.SWITCH,
-
-}, {
-  label: '标签颜色',
-  name: 'labelColor',
-  inputType: InputTypes.CUSTOM,
-  component: external_element_ui_["ColorPicker"]
-}, {
-  label: '备注',
-  name: 'remark',
-  inputType: InputTypes.LONGTEXT // }, {
-  //   label: '连接类型',
-  //   name: 'lineType',
-  //   inputType: InputTypes.RADIO,
-  //   options: lineTypes,
-  //   config: {
-  //     default: lineTypes[0].value
-  //   }
-
-}, BUILTIN_FIELDS.EDGE_TYPE, BUILTIN_FIELDS.EDGE_CURVE_OFFSET, BUILTIN_FIELDS.EDGE_STYLE, BUILTIN_FIELDS.EDGE_VISIBLE]);
-var edgeFields = defineFields();
-var comboFields = defineFields([{
-  label: '名称',
-  name: 'name',
-  inputType: InputTypes.TEXT,
-  config: {
-    required: true
-  }
-}, {
-  label: '固定大小',
-  name: 'fixed',
-  inputType: InputTypes.SWITCH,
-  config: {
-    tip: '当不启用固定大小时，分组会根据包含元素的数量和位置自动计算其大小',
-    required: true
-  }
-}, {
-  label: '宽度',
-  name: 'width',
-  inputType: InputTypes.NUMBER,
-  config: {
-    tip: '单位为像素',
-    minlength: 0,
-    maxlength: 2000,
-    default: 200,
-    isVisible: function isVisible(e) {
-      return e.data.fixed;
-    }
-  }
-}, {
-  label: '高度',
-  name: 'height',
-  inputType: InputTypes.NUMBER,
-  config: {
-    minlength: 0,
-    maxlength: 2000,
-    default: 200,
-    tip: '单位为像素',
-    isVisible: function isVisible(e) {
-      return e.data.fixed;
-    }
-  }
-}]);
-/* harmony default export */ var fields = ({
-  nodeFields: nodeFields,
-  edgeFields: edgeFields,
-  comboFields: comboFields
-});
-// CONCATENATED MODULE: ./src/assets/options.js
-
-
-
-
-
-
-/* harmony default export */ var options = (defineOptions({
-  nodeFields: fields.nodeFields,
-  edgeFields: fields.edgeFields,
-  comboFields: fields.comboFields,
-  styles: {
-    edge: {
-      type: 'polyline',
-      style: {
-        stroke: 'purple'
-      }
-    },
-    combo: {
-      type: 'rect-ext',
-      style: {
-        stroke: 'red',
-        lineDash: [10, 2]
-      },
-      labelCfg: {
-        style: {
-          fontSize: 10,
-          stroke: 'red',
-          fill: 'blue',
-          backgroundColor: 'red'
-        }
-      },
-      title: {
-        style: {
-          stroke: 'blue'
-        }
-      },
-      background: {
-        style: {
-          fill: 'yellow'
-        }
-      }
-    },
-    nodeStates: {
-      highlight: {
-        'highlight-border': {
-          fill: 'green',
-          fillOpacity: 0.1,
-          stroke: 'green',
-          strokeOpacity: 0.3,
-          lineWidth: 2
-        }
-      },
-      selected: {
-        'select-border': {
-          stroke: 'blue',
-          lineWidth: 3
-        }
-      },
-      hover: {
-        'select-border': {
-          stroke: 'green'
-        }
-      }
-    },
-    edgeStates: {
-      selected: {
-        stroke: 'blue',
-        lineWidth: 3
-      },
-      hover: {
-        lineWidth: 3
-      }
-    }
-  },
-  beforeEditHandler: function beforeEditHandler(e) {
-    if (e.type !== 'combo') {
-      return;
-    }
-
-    var data = Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, e.data), {}, {
-      type: 'rect-ext'
-    }); // 有个 21 的 padding
-
-
-    var bounds = e.item.getBBox();
-    var padding = 21 * 2;
-    data.width = bounds.width - padding;
-    data.height = bounds.height - padding;
-
-    if (data.fixSize) {
-      data.fixed = true;
-    } else {
-      data.fixed = false;
-    }
-
-    return data;
-  },
-  editHandler: function editHandler(e) {
-    var data = e.data;
-
-    if (e.type === 'node') {
-      data.id = data.ip;
-
-      if (!data.type) {
-        data.type = 'image-ext';
-      }
-
-      data.img = storage.getIcon(data.deviceType);
-      data.size = storage.getSize(data.deviceType);
-    } else if (e.type === 'combo') {
-      data.label = data.name;
-
-      if (data.fixed) {
-        data.fixSize = [data.width, data.height];
-      } else {
-        delete data.fixSize;
-      }
-    }
-
-    return data;
-  },
-  tooltipRenderers: {
-    node: defineTooltip(function (node) {
-      var table = document.createElement('table');
-      var data = [['名称', 'IP', '分组', '责任人'], [node.label, node.ip, node.group, node.resp_person + '/' + node.dept]];
-
-      for (var i = 0; i < data[0].length; i++) {
-        var row = document.createElement('tr');
-
-        for (var j = 0; j < data.length; j++) {
-          var cell = document.createElement('td');
-          cell.innerText = data[j][i];
-          row.appendChild(cell);
-        }
-
-        table.appendChild(row);
-      }
-
-      return table;
-    }),
-    edge: defineTooltip(function (edge) {
-      var table = document.createElement('table');
-      var data = [['速率', '流量', '状态'], [edge.speed, edge.traffic, edge.state]];
-
-      for (var i = 0; i < data[0].length; i++) {
-        var row = document.createElement('tr');
-
-        for (var j = 0; j < data.length; j++) {
-          var cell = document.createElement('td');
-          cell.innerText = data[j][i];
-          row.appendChild(cell);
-        }
-
-        table.appendChild(row);
-      }
-
-      return table;
-    })
-  }
-}));
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/views/App.vue?vue&type=script&lang=js&
-
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ var Appvue_type_script_lang_js_ = ({
-  data: function data() {
-    var _storage$get = storage.get(),
-        nodes = _storage$get.nodes,
-        edges = _storage$get.edges,
-        combos = _storage$get.combos;
-
-    return {
-      options: options,
-      deviceTypes: storage.getDeviceTypes(),
-      data: {
-        nodes: nodes,
-        combos: combos,
-        edges: edges.map(function (edge) {
-          if (edge.state === '正常') {
-            edge.style = {
-              stroke: 'green'
-            };
-          } else if (edge.state === '断开') {
-            edge.style = {
-              stroke: 'gray'
-            };
-          } else if (edge.state === '卡顿') {
-            edge.style = {
-              stroke: 'red'
-            };
-          } else {
-            edge.style = {
-              stroke: 'black'
-            };
-          } // link.label = meta.state
-
-
-          return edge;
-        }) // combos: Object.values(combos)
-
-      },
-      search: {
-        keyword: '192.168.1.1'
-      },
-      editMode: true
-    };
-  },
-  mounted: function mounted() {},
-  methods: {
-    saveData: function saveData() {
-      var data = this.$refs.board.getData();
-      storage.set(data);
-      this.$message.success('数据已保存');
-    },
-    onSearch: function onSearch() {
-      var keyword = this.search.keyword;
-
-      if (!keyword) {
-        this.$refs.board.clearSelection();
-        return;
-      }
-
-      var nodes = this.$refs.board.findNode(function (node) {
-        return node.ip.indexOf(keyword) !== -1 || node.label.indexOf(keyword) !== -1;
-      }, true); // eslint-disable-next-line
-
-      console.info(nodes);
-    },
-    onGraphChange: function onGraphChange(e) {
-      // eslint-disable-next-line
-      console.info(e);
-    }
-  }
-});
-// CONCATENATED MODULE: ./src/views/App.vue?vue&type=script&lang=js&
- /* harmony default export */ var views_Appvue_type_script_lang_js_ = (Appvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./src/views/App.vue?vue&type=style&index=0&lang=css&
-var Appvue_type_style_index_0_lang_css_ = __webpack_require__("1145");
-
-// EXTERNAL MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-var componentNormalizer = __webpack_require__("2877");
-
-// CONCATENATED MODULE: ./src/views/App.vue
-
-
-
-
-
-
-/* normalize component */
-
-var component = Object(componentNormalizer["a" /* default */])(
-  views_Appvue_type_script_lang_js_,
-  Appvue_type_template_id_14dde052_render,
-  staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var App = (component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"51a94007-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/board.vue?vue&type=template&id=a27027b2&
-var boardvue_type_template_id_a27027b2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"g6-board"},[_c('div',{ref:"canvas",staticClass:"g6-board--body",on:{"contextmenu":function($event){$event.preventDefault();}}}),_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.zoom.visible),expression:"zoom.visible"}],staticClass:"g6-board--zoom-tip"},[_vm._v(_vm._s(_vm.zoom.value))]),_c('fields-dialog',{attrs:{"fields":_vm.options.nodeFields,"title":_vm.dialogs.node.editItem ? '编辑节点' : '添加节点',"visible":_vm.dialogs.node.visible,"graph":_vm.graph},on:{"update:visible":function($event){return _vm.$set(_vm.dialogs.node, "visible", $event)},"ok":_vm.onNodeOk},model:{value:(_vm.dialogs.node.form),callback:function ($$v) {_vm.$set(_vm.dialogs.node, "form", $$v)},expression:"dialogs.node.form"}}),_c('fields-dialog',{attrs:{"fields":_vm.options.edgeFields,"title":"编辑连接","visible":_vm.dialogs.edge.visible,"graph":_vm.graph},on:{"update:visible":function($event){return _vm.$set(_vm.dialogs.edge, "visible", $event)},"ok":_vm.onEdgeOk},model:{value:(_vm.dialogs.edge.form),callback:function ($$v) {_vm.$set(_vm.dialogs.edge, "form", $$v)},expression:"dialogs.edge.form"}}),_c('fields-dialog',{attrs:{"fields":_vm.options.comboFields,"title":_vm.dialogs.combo.editItem ? '编辑分组' : '添加分组',"visible":_vm.dialogs.combo.visible,"graph":_vm.graph},on:{"update:visible":function($event){return _vm.$set(_vm.dialogs.combo, "visible", $event)},"ok":_vm.onComboOk},model:{value:(_vm.dialogs.combo.form),callback:function ($$v) {_vm.$set(_vm.dialogs.combo, "form", $$v)},expression:"dialogs.combo.form"}}),_c('contextmenu',{ref:"contextmenu",attrs:{"items":_vm.contextmenus,"title":_vm.contextmenuTitle}})],1)}
-var boardvue_type_template_id_a27027b2_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/board.vue?vue&type=template&id=a27027b2&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.some.js
-var es_array_some = __webpack_require__("45fc");
-
-// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
-var runtime = __webpack_require__("96cf");
-
-// EXTERNAL MODULE: ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__("c964");
-
-// EXTERNAL MODULE: ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/toConsumableArray.js + 3 modules
-var toConsumableArray = __webpack_require__("d0ff");
-
-// EXTERNAL MODULE: external "@antv/g6"
-var g6_ = __webpack_require__("336c");
-var g6_default = /*#__PURE__*/__webpack_require__.n(g6_);
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"51a94007-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/fieldsdialog.vue?vue&type=template&id=3cac5a0d&
-var fieldsdialogvue_type_template_id_3cac5a0d_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('el-dialog',{attrs:{"title":_vm.title,"visible":_vm.isVisible,"width":_vm.width,"close-on-click-modal":false,"close-on-press-escape":false,"custom-class":"g6-board--dialog","append-to-body":""},on:{"update:visible":function($event){_vm.isVisible=$event},"closed":_vm.onClose},scopedSlots:_vm._u([{key:"footer",fn:function(){return [_c('el-button',{on:{"click":_vm.onCancel}},[_vm._v("取消")]),_c('el-button',{attrs:{"type":"primary"},on:{"click":_vm.onOk}},[_vm._v("确定")])]},proxy:true}])},[_c('el-form',{ref:"form",style:(_vm.styles),attrs:{"size":"small","model":_vm.form,"rules":_vm.rules,"label-width":"100px"}},[_vm._l((_vm.data),function(field){return [_c('el-form-item',{directives:[{name:"show",rawName:"v-show",value:(field.config.isVisible()),expression:"field.config.isVisible()"}],key:field._id,attrs:{"label":field.label,"prop":field.name}},[(field.inputType === _vm.InputTypes.TEXT)?_c('el-input',{style:(field.style),attrs:{"minlength":field.config.minlength,"maxlength":field.config.maxlength,"placeholder":field.config.placeholder,"readonly":field.config.readonly},on:{"change":function($event){return _vm.onChange(field)}},model:{value:(_vm.form[field.name]),callback:function ($$v) {_vm.$set(_vm.form, field.name, (typeof $$v === 'string'? $$v.trim(): $$v))},expression:"form[field.name]"}}):(field.inputType === _vm.InputTypes.LONGTEXT)?_c('el-input',{style:(field.style),attrs:{"type":"textarea","minlength":field.config.minlength,"maxlength":field.config.maxlength,"rows":5,"placeholder":field.config.placeholder,"readonly":field.config.readonly,"show-word-limit":""},on:{"change":function($event){return _vm.onChange(field)}},model:{value:(_vm.form[field.name]),callback:function ($$v) {_vm.$set(_vm.form, field.name, (typeof $$v === 'string'? $$v.trim(): $$v))},expression:"form[field.name]"}}):(field.inputType === _vm.InputTypes.NUMBER)?_c('el-input-number',{style:(field.style),attrs:{"max":field.config.maxlength,"min":field.config.minlength,"precision":field.config.precision,"placeholder":field.config.placeholder,"readonly":field.config.readonly,"controls":false},on:{"change":function($event){return _vm.onChange(field)}},model:{value:(_vm.form[field.name]),callback:function ($$v) {_vm.$set(_vm.form, field.name, _vm._n($$v))},expression:"form[field.name]"}}):(field.inputType === _vm.InputTypes.SWITCH)?_c('el-switch',{style:(field.style),attrs:{"readonly":field.config.readonly,"active-text":"","inactive-text":""},on:{"change":function($event){return _vm.onChange(field)}},model:{value:(_vm.form[field.name]),callback:function ($$v) {_vm.$set(_vm.form, field.name, _vm._n($$v))},expression:"form[field.name]"}}):(field.inputType === _vm.InputTypes.SELECT &&
-          field.config.optionsLoader
-          )?_c('el-select',{style:(field.style),attrs:{"placeholder":field.config.placeholder,"loading":field.config.optionsLoading,"remote-method":field.config.optionsLoader.bind(field, {
-            data: _vm.form,
-            fields: _vm.fieldsMap,
-          }),"disabled":field.config.readonly,"popper-class":"g6-board--dialog-select-opions","filterable":"","remote":""},on:{"change":function($event){return _vm.onChange(field)}},scopedSlots:_vm._u([(_vm.getSelectIcon(field))?{key:"prefix",fn:function(){return [_c('img',{staticClass:"select-icon",attrs:{"src":_vm.getSelectIcon(field)}})]},proxy:true}:null],null,true),model:{value:(_vm.form[field.name]),callback:function ($$v) {_vm.$set(_vm.form, field.name, $$v)},expression:"form[field.name]"}},_vm._l((field.options),function(item){return _c('el-option',{key:item.value,attrs:{"label":item.label,"value":item.value,"title":item.title}},[(item.icon)?_c('img',{staticClass:"select-icon",attrs:{"src":item.icon}}):_vm._e(),_c('span',[_vm._v(_vm._s(item.label))])])}),1):(field.inputType === _vm.InputTypes.SELECT)?_c('el-select',{style:(field.style),attrs:{"placeholder":field.config.placeholder,"disabled":field.config.readonly,"popper-class":"g6-board--dialog-select-opions","filterable":""},on:{"change":function($event){return _vm.onChange(field)}},scopedSlots:_vm._u([(_vm.getSelectIcon(field))?{key:"prefix",fn:function(){return [_c('img',{staticClass:"select-icon",attrs:{"src":_vm.getSelectIcon(field)}})]},proxy:true}:null],null,true),model:{value:(_vm.form[field.name]),callback:function ($$v) {_vm.$set(_vm.form, field.name, $$v)},expression:"form[field.name]"}},_vm._l((field.options),function(item){return _c('el-option',{key:item.value,attrs:{"label":item.label,"value":item.value,"title":item.title}},[(item.icon)?_c('img',{staticClass:"select-icon",attrs:{"src":item.icon}}):_vm._e(),_c('span',[_vm._v(_vm._s(item.label))])])}),1):(field.inputType === _vm.InputTypes.CHECKBOX)?_c('el-checkbox-group',{style:(field.style),attrs:{"disabled":field.config.readonly},on:{"change":function($event){return _vm.onChange(field)}},model:{value:(_vm.form[field.name]),callback:function ($$v) {_vm.$set(_vm.form, field.name, $$v)},expression:"form[field.name]"}},_vm._l((field.options),function(item){return _c('el-checkbox',{key:item.value,attrs:{"label":item.label,"title":item.title,"value":item.value}})}),1):(field.inputType === _vm.InputTypes.RADIO)?_c('el-radio-group',{style:(field.style),attrs:{"disabled":field.config.readonly},on:{"change":function($event){return _vm.onChange(field)}},model:{value:(_vm.form[field.name]),callback:function ($$v) {_vm.$set(_vm.form, field.name, $$v)},expression:"form[field.name]"}},_vm._l((field.options),function(item){return _c('el-radio',{key:item.value,attrs:{"label":item.value,"title":item.title}},[_vm._v(_vm._s(item.label))])}),1):(field.inputType === _vm.InputTypes.CUSTOM && field.component)?_c(field.component,{tag:"component",style:(field.style),attrs:{"disabled":field.config.readonly},on:{"change":function($event){return _vm.onChange(field)}},model:{value:(_vm.form[field.name]),callback:function ($$v) {_vm.$set(_vm.form, field.name, $$v)},expression:"form[field.name]"}}):_vm._e(),(field.config.tip)?_c('div',{staticClass:"input-tip"},[_vm._v(" "+_vm._s(field.config.tip)+" ")]):_vm._e()],1)]})],2)],1)}
-var fieldsdialogvue_type_template_id_3cac5a0d_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/fieldsdialog.vue?vue&type=template&id=3cac5a0d&
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
-var es_array_concat = __webpack_require__("99af");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/fieldsdialog.vue?vue&type=script&lang=js&
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ var fieldsdialogvue_type_script_lang_js_ = ({
-  props: {
-    // 属性列表，使用类型 Fields 传入
-    fields: {
-      type: Array,
-      required: true
-    },
-    // 标题
-    title: {
-      type: String,
-      required: true
-    },
-    // 是否可见
-    visible: {
-      type: Boolean,
-      required: true
-    },
-    // 表单数据
-    value: {
-      type: Object,
-      required: true
-    },
-    width: {
-      type: String,
-      default: "600px"
-    },
-    styles: {
-      type: [Object, String],
-      default: function _default() {
-        return {
-          padding: "0 40px 0 0"
-        };
-      }
-    },
-    graph: Object
-  },
-  data: function data() {
-    return {
-      InputTypes: InputTypes,
-      isVisible: false,
-      data: [],
-      form: {},
-      rules: {},
-      // 标记量，用于在触发事件时，不执行 watch，以避免数据被循环处理
-      noWatch: false,
-      fieldsMap: {}
-    };
-  },
-  watch: {
-    value: {
-      deep: true,
-      handler: function handler() {
-        if (this.noWatch) {
-          this.noWatch = false;
-          return;
-        }
-
-        this.processFields();
-      }
-    },
-    visible: function visible(val) {
-      this.isVisible = val;
-    }
-  },
-  mounted: function mounted() {
-    this.processFields();
-  },
-  computed: {},
-  methods: {
-    processFields: function processFields() {
-      var _this = this;
-
-      // 处理校验规则和表单字段
-      var rules = {};
-      var form = {
-        id: "g6-data-".concat(new Date().getTime(), "-").concat(Math.round(Math.random() * 10000))
-      };
-      var map = {};
-      this.fields.forEach(function (field) {
-        field.config = Object.assign({}, FieldConfig, field.config);
-        field.style = Object.assign({}, field.style);
-        field._id = "g6-".concat(new Date().getTime(), "-").concat(Math.round(Math.random() * 10000));
-        map[field.name] = field;
-        var isVisible = field.config.isVisible;
-
-        field.config.isVisible = function () {
-          if (typeof isVisible === 'boolean') {
-            return isVisible;
-          }
-
-          return isVisible({
-            data: _this.form,
-            fields: _this.fieldsMap
-          });
-        };
-
-        var config = field.config;
-        var defaultValue = config.default;
-
-        if (field.inputType === InputTypes.CHECKBOX) {
-          // 当输入类型为 checkbox 时，默认值应当为 []
-          if (!defaultValue) {
-            defaultValue = [];
-          }
-        } else if (field.inputType === InputTypes.SWITCH) {
-          // 当输入类型为 switch 时，默认值应当为 false
-          if (!defaultValue) {
-            defaultValue = false;
-          }
-        } else if (field.inputType === InputTypes.NUMBER) {
-          if (!field.config.minlength) {
-            field.config.minlength = 0;
-          }
-
-          if (!field.config.maxlength) {
-            field.config.maxlength = Infinity;
-          }
-        }
-
-        form[field.name] = defaultValue;
-        var validators = [];
-
-        if (config.validators) {
-          validators.push.apply(validators, Object(toConsumableArray["a" /* default */])(config.validators));
-        }
-
-        if (config.required) {
-          validators.push({
-            required: true,
-            message: "不能为空"
-          });
-        }
-
-        if (validators.length) {
-          rules[field.name] = validators;
-        }
-      });
-      this.fieldsMap = map;
-      this.data = this.fields;
-      this.form = Object.assign({}, form, this.value);
-      this.rules = rules;
-    },
-    onClose: function onClose() {
-      this.$emit("update:visible", this.isVisible);
-    },
-    getSelectIcon: function getSelectIcon(field) {
-      var value = this.form[field.name];
-
-      if (!value) {
-        return "";
-      }
-
-      var item = field.options.filter(function (opt) {
-        return opt.value === value;
-      })[0];
-
-      if (!item) {
-        return "";
-      }
-
-      return item.icon || "";
-    },
-    onCancel: function onCancel() {
-      this.isVisible = false;
-      this.form = {};
-      this.data = [];
-    },
-    onOk: function onOk() {
-      var _this2 = this;
-
-      return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var form;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return new Promise(function (resolve, reject) {
-                  _this2.$refs.form.validate(function (result) {
-                    if (result) {
-                      resolve();
-                    } else {
-                      reject();
-                    }
-                  });
-                });
-
-              case 3:
-                _context.next = 8;
-                break;
-
-              case 5:
-                _context.prev = 5;
-                _context.t0 = _context["catch"](0);
-                return _context.abrupt("return");
-
-              case 8:
-                form = Object(objectSpread2["a" /* default */])({}, _this2.form);
-                _this2.noWatch = true;
-
-                _this2.$emit("input", form);
-
-                _this2.$emit("ok", form);
-
-              case 12:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[0, 5]]);
-      }))();
-    },
-    onChange: function onChange(field) {
-      field.config.onchange.call(field, {
-        type: 'change',
-        field: field,
-        value: this.form[field.name],
-        data: this.form,
-        fields: this.fieldsMap,
-        graph: this.graph
-      });
-    }
-  }
-});
-// CONCATENATED MODULE: ./src/components/fieldsdialog.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_fieldsdialogvue_type_script_lang_js_ = (fieldsdialogvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/fieldsdialog.vue
-
-
-
-
-
-/* normalize component */
-
-var fieldsdialog_component = Object(componentNormalizer["a" /* default */])(
-  components_fieldsdialogvue_type_script_lang_js_,
-  fieldsdialogvue_type_template_id_3cac5a0d_render,
-  fieldsdialogvue_type_template_id_3cac5a0d_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var fieldsdialog = (fieldsdialog_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"51a94007-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/contextmenu.vue?vue&type=template&id=65551966&
-var contextmenuvue_type_template_id_65551966_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.visible)?_c('div',{staticClass:"g6-board--contextmenu",style:(_vm.style),on:{"contextmenu":function($event){$event.preventDefault();},"click":function($event){$event.stopPropagation();}}},[(_vm.title)?_c('div',{staticClass:"g6-board--contextmenu-title"},[_vm._v(_vm._s(_vm.title))]):_vm._e(),_c('ul',{staticClass:"g6-board--contextmenu-items"},_vm._l((_vm.activeMenu),function(item,i){return _c('li',{key:i,class:{ 'g6-board--contextmenu-separator': !Object.keys(item).length },attrs:{"title":item.title},on:{"click":function($event){return _vm.onItemClick(item)}}},[_c('i'),_c('span',{staticClass:"g6-board--contextmenu-item-label"},[_vm._v(_vm._s(item.label))])])}),0)]):_vm._e()}
-var contextmenuvue_type_template_id_65551966_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/contextmenu.vue?vue&type=template&id=65551966&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/contextmenu.vue?vue&type=script&lang=js&
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ var contextmenuvue_type_script_lang_js_ = ({
-  props: {
-    title: {
-      type: String,
-      default: '操作'
-    },
-
-    /**
-     * 数组表示菜单不复用
-     * 对象表示菜单要复用，此时对象的每个 value 为数组
-     * 空对象表示为分隔线
-     * {
-     * key1: [{
-     *  command: 'xxx',
-     *  label: 'xxx',
-     *  title: 'xxx',
-     * }],
-     * key2: [{
-     *
-     * }]
-     * }
-     */
-    items: {
-      type: [Array, Object],
-      required: true
-    }
-  },
-  data: function data() {
-    return {
-      visible: false,
-      style: {
-        left: 0,
-        top: 0
-      },
-      active: null,
-      position: {
-        x: 0,
-        y: 0
-      },
-      item: null
-    };
-  },
-  mounted: function mounted() {
-    window.addEventListener('click', this.hide);
-    window.addEventListener('keydown', this.hide);
-  },
-  beforeDestroy: function beforeDestroy() {
-    window.removeEventListener('click', this.hide);
-    window.removeEventListener('keydown', this.hide);
-  },
-  computed: {
-    activeMenu: function activeMenu() {
-      if (Array.isArray(this.items)) {
-        return this.items;
-      }
-
-      return this.items[this.active];
-    }
-  },
-  methods: {
-    getBounds: function getBounds() {
-      var rect = this.$el.getBoundingClientRect();
-      return {
-        width: rect.width,
-        height: rect.height,
-        left: rect.left,
-        top: rect.top
-      };
-    },
-    show: function show(x, y, active, item) {
-      var _this = this;
-
-      return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _this.position.x = x;
-                _this.position.y = y;
-                _this.item = item;
-
-                if (!_this.visible) {
-                  _context.next = 7;
-                  break;
-                }
-
-                _this.visible = false;
-                _context.next = 7;
-                return _this.$nextTick();
-
-              case 7:
-                _this.style.left = "".concat(x, "px");
-                _this.style.top = "".concat(y, "px");
-                _this.active = active;
-                _this.visible = true;
-
-                _this.$nextTick(function () {
-                  // 修正位置
-                  var bounds = _this.getBounds();
-
-                  var winBounds = {
-                    width: window.innerWidth,
-                    height: window.innerHeight
-                  };
-                  var fixRequired = false;
-
-                  if (bounds.left + bounds.width > winBounds.width) {
-                    x = winBounds.width - bounds.width;
-                    fixRequired = true;
-                  }
-
-                  if (bounds.top + bounds.height > winBounds.height) {
-                    y = winBounds.height - bounds.height;
-                    fixRequired = true;
-                  }
-
-                  if (!fixRequired) {
-                    return;
-                  }
-
-                  _this.style.left = "".concat(x, "px");
-                  _this.style.top = "".concat(y, "px");
-                });
-
-              case 12:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
-    },
-    hide: function hide(e) {
-      if (e instanceof KeyboardEvent) {
-        // ESC 关闭
-        if (e.keyCode !== 27) {
-          return;
-        }
-      }
-
-      this.visible = false;
-    },
-    onItemClick: function onItemClick(item) {
-      var _this2 = this;
-
-      this.hide();
-      this.$nextTick(function () {
-        var e = {
-          active: _this2.active,
-          command: item.command,
-          x: _this2.position.x,
-          y: _this2.position.y,
-          item: _this2.item
-        };
-
-        _this2.$emit("command", e);
-
-        if (item.handler) {
-          item.handler(e);
-        }
-      });
-    }
-  }
-});
-// CONCATENATED MODULE: ./src/components/contextmenu.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_contextmenuvue_type_script_lang_js_ = (contextmenuvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/contextmenu.vue
-
-
-
-
-
-/* normalize component */
-
-var contextmenu_component = Object(componentNormalizer["a" /* default */])(
-  components_contextmenuvue_type_script_lang_js_,
-  contextmenuvue_type_template_id_65551966_render,
-  contextmenuvue_type_template_id_65551966_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var contextmenu = (contextmenu_component.exports);
-// EXTERNAL MODULE: ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/createForOfIteratorHelper.js
-var createForOfIteratorHelper = __webpack_require__("54f8");
-
-// EXTERNAL MODULE: ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/classCallCheck.js
-var classCallCheck = __webpack_require__("276c");
-
-// EXTERNAL MODULE: ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/helpers/esm/createClass.js
-var createClass = __webpack_require__("e954");
-
-// CONCATENATED MODULE: ./src/components/events.js
-
-
-
-
-
-var events_EventBus = /*#__PURE__*/function () {
-  function EventBus() {
-    Object(classCallCheck["a" /* default */])(this, EventBus);
-
-    this.handlers = {};
-  }
-
-  Object(createClass["a" /* default */])(EventBus, [{
-    key: "on",
-    value: function on(eventType, handler) {
-      if (!this.handlers[eventType]) {
-        this.handlers[eventType] = [];
-      }
-
-      this.handlers[eventType].push(handler);
-    }
-  }, {
-    key: "off",
-    value: function off(eventType, handler) {
-      if (!this.handlers[eventType]) {
-        return;
-      }
-
-      this.handlers[eventType] = this.handlers[eventType].filter(function (h) {
-        return h !== handler;
-      });
-    }
-  }, {
-    key: "emit",
-    value: function emit(eventType, eventArgs) {
-      if (!this.handlers[eventType]) {
-        return;
-      }
-
-      var _iterator = Object(createForOfIteratorHelper["a" /* default */])(this.handlers[eventType]),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var handler = _step.value;
-          handler(eventArgs);
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
-      }
-    }
-  }]);
-
-  return EventBus;
-}();
-
-var instance = new events_EventBus();
-events_EventBus.on = instance.on.bind(instance);
-events_EventBus.off = instance.off.bind(instance);
-events_EventBus.emit = instance.emit.bind(instance);
-/* harmony default export */ var events = (events_EventBus);
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.find.js
-var es_array_find = __webpack_require__("7db0");
-
-// CONCATENATED MODULE: ./src/components/setup.js
-
-
-
-
-
-
-
-
-
-g6_default.a.registerNode('image-ext', {
-  afterDraw: function afterDraw(cfg, group, img) {
-    // 获取图形组中的第一个图形
-    // 获取路径图形的中点坐标
-    var _img$attr = img.attr(),
-        x = _img$attr.x,
-        y = _img$attr.y,
-        height = _img$attr.height,
-        width = _img$attr.width; // 选择框
-
-
-    var offset = 8;
-    group.addShape('rect', {
-      attrs: {
-        width: width + offset,
-        height: height + offset,
-        x: x - offset / 2,
-        y: y - offset / 2,
-        radius: 4
-      },
-      name: 'select-border'
-    }); // 高亮框
-
-    var size = Math.max(height, width);
-    group.addShape('circle', {
-      attrs: {
-        r: size,
-        x: 0,
-        y: 0
-      },
-      name: 'highlight-border'
-    });
-  }
-}, 'image');
-g6_default.a.registerEdge('polyline-ext', {// afterDraw(cfg, group, line) {
-  //   line.at
-  // }
-}, 'polyline');
-g6_default.a.registerCombo('rect-ext', {
-  drawShape: function drawShape(cfg, group) {
-    var style = this.getShapeStyle(cfg);
-    var rect = group.addShape('rect', {
-      attrs: Object(objectSpread2["a" /* default */])({}, style),
-      name: 'key-shape'
-    });
-    var titleKey = 'title';
-    var titleCfg = cfg[titleKey];
-
-    if (titleCfg) {
-      var width = style.width,
-          height = style.height;
-      group.addShape('rect', {
-        attrs: Object(objectSpread2["a" /* default */])({
-          width: width,
-          height: 30,
-          x: -width / 2,
-          y: -height / 2 - 5
-        }, titleCfg.style),
-        draggable: titleCfg.draggable,
-        name: titleKey
-      });
-    }
-
-    var bgKey = 'background';
-    var bgCfg = cfg[bgKey];
-
-    if (cfg[bgKey]) {
-      var _width = style.width,
-          _height = style.height;
-      group.addShape(bgCfg.shape || 'rect', {
-        attrs: Object(objectSpread2["a" /* default */])({
-          x: -_width / 2,
-          y: -_height / 2 - 5 + 30,
-          width: _width,
-          height: _height - 30
-        }, bgCfg.style),
-        draggable: bgCfg.draggable,
-        name: bgKey
-      });
-    }
-
-    return rect;
-  },
-  afterUpdate: function afterUpdate(cfg, item) {
-    var group = item.get('group');
-    var shapes = group.getChildren();
-    var style = this.getShapeStyle(cfg);
-    var width = style.width,
-        height = style.height;
-    shapes.forEach(function (shape) {
-      var shapeName = shape.get('name');
-
-      if (shapeName === 'title') {
-        shape.attr({
-          width: width,
-          x: -width / 2,
-          y: -height / 2 - 5
-        });
-        return;
-      }
-
-      if (shapeName === 'background') {
-        shape.attr({
-          x: -width / 2,
-          y: -height / 2 - 5 + 30,
-          width: width,
-          height: height - 30
-        });
-        return;
-      }
-    });
-  }
-}, 'rect'); // G6.registerCombo('rect-ext', {
-//   afterDraw(cfg, group, combo) {
-//     let { width, height } = cfg
-//     const handleSize = 50
-//     const handleHeight = 2
-//     const padding = 40
-//     const color = 'green'
-//     width += padding
-//     height += padding
-//     const origin = {
-//       x: -width / 2,
-//       y: -height / 2
-//     }
-//     const offset = {
-//       x: (width - handleSize) / 2,
-//       y: (height - handleSize) / 2,
-//     }
-//     // 允许分组拖动以调整大小
-//     // top
-//     const top = group.addShape('rect', {
-//       attrs: {
-//         x: origin.x + offset.x,
-//         y: origin.y - 6,
-//         height: handleHeight,
-//         width: handleSize,
-//         fill: color,
-//         cursor: 'ns-resize'
-//       },
-//       name: 'resize-handle-top'
-//     })
-//     // right
-//     const right = group.addShape('rect', {
-//       attrs: {
-//         x: origin.x + width - 1,
-//         y: origin.y + offset.y,
-//         width: handleHeight,
-//         height: handleSize,
-//         fill: color,
-//         cursor: 'ew-resize'
-//       },
-//       name: 'resize-handle-right'
-//     })
-//     // bottom
-//     const bottom = group.addShape('rect', {
-//       attrs: {
-//         x: origin.x + offset.x,
-//         y: origin.y + height - 6,
-//         height: handleHeight,
-//         width: handleSize,
-//         fill: color,
-//         cursor: 'ns-resize'
-//       },
-//       name: 'resize-handle-bottom'
-//     })
-//     // left
-//     const left = group.addShape('rect', {
-//       attrs: {
-//         x: origin.x - 1,
-//         y: origin.y + offset.y,
-//         width: handleHeight,
-//         height: handleSize,
-//         fill: color,
-//         cursor: 'ew-resize'
-//       },
-//       name: 'resize-handle-left'
-//     })
-//     // 事件设定
-//     let mouseDown = false
-//     let resizeDir = ''
-//     const pos = {
-//       x: 0,
-//       y: 0
-//     }
-//     function onMouseUp(e) {
-//       window.removeEventListener('mouseup', onMouseUp)
-//       if (!mouseDown) {
-//         return
-//       }
-//       mouseDown = false
-//       const { x, y } = e
-//       const attrs = combo.getBBox()
-//       console.info(attrs)
-//       const bounds = {
-//         x: attrs.canvasX,
-//         y: attrs.canvasY,
-//         width: attrs.width,
-//         height: attrs.height,
-//       }
-//       const boundsOffset = {
-//         x: x - pos.x,
-//         y: y - pos.y
-//       }
-//       if (resizeDir === 'top' || resizeDir === 'bottom') {
-//         bounds.y += boundsOffset.y
-//         bounds.height += boundsOffset.y
-//       } else {
-//         bounds.x += boundsOffset.x
-//         bounds.width += boundsOffset.x
-//       }
-//       console.info(boundsOffset, bounds)
-//       const graph = window.G6
-//       window.G6.updateItem(graph.findById(cfg.id), bounds)
-//     }
-//     function onMouseDown(dir, e) {
-//       e.preventDefault();
-//       resizeDir = dir
-//       const { x, y } = e
-//       mouseDown = true
-//       pos.x = x
-//       pos.y = y
-//       window.addEventListener('mouseup', onMouseUp)
-//     }
-//     top.on('mousedown', onMouseDown.bind(null, 'top'))
-//     right.on('mousedown', onMouseDown.bind(null, 'right'))
-//     bottom.on('mousedown', onMouseDown.bind(null, 'bottom'))
-//     left.on('mousedown', onMouseDown.bind(null, 'left'))
-//   }
-// }, 'rect')
-
-g6_default.a.registerBehavior('select-item', {
-  getEvents: function getEvents() {
-    return {
-      'edge:click': 'onClick',
-      'edge:mouseover': 'onHover',
-      'edge:mouseleave': 'onLeave',
-      'node:click': 'onClick',
-      'node:mouseover': 'onHover',
-      'node:mouseleave': 'onLeave'
-    };
-  },
-  onClick: function onClick(e) {
-    var item = e.item; // 在连线时，如果点击空白处取消会报错
-
-    try {
-      item.setState('selected', true);
-    } catch (e) {// ignore
-    }
-  },
-  onHover: function onHover(e) {
-    var item = e.item;
-    item.setState('hover', true);
-  },
-  onLeave: function onLeave(e) {
-    var graph = this.graph;
-    var item = e.item;
-    var states = item.getStates();
-
-    if (states.indexOf('hover') !== -1) {
-      graph.clearItemStates(item, 'hover');
-    }
-  }
-}); // TODO 添加连线到分组的支持
-
-g6_default.a.registerBehavior('add-edge', {
-  getEvents: function getEvents() {
-    return {
-      'node:click': 'onClick',
-      mousemove: 'onMousemove',
-      // 点击空白处，取消边
-      'edge:click': 'onEdgeClick'
-    };
-  },
-  onEnd: function onEnd(model) {
-    var graph = this.graph;
-    var source = this.edge.getModel().source;
-    var target = model.id; // 不允许连线自环
-
-    if (source === target) {
-      // eslint-disable-next-line
-      console.debug("The edge is a loop, abort!");
-      graph.removeItem(this.edge);
-      this.edge = null;
-      this.addingEdge = false;
-      return;
-    } // 如果边已经存在，则取消此操作
-    // 禁止两个节点间连接多条线
-
-
-    if (graph.find('edge', function (item) {
-      var itemModel = item.getModel();
-      return itemModel.source === source && itemModel.target === target || itemModel.source === target && itemModel.target === source;
-    })) {
-      // eslint-disable-next-line
-      console.debug("The edge from ".concat(source, " to ").concat(target, " is duplicated, abort!"));
-      graph.removeItem(this.edge);
-      this.edge = null;
-      this.addingEdge = false;
-      return;
-    }
-
-    var defaultStyle = graph.cfg.defaultEdge.style;
-    graph.updateItem(this.edge, {
-      target: target,
-      style: Object(objectSpread2["a" /* default */])({}, defaultStyle)
-    });
-    this.edge.toFront();
-    graph.emit('custom:add-edge', {
-      item: this.edge
-    }); // graph.setItemState(this.edge, 'selected', true);
-
-    this.edge = null;
-    this.addingEdge = false;
-  },
-  onClick: function onClick(ev) {
-    var node = ev.item;
-    var graph = this.graph;
-    var point = {
-      x: ev.x,
-      y: ev.y
-    }; // function cancel(e) {
-    //   if (e.keyCode === 27) {
-    //     window.removeEventListener('keydown', cancel)
-    //     // ESC 取消连线
-    //     graph.removeItem(this.edge);
-    //     this.edge = null;
-    //     this.addingEdge = false;
-    //   }
-    // }
-
-    var model = node.getModel();
-
-    if (this.addingEdge && this.edge) {
-      this.onEnd(model);
-    } else {
-      var option = {
-        source: model.id,
-        target: point,
-        style: Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, this.graph.cfg.defaultEdge.style), {}, {
-          endArrow: true
-        })
-      };
-
-      if (model._lineType) {
-        option.type = model._lineType;
-      }
-
-      if (model._lineStyle === 'dotted') {
-        option.style.lineDash = [2, 2];
-      } else if (model._lineStyle === 'dashed') {
-        option.style.lineDash = [10, 2];
-      }
-
-      this.edge = graph.addItem('edge', option);
-      this.addingEdge = true; // window.addEventListener('keydown', cancel)
-    }
-  },
-  onMousemove: function onMousemove(ev) {
-    var point = {
-      x: ev.x,
-      y: ev.y
-    };
-
-    if (this.addingEdge && this.edge) {
-      this.graph.updateItem(this.edge, {
-        target: point
-      });
-    }
-  },
-  onEdgeClick: function onEdgeClick(ev) {
-    // 拖拽过程中，点击会点击到新增的边上
-    if (!this.addingEdge || this.edge !== ev.item) {
-      return;
-    } // 突然出现鼠标始终会点击在线上的问题，在此添加代码片段以处理
-
-
-    var graph = this.graph;
-
-    var _graph$getPointByClie = graph.getPointByClient(ev.clientX, ev.clientY),
-        x = _graph$getPointByClie.x,
-        y = _graph$getPointByClie.y;
-
-    var targetItem;
-    var nodes = graph.getNodes();
-
-    var _iterator = Object(createForOfIteratorHelper["a" /* default */])(nodes),
-        _step;
-
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var node = _step.value;
-        var bbox = node.getBBox();
-
-        if (x >= bbox.minX && x <= bbox.maxX && y >= bbox.minY && y <= bbox.maxY) {
-          targetItem = node;
-          break;
-        }
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-
-    if (targetItem) {
-      this.onEnd(targetItem.getModel());
-      return;
-    } // eslint-disable-next-line
-
-
-    console.debug("The edge adding is canceled!");
-    this.graph.removeItem(this.edge);
-    this.edge = null;
-    this.addingEdge = false;
-  }
-});
-g6_default.a.registerBehavior('contextmenu', {
-  getEvents: function getEvents() {
-    return {
-      'canvas:contextmenu': 'onCanvasContextMenu',
-      'node:contextmenu': 'onNodeContextMenu',
-      'edge:contextmenu': 'onEdgeContextMenu',
-      'combo:contextmenu': 'onComboContextMenu'
-    };
-  },
-  onCanvasContextMenu: function onCanvasContextMenu(e) {
-    events.emit('canvas:contextmenu', e);
-  },
-  onNodeContextMenu: function onNodeContextMenu(e) {
-    events.emit('node:contextmenu', e);
-  },
-  onEdgeContextMenu: function onEdgeContextMenu(e) {
-    events.emit('edge:contextmenu', e);
-  },
-  onComboContextMenu: function onComboContextMenu(e) {
-    events.emit('combo:contextmenu', e);
-  }
-});
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/board.vue?vue&type=script&lang=js&
-
-
-
-
-
-
-
-
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-/* harmony default export */ var boardvue_type_script_lang_js_ = ({
-  components: {
-    FieldsDialog: fieldsdialog,
-    contextmenu: contextmenu
-  },
-  props: {
-    title: {
-      type: String,
-      default: '图编辑器'
-    },
-    data: {
-      type: Object,
-      required: true
-    },
-    editMode: {
-      type: Boolean,
-      default: false
-    },
-
-    /**
-     * @type {BoardOptions}
-     */
-    options: {
-      type: Object,
-      required: true
-    }
-  },
-  watch: {
-    editMode: function editMode() {
-      if (!this.graph) {
-        return;
-      }
-
-      this.updateMode();
-    }
-  },
-  data: function data() {
-    var _this = this;
-
-    return {
-      /**
-       * @type {G6.Graph}
-       */
-      graph: null,
-      dialogs: {
-        node: {
-          editItem: null,
-          visible: false,
-          form: {},
-          position: {
-            x: 0,
-            y: 0
-          }
-        },
-        edge: {
-          visible: false,
-          form: {}
-        },
-        combo: {
-          editItem: null,
-          visible: false,
-          form: {},
-          position: {
-            x: 0,
-            y: 0
-          }
-        }
-      },
-      contextmenuTitle: '操作',
-      contextmenus: {
-        canvas: [{
-          label: '添加节点',
-          command: 'add-node',
-          handler: function handler(e) {
-            _this.dialogs.node.editItem = null;
-            _this.dialogs.node.form = {};
-            _this.dialogs.node.position.x = e.x;
-            _this.dialogs.node.position.y = e.y;
-            _this.dialogs.node.visible = true;
-          }
-        }, {
-          label: '添加分组',
-          command: 'add-combo',
-          handler: function handler(e) {
-            _this.dialogs.combo.editItem = null;
-            _this.dialogs.combo.form = {};
-            _this.dialogs.combo.position.x = e.x;
-            _this.dialogs.combo.position.y = e.y;
-            _this.dialogs.combo.visible = true;
-          }
-        }],
-        node: [{
-          label: '编辑节点',
-          command: 'edit-node',
-          handler: function handler(e) {
-            var item = e.item;
-            var data = item.getModel();
-            var e1 = {
-              type: 'node',
-              data: data,
-              item: item,
-              graph: _this.graph
-            };
-            var form;
-            var handler = _this.options.beforeEditHandler;
-
-            if (handler) {
-              // 如果有返回值，则使用返回值作为节点数据
-              var handleResult = handler(e1); // 返回 false 取消编辑
-
-              if (handleResult === false) {
-                return;
-              }
-
-              if (handleResult === undefined) {
-                form = Object(objectSpread2["a" /* default */])({}, data);
-              } else {
-                form = handleResult;
-              }
-            } else {
-              form = Object(objectSpread2["a" /* default */])({}, data);
-            }
-
-            _this.dialogs.node.form = form;
-            _this.dialogs.node.editItem = item;
-            _this.dialogs.node.visible = true;
-          }
-        }, {
-          label: '移除节点',
-          command: 'remove-node',
-          handler: function handler(e) {
-            _this.$confirm('您正在移除节点，此操作会同时移除与此节点相连接的边，是否继续？', '提示').then(function () {
-              var item = e.item;
-              var data = item.getModel();
-
-              _this.graph.removeItem(item);
-
-              _this.emitChangeEvent('node-remove', {
-                item: item,
-                data: data
-              });
-            }).catch(function () {});
-          }
-        }],
-        edge: [{
-          label: '移除边',
-          command: 'remove-edge',
-          handler: function handler(e) {
-            _this.$confirm('您正在移除连接，是否继续？', '提示').then(function () {
-              var item = e.item;
-              var data = item.getModel();
-
-              _this.graph.removeItem(item);
-
-              _this.emitChangeEvent('edge-remove', {
-                item: item,
-                data: data
-              });
-            }).catch(function () {});
-          }
-        }],
-        combo: [{
-          label: '添加节点',
-          command: 'add-node',
-          handler: function handler(e) {
-            var comboId = e.item.getID();
-            _this.dialogs.node.editItem = null;
-            _this.dialogs.node.form = {
-              comboId: comboId
-            };
-            _this.dialogs.node.position.x = e.x;
-            _this.dialogs.node.position.y = e.y;
-            _this.dialogs.node.visible = true;
-          }
-        }, {
-          label: '添加分组',
-          command: 'add-combo',
-          handler: function handler(e) {
-            var comboId = e.item.getID();
-            _this.dialogs.combo.editItem = null;
-            _this.dialogs.combo.form = {
-              parentId: comboId
-            };
-            _this.dialogs.combo.position.x = e.x;
-            _this.dialogs.combo.position.y = e.y;
-            _this.dialogs.combo.visible = true;
-          }
-        }, {}, {
-          label: '编辑分组',
-          command: 'edit-combo',
-          handler: function handler(e) {
-            var item = e.item;
-            var data = item.getModel();
-            var e1 = {
-              type: 'combo',
-              data: data,
-              item: item,
-              graph: _this.graph
-            };
-            var form;
-            var handler = _this.options.beforeEditHandler;
-
-            if (handler) {
-              // 如果有返回值，则使用返回值作为节点数据
-              var handleResult = handler(e1); // 返回 false 取消编辑
-
-              if (handleResult === false) {
-                return;
-              }
-
-              if (handleResult !== undefined) {
-                form = handleResult;
-              }
-            } else {
-              form = Object(objectSpread2["a" /* default */])({}, data);
-            }
-
-            _this.dialogs.combo.form = form;
-            _this.dialogs.combo.editItem = item;
-            _this.dialogs.combo.visible = true;
-          }
-        }, {
-          label: '解散分组',
-          command: 'remove-combo',
-          handler: function handler(e) {
-            _this.$confirm('您正在解散分组，是否继续？', '提示').then(function () {
-              var item = e.item;
-              var data = item.getModel();
-
-              _this.graph.uncombo(item);
-
-              _this.emitChangeEvent('combo-remove', {
-                item: item,
-                data: data
-              });
-            }).catch(function () {});
-          }
-        }]
-      },
-      zoom: {
-        handleTimer: -1,
-        visibleTimer: -1,
-        value: 100,
-        visible: false
-      },
-      tooltipPlugins: [],
-      gridPlugin: null,
-      snapLinePlugin: null
-    };
-  },
-  mounted: function mounted() {
-    this.init();
-  },
-  beforeDestroy: function beforeDestroy() {
-    this.unbindMethods();
-  },
-  methods: {
-    init: function init() {
-      var styles = this.options.styles;
-      var size = this.getBounds(); // const tc = document.createElement('div');
-      // tc.id = 'toolbarContainer';
-      // tc.style.position = 'absolute'
-      // tc.style.top = '60px'
-      // tc.style.right = '20px'
-      // tc.style.width = '400px'
-      // document.body.appendChild(tc);
-      // const toolbar = new G6.ToolBar({
-      //   container: tc,
-      //   getContent: () => {
-      //     return `
-      //       <ul>
-      //         <li code='add'>增加节点</li>
-      //         <li code='undo'>撤销</li>
-      //       </ul>
-      //     `
-      //   },
-      //   handleClick: (code, graph) => {
-      //     if (code === 'add') {
-      //       graph.addItem('node', {
-      //         id: 'node2',
-      //         label: 'node2',
-      //         x: 300,
-      //         y: 150
-      //       })
-      //     } else if (code === 'undo') {
-      //       toolbar.undo()
-      //     }
-      //   }
-      // })
-
-      var plugins = [];
-
-      if (this.options.tooltipRenderers.node) {
-        // 允许出现 tooltip 的 item 类型
-        this.options.tooltipRenderers.node.itemTypes = ['node'];
-        var tooltipOption = this.options.tooltipRenderers.node;
-        tooltipOption.shouldBegin = tooltipOption.shouldBegin.bind(this);
-        tooltipOption.getContent = tooltipOption.getContent.bind(this);
-        this.tooltipPlugins.push(new g6_default.a.Tooltip(this.options.tooltipRenderers.node));
-      }
-
-      if (this.options.tooltipRenderers.edge) {
-        // 允许出现 tooltip 的 item 类型
-        this.options.tooltipRenderers.edge.itemTypes = ['edge'];
-        var _tooltipOption = this.options.tooltipRenderers.edge;
-        _tooltipOption.shouldBegin = _tooltipOption.shouldBegin.bind(this);
-        _tooltipOption.getContent = _tooltipOption.getContent.bind(this);
-        this.tooltipPlugins.push(new g6_default.a.Tooltip(this.options.tooltipRenderers.edge));
-      }
-
-      plugins.push.apply(plugins, Object(toConsumableArray["a" /* default */])(this.tooltipPlugins)); // 创建 G6 图实例
-
-      var graph = this.graph = new g6_default.a.Graph({
-        // 指定图画布的容器 id
-        container: this.$refs.canvas,
-        enabledStack: true,
-        groupByTypes: false,
-        plugins: plugins,
-        modes: {
-          // 支持的 behavior
-          default: ['zoom-canvas', 'click-select', // 'activate-relations',
-          'select-item', 'drag-canvas'],
-          edit: ['click-select', 'select-item', // 'zoom-canvas',
-          'drag-node', 'drag-combo', // 'create-edge',
-          'add-edge', 'contextmenu', 'drag-canvas']
-        },
-        // 画布宽高
-        width: size.width,
-        height: size.height,
-        defaultNode: Object(objectSpread2["a" /* default */])({}, styles.node),
-        defaultEdge: Object(objectSpread2["a" /* default */])({
-          style: {
-            lineAppendWidth: 5
-          }
-        }, styles.edge),
-        defaultCombo: Object(objectSpread2["a" /* default */])({
-          type: 'rect-ext',
-          // padding: 0,
-          // style: {
-          // }
-          labelCfg: {
-            style: {
-              fontSize: 24
-            }
-          }
-        }, styles.combo),
-        nodeStateStyles: Object(objectSpread2["a" /* default */])({}, styles.nodeStates),
-        edgeStateStyles: Object(objectSpread2["a" /* default */])({}, styles.edgeStates)
-      });
-      graph.data(this.data);
-      graph.render();
-      window.G6 = graph; // // 处理多边场景
-      // const offsetDiff = 10;
-      // const multiEdgeType = 'quadratic';
-      // const singleEdgeType = 'polyline-ext';
-      // const loopEdgeType = 'loop';
-      // G6.Util.processParallelEdges(this.data.edges, offsetDiff, multiEdgeType, singleEdgeType, loopEdgeType);
-
-      this.bindMethods();
-      this.updateMode();
-      this.$emit('ready', {
-        graph: graph
-      });
-    },
-    updateMode: function updateMode() {
-      var mode = this.editMode ? 'edit' : 'default';
-      this.graph.setMode(mode);
-
-      if (!this.editMode) {
-        this.$refs.contextmenu.hide();
-      } // 网格插件
-
-
-      if (this.editMode) {
-        this.gridPlugin = new g6_default.a.Grid();
-        this.graph.addPlugin(this.gridPlugin);
-        this.snapLinePlugin = new g6_default.a.SnapLine();
-        this.graph.addPlugin(this.snapLinePlugin);
-      } else {
-        if (this.gridPlugin) {
-          this.graph.removePlugin(this.gridPlugin);
-        }
-
-        if (this.snapLinePlugin) {
-          this.graph.removePlugin(this.snapLinePlugin);
-        }
-      } // tooltip 插件，在编辑模式下禁用
-
-
-      var tooltipEnabled = !this.editMode;
-      this.tooltipPlugins.forEach(function (tooltip) {
-        tooltip.set('enabled', tooltipEnabled);
-      }); // 更新连线的箭头：
-      // 在编辑模式时展示，预览模式时隐藏
-
-      var showEndArrow = this.editMode;
-      this.data.edges.forEach(function (edge) {
-        if (!edge.style) {
-          edge.style = {};
-        }
-
-        edge.style.endArrow = showEndArrow;
-      });
-      this.graph.render();
-    },
-    getBounds: function getBounds() {
-      var rect = this.$refs.canvas.getClientRects()[0];
-      return {
-        width: rect.width,
-        height: rect.height,
-        left: rect.left,
-        top: rect.top
-      };
-    },
-    bindMethods: function bindMethods() {
-      events.on('canvas:contextmenu', this.onCanvasContextMenu);
-      events.on('node:contextmenu', this.onNodeContextMenu);
-      events.on('edge:contextmenu', this.onEdgeContextMenu);
-      events.on('combo:contextmenu', this.onComboContextMenu);
-      this.graph.on('wheelzoom', this.onCanvasZoom);
-      this.graph.on('custom:add-edge', this.onEdgeAdded);
-      this.graph.on('node:dragend', this.onDragEnd);
-      this.graph.on('combo:dragend', this.onDragEnd);
-    },
-    unbindMethods: function unbindMethods() {
-      events.off('canvas:contextmenu', this.onCanvasContextMenu);
-      events.off('node:contextmenu', this.onNodeContextMenu);
-      events.off('edge:contextmenu', this.onEdgeContextMenu);
-      events.off('combo:contextmenu', this.onComboContextMenu);
-      this.graph.off('wheelzoom', this.onCanvasZoom);
-      this.graph.off('custom:add-edge', this.onEdgeAdded);
-      this.graph.off('node:dragend', this.onDragEnd);
-      this.graph.off('combo:dragend', this.onDragEnd);
-    },
-    onEdgeAdded: function onEdgeAdded(e) {
-      this.emitChangeEvent('edge-add', {
-        item: e.item,
-        data: e.item.getModel()
-      });
-    },
-    onDragEnd: function onDragEnd(e) {
-      this.emitChangeEvent('location', {
-        item: e.item,
-        data: e.item.getModel()
-      });
-    },
-    onCanvasZoom: function onCanvasZoom(e) {
-      var _this2 = this;
-
-      clearTimeout(this.zoom.handleTimer);
-      clearTimeout(this.zoom.visibleTimer);
-      this.zoom.handleTimer = requestAnimationFrame(function () {
-        var zoom = _this2.graph.getZoom();
-
-        _this2.zoom.value = Math.round(zoom * 100);
-        _this2.zoom.visible = true;
-
-        _this2.$emit('zoom', {
-          type: 'zoom',
-          value: zoom,
-          event: e,
-          graph: _this2.graph
-        });
-
-        _this2.zoom.visibleTimer = setTimeout(function () {
-          _this2.zoom.visible = false;
-        }, 1000);
-      });
-    },
-    onCanvasContextMenu: function onCanvasContextMenu(e) {
-      this.contextmenuTitle = '操作';
-      this.clearSelectedNode();
-      this.showContextMenu(e, 'canvas');
-    },
-    onNodeContextMenu: function onNodeContextMenu(e) {
-      this.contextmenuTitle = '节点操作';
-      this.clearSelectedNode();
-      this.graph.setItemState(e.item, 'selected', true);
-      this.showContextMenu(e, 'node');
-    },
-    onComboContextMenu: function onComboContextMenu(e) {
-      this.contextmenuTitle = '分组操作';
-      this.graph.setItemState(e.item, 'selected', true);
-      this.showContextMenu(e, 'combo');
-    },
-    onEdgeContextMenu: function onEdgeContextMenu(e) {
-      this.contextmenuTitle = '边操作';
-      this.clearSelectedNode();
-      this.showContextMenu(e, 'edge');
-    },
-    showContextMenu: function showContextMenu(e, type) {
-      var x = e.canvasX;
-      var y = e.canvasY;
-      var item = e.item; // 检查是否允许打开
-
-      if (this.options.contextmenu) {
-        var visible = this.options.contextmenu.visible;
-
-        if (visible !== undefined) {
-          if (typeof visible === 'function') {
-            visible = visible.call(this.graph, {
-              type: type,
-              item: item,
-              data: item === null || item === void 0 ? void 0 : item.getModel(),
-              graph: this.graph
-            });
-          }
-
-          if (!visible) {
-            this.$refs.contextmenu.hide();
-            return;
-          }
-        }
-      } // const bounds = this.getBounds()
-      // x += bounds.left
-      // y += bounds.top
-
-
-      this.$refs.contextmenu.show(x, y, type, item);
-    },
-    onNodeOk: function onNodeOk() {
-      var _this3 = this;
-
-      return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-        var editItem, form, e, editHandler, handleResult, oldData, newItem;
-        return regeneratorRuntime.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                editItem = _this3.dialogs.node.editItem;
-                form = _this3.dialogs.node.form; // 添加时，要设置节点的位置
-
-                if (!editItem) {
-                  form.x = _this3.dialogs.node.position.x;
-                  form.y = _this3.dialogs.node.position.y;
-                }
-
-                e = {
-                  type: 'node',
-                  data: form,
-                  item: editItem,
-                  graph: _this3.graph
-                };
-                editHandler = _this3.options.editHandler;
-
-                if (!editHandler) {
-                  _context.next = 19;
-                  break;
-                }
-
-                _context.prev = 6;
-                _context.next = 9;
-                return editHandler(e);
-
-              case 9:
-                handleResult = _context.sent;
-                _context.next = 16;
-                break;
-
-              case 12:
-                _context.prev = 12;
-                _context.t0 = _context["catch"](6);
-
-                _this3.$message.warning(_context.t0.message);
-
-                return _context.abrupt("return");
-
-              case 16:
-                if (!(handleResult === false)) {
-                  _context.next = 18;
-                  break;
-                }
-
-                return _context.abrupt("return");
-
-              case 18:
-                if (handleResult !== undefined) {
-                  form = handleResult;
-                }
-
-              case 19:
-                if (!editItem) {
-                  _context.next = 28;
-                  break;
-                }
-
-                oldData = editItem.getModel(); // 检查数据是否重复
-
-                if (!(oldData.id !== form.id && _this3.data.nodes.some(function (node) {
-                  return node.id === form.id;
-                }))) {
-                  _context.next = 24;
-                  break;
-                }
-
-                _this3.$message.warning('编辑失败，此数据已经存在');
-
-                return _context.abrupt("return");
-
-              case 24:
-                _this3.graph.updateItem(editItem, form);
-
-                _this3.emitChangeEvent('node-update', {
-                  item: editItem,
-                  data: form
-                });
-
-                _context.next = 34;
-                break;
-
-              case 28:
-                if (!_this3.data.nodes.some(function (node) {
-                  return node.id === form.id;
-                })) {
-                  _context.next = 31;
-                  break;
-                }
-
-                _this3.$message.warning('添加失败，此数据已经存在');
-
-                return _context.abrupt("return");
-
-              case 31:
-                newItem = _this3.graph.addItem('node', form);
-                newItem.toFront();
-
-                _this3.emitChangeEvent('node-add', {
-                  item: null,
-                  data: form
-                });
-
-              case 34:
-                _this3.dialogs.node.visible = false;
-
-              case 35:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, null, [[6, 12]]);
-      }))();
-    },
-    emitChangeEvent: function emitChangeEvent(type, e) {
-      var _this4 = this;
-
-      if (!this.editMode) {
-        // 非编辑模式下，不触发变更事件
-        return;
-      }
-
-      this.$nextTick(function () {
-        e.type = type;
-        e.graph = _this4.graph;
-
-        _this4.$emit(type, e);
-
-        _this4.$emit('change', e);
-      });
-    },
-    onEdgeOk: function onEdgeOk() {},
-    onComboOk: function onComboOk() {
-      var _this5 = this;
-
-      return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-        var editItem, form, e, editHandler, handleResult, item;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                editItem = _this5.dialogs.combo.editItem;
-                form = _this5.dialogs.combo.form; // form.type = 'rect-ext'
-                // form.type = 'rect'
-                // 添加时，要设置分组的位置
-
-                if (!editItem) {
-                  form.x = _this5.dialogs.combo.position.x;
-                  form.y = _this5.dialogs.combo.position.y;
-                }
-
-                e = {
-                  type: 'combo',
-                  data: form,
-                  item: editItem,
-                  graph: _this5.graph
-                };
-                editHandler = _this5.options.editHandler;
-
-                if (!editHandler) {
-                  _context2.next = 19;
-                  break;
-                }
-
-                _context2.prev = 6;
-                _context2.next = 9;
-                return editHandler(e);
-
-              case 9:
-                handleResult = _context2.sent;
-                _context2.next = 16;
-                break;
-
-              case 12:
-                _context2.prev = 12;
-                _context2.t0 = _context2["catch"](6);
-
-                _this5.$message.warning(_context2.t0.message);
-
-                return _context2.abrupt("return");
-
-              case 16:
-                if (!(handleResult === false)) {
-                  _context2.next = 18;
-                  break;
-                }
-
-                return _context2.abrupt("return");
-
-              case 18:
-                if (handleResult !== undefined) {
-                  form = handleResult;
-                }
-
-              case 19:
-                if (editItem) {
-                  // const oldData = editItem.getModel()
-                  // // 检查数据是否重复
-                  // if (oldData.id !== form.id && this.data.combos.some(node => node.id === form.id)) {
-                  //   this.$message.warning('编辑失败，此数据已经存在')
-                  //   return
-                  // }
-                  _this5.graph.updateItem(editItem, form);
-
-                  _this5.emitChangeEvent('combo-update', {
-                    item: editItem,
-                    data: form
-                  });
-                } else {
-                  // // 检查数据是否重复
-                  // if (this.data.combos.some(combo => combo.id === form.id)) {
-                  //   this.$message.warning('添加失败，此数据已经存在')
-                  //   return
-                  // }
-                  item = _this5.graph.addItem('combo', form);
-
-                  _this5.emitChangeEvent('combo-add', {
-                    item: item,
-                    data: form
-                  });
-                }
-
-                _this5.dialogs.combo.visible = false;
-
-              case 21:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, null, [[6, 12]]);
-      }))();
-    },
-    clearSelectedNode: function clearSelectedNode() {
-      var _this6 = this;
-
-      var nodes = this.graph.findAllByState('node', 'selected');
-      nodes.forEach(function (node) {
-        _this6.graph.clearItemStates(node, 'selected');
-      });
-    },
-    highlightNode: function highlightNode(node) {
-      this.graph.setItemState(node, 'highlight', true);
-    },
-    clearHighlightNodes: function clearHighlightNodes() {
-      var _this7 = this;
-
-      var nodes = this.graph.getNodes();
-      nodes.forEach(function (node) {
-        _this7.graph.clearItemStates(node, 'highlight');
-      });
-    },
-    // ---------- 以下是公开接口 --------------
-    getData: function getData() {
-      return this.graph.save();
-    },
-    getGraph: function getGraph() {
-      return this.graph;
-    },
-    undo: function undo() {
-      this.graph.undo();
-    },
-    redo: function redo() {
-      this.graph.redo();
-    },
-    clearSelection: function clearSelection() {
-      this.clearHighlightNodes();
-    },
-    findNode: function findNode(predicator, highlight) {
-      var _this8 = this;
-
-      if (highlight) {
-        this.clearHighlightNodes();
-      }
-
-      return this.graph.findAll('node', function (node) {
-        var data = node.getModel();
-        var hit = predicator(data);
-
-        if (hit && highlight) {
-          _this8.highlightNode(node);
-        }
-
-        return hit;
-      });
-    },
-
-    /**
-     * 将图导出为图片
-     * @param {String} [name=graph] 图片的名称
-     * @param {'image/png'|'image/jpeg'|'image/webp'|'image/bmp'} [type] 图片的类型。图的 renderer 为默认的 'canvas' 时生效，图的 renderer 为 'svg' 时将导出 svg 文件
-     * @param {Object} [imageConfig] 图片的配置项，可选，具体字段见下方
-     * @param {String} [imageConfig.backgroundColor] 图片的背景色，可选，不传值时将导出透明背景的图片
-     * @param {Number|Number[]} [imageConfig.padding] 导出图片的上左下右 padding 值。当 padding 为 number 类型时，四周 padding 相等
-     * @param {Number} [pixelRatio=window.devicePixelRatio] 控制导出图片的清晰度。默认使用 window.devicePixelRatio
-     */
-    exportImage: function exportImage(name, type, imageConfig, pixelRatio) {
-      // 处理导出清晰度
-      // 参考 https://github.com/antvis/G6/issues/2979
-      var oldRatio;
-
-      if (pixelRatio) {
-        oldRatio = window.devicePixelRatio;
-        window.devicePixelRatio = pixelRatio;
-      }
-
-      this.graph.downloadFullImage(name, type, imageConfig);
-
-      if (pixelRatio) {
-        setTimeout(function () {
-          window.devicePixelRatio = oldRatio;
-        }, 100);
-      }
-    },
-
-    /**
-     * 将画布上元素生成为图片的 URL
-     * @param {'image/png'|'image/jpeg'|'image/webp'|'image/bmp'} [type] 图片的类型。图的 renderer 为默认的 'canvas' 时生效，图的 renderer 为 'svg' 时将导出 svg 文件
-     * @param {Object} [imageConfig] 图片的配置项，可选，具体字段见下方
-     * @param {String} [imageConfig.backgroundColor] 图片的背景色，可选，不传值时将导出透明背景的图片
-     * @param {Number|Number[]} [imageConfig.padding] 导出图片的上左下右 padding 值。当 padding 为 number 类型时，四周 padding 相等
-     * @param {Number} [pixelRatio=window.devicePixelRatio] 控制导出图片的清晰度。默认使用 window.devicePixelRatio
-     */
-    exportImageURL: function exportImageURL(type, imageConfig, pixelRatio) {
-      var _this9 = this;
-
-      return Object(asyncToGenerator["a" /* default */])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                return _context3.abrupt("return", new Promise(function (resolve) {
-                  // 处理导出清晰度
-                  // 参考 https://github.com/antvis/G6/issues/2979
-                  var oldRatio;
-
-                  if (pixelRatio) {
-                    oldRatio = window.devicePixelRatio;
-                    window.devicePixelRatio = pixelRatio;
-                  }
-
-                  _this9.graph.toFullDataURL(function (response) {
-                    if (pixelRatio) {
-                      setTimeout(function () {
-                        window.devicePixelRatio = oldRatio;
-                      }, 100);
-                    }
-
-                    resolve(response);
-                  }, type, imageConfig);
-                }));
-
-              case 1:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3);
-      }))();
-    }
-  }
-});
-// CONCATENATED MODULE: ./src/components/board.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_boardvue_type_script_lang_js_ = (boardvue_type_script_lang_js_); 
-// CONCATENATED MODULE: ./src/components/board.vue
-
-
-
-
-
-/* normalize component */
-
-var board_component = Object(componentNormalizer["a" /* default */])(
-  components_boardvue_type_script_lang_js_,
-  boardvue_type_template_id_a27027b2_render,
-  boardvue_type_template_id_a27027b2_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var board = (board_component.exports);
-// EXTERNAL MODULE: ./src/components/board.less
-var components_board = __webpack_require__("d521");
-
-// CONCATENATED MODULE: ./src/components/index.js
-
-
-
-
-function install(Vue) {
-  Vue.component('G6Board', board);
-}
-
-/* harmony default export */ var components = ({
-  install: install
-});
-
-// CONCATENATED MODULE: ./src/main.js
-
-
-
-
-
-
-
-
-
-vue_runtime_esm["a" /* default */].use(external_element_ui_default.a);
-vue_runtime_esm["a" /* default */].use(components);
-new vue_runtime_esm["a" /* default */]({
-  render: function render(h) {
-    return h(App);
-  }
-}).$mount('#app');
-
-/***/ }),
-
-/***/ "5f72":
-/***/ (function(module, exports) {
-
-module.exports = element-ui;
-
-/***/ }),
-
-/***/ "d521":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
+eval("module.exports = __webpack_require__(/*! ./src/main.js */\"./src/main.js\");\n\n\n//# sourceURL=webpack:///multi_./src/main.js?");
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=app.js.map

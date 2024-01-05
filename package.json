@@ -5,7 +5,7 @@
   "main": "dist/g6board.common.js",
   "scripts": {
     "serve": "npx vue-cli-service serve",
-    "build:sample": "npx vue-cli-service build --dest sample",
+    "build:sample": "npx vue-cli-service build --dest sample --mode development",
     "build": "npx vue-cli-service build --target lib --dest dist --formats commonjs --name g6board src/components/index.js",
     "release": "yarn run lint & yarn run build & yarn run build:sample & node version.js",
     "lint": "npx vue-cli-service lint",
