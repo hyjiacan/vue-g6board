@@ -5,14 +5,15 @@
   "main": "dist/g6board.common.js",
   "scripts": {
     "serve": "npx vue-cli-service serve",
+    "build:sample": "npx vue-cli-service build --dest sample",
     "build": "npx vue-cli-service build --target lib --dest dist --formats commonjs --name g6board src/components/index.js",
-    "release": "yarn run lint & yarn run build & node version.js",
+    "release": "yarn run lint & yarn run build & yarn run build:sample & node version.js",
     "lint": "npx vue-cli-service lint",
     "test": "npx vue-cli-service lint & npx vue-cli-service build"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitee.com/wangankeji/vue-g6board.git"
+    "url": "https://gitee.com/wangankeji/vue-g6board.git"
   },
   "bugs": {
     "url": "https://gitee.com/wangankeji/vue-g6board/issues"
