@@ -1,7 +1,7 @@
 {
   "name": "@wangankeji/vue-g6board",
   "description": "Viewer & Editor for G6 graph.",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "main": "dist/g6board.common.js",
   "scripts": {
     "serve": "npx vue-cli-service serve",
