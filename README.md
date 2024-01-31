@@ -111,10 +111,10 @@ export default {
 在编辑模式时，若发生了以下操作则会触发此事件:
 
 - 添加节点 `node-add`
-- 编辑节点 `node-edit`
+- 编辑节点 `node-update`
 - 移除节点 `node-remove`
 - 添加分组 `combo-add`
-- 编辑分组 `combo-edit`
+- 编辑分组 `combo-update`
 - 移除分组 `combo-remove`
 - 添加边 `edge-add`
 - 移除边 `edge-remove`

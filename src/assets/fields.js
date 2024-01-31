@@ -7,7 +7,11 @@ const nodeFields = defineFields([{
   label: '设备类型',
   name: 'deviceType',
   inputType: InputTypes.SELECT,
-  options: storage.getDeviceTypes(),
+  options: new Promise(resolve => {
+    setTimeout(() => {
+      resolve(storage.getDeviceTypes())
+    }, 1000)
+  }),
   config: {
     required: true,
     tip: '不同的设备类型，有不同有图标和含义',

@@ -130,7 +130,7 @@ const Field = {
   inputType: 1,
   /**
    * 当 inputType 为 select/checkbox/radio 时的选项
-   * @type {FieldOption}
+   * @type {FieldOption[] | Promise<FieldOption[]>}
    */
   options: [],
   /**

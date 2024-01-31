@@ -219,6 +219,14 @@ export default {
         if (validators.length) {
           rules[field.name] = validators;
         }
+
+        if (field.options instanceof Promise) {
+          const promise = field.options
+          field.options = []
+          promise.then(data => {
+            field.options = data
+          })
+        }
       });
 
       this.fieldsMap = map;

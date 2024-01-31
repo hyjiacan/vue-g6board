@@ -71,6 +71,11 @@ export default defineOptions({
     }
   },
   beforeEditHandler(e) {
+    if (e.type === 'node') {
+      const data = e.data
+      data.device = data.ip
+      return data
+    }
     if (e.type !== 'combo') {
       return
     }

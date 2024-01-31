@@ -156,7 +156,7 @@ export interface Field {
   /**
    * 当 inputType 为 select/checkbox/radio 时的选项
    */
-  options?: FieldOption | typeof fieldOptionGetter;
+  options?: FieldOption[] | Promise<FieldOption[]> | typeof fieldOptionGetter;
   /**
    * 选项
    */
