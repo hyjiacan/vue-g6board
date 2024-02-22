@@ -7,6 +7,8 @@ export default defineOptions({
   edgeFields: fields.edgeFields,
   comboFields: fields.comboFields,
   styles: {
+    node: {
+    },
     edge: {
       type: 'polyline',
       style: {
@@ -22,7 +24,7 @@ export default defineOptions({
       labelCfg: {
         style: {
           fontSize: 10,
-          stroke: 'red',
+          // stroke: 'red',
           fill: 'blue',
           backgroundColor: 'red'
         }
@@ -39,6 +41,28 @@ export default defineOptions({
       }
     },
     nodeStates: {
+      highlight: {
+        'highlight-border': {
+          fill: 'green',
+          fillOpacity: 0.1,
+          stroke: 'green',
+          strokeOpacity: 0.3,
+          lineWidth: 2,
+        }
+      },
+      selected: {
+        'select-border': {
+          stroke: 'blue',
+          lineWidth: 3
+        }
+      },
+      hover: {
+        'select-border': {
+          stroke: 'green'
+        }
+      }
+    },
+    comboStates: {
       highlight: {
         'highlight-border': {
           fill: 'green',
@@ -102,8 +126,15 @@ export default defineOptions({
       if (!data.type) {
         data.type = 'image-ext'
       }
+      if (!data.labelCfg) {
+        data.labelCfg = {}
+      }
+      if (!data.labelCfg.style) {
+        data.labelCfg.style = {}
+      }
+      data.labelCfg.style.fill = data.labelColor || '#000'
       data.img = storage.getIcon(data.deviceType)
-      data.size = storage.getSize(data.deviceType)
+      data.size = [data.width, data.height]
     } else if (e.type === 'combo') {
       data.label = data.name
       if (data.fixed) {
@@ -111,6 +142,23 @@ export default defineOptions({
       } else {
         delete data.fixSize
       }
+    } else if (e.type === 'edge') {
+      if (!data.style) {
+        data.style = {}
+      }
+      let dash
+      switch (data._lineStyle) {
+        case 'solid':
+          break
+        case 'dotted':
+          dash = [2, 2]
+          break
+        case 'dashed':
+          dash = [10, 5]
+          break
+      }
+      data.style.lineDash = dash
+      data.style.visible = data._lineVisible
     }
     return data
   },

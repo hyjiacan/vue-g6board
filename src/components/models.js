@@ -349,8 +349,8 @@ const BUILTIN_FIELDS = {
    * @type {Field}
    */
   EDGE_TYPE: {
-    label: '边类型',
-    name: '_lineType',
+    label: '类型',
+    name: 'type',
     inputType: InputTypes.RADIO,
     options: [{
       label: '直线',
@@ -386,8 +386,8 @@ const BUILTIN_FIELDS = {
    * @type {Field}
    */
   EDGE_CURVE_OFFSET: {
-    label: '边弧度',
-    name: '_curveOffset',
+    label: '弧度',
+    name: 'curveOffset',
     inputType: InputTypes.NUMBER,
     config: {
       tip: '指定弧的弯曲程度，其正负影响弧弯曲的方向。取值范围 -100 ~ 100',
@@ -395,12 +395,12 @@ const BUILTIN_FIELDS = {
       minlength: -100,
       default: 20,
       isVisible(e) {
-        return e.data._lineType === 'arc'
+        return e.data.type === 'arc'
       }
     }
   },
   EDGE_STYLE: {
-    label: '边样式',
+    label: '样式',
     name: '_lineStyle',
     inputType: InputTypes.RADIO,
     options: [{
@@ -421,12 +421,36 @@ const BUILTIN_FIELDS = {
     }
   },
   EDGE_VISIBLE: {
-    label: '边可见',
-    name: 'lineVisible',
+    label: '是否可见',
+    name: '_lineVisible',
     inputType: InputTypes.SWITCH,
     config: {
       default: true,
       tip: '在预览图时，边是否可见'
+    }
+  },
+  EDGE_SOURCE_ANCHOR: {
+    label: '起点位置',
+    name: 'sourceAnchor',
+    inputType: InputTypes.SWITCH,
+    options: [{
+      label: '自动',
+      value: -1
+    }, {
+      label: '上',
+      value: 1
+    }, {
+      label: '下',
+      value: 2
+    }, {
+      label: '左',
+      value: 3
+    }, {
+      label: '右',
+      value: 4
+    }],
+    config: {
+      default: -1
     }
   }
 }

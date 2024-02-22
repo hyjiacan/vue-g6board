@@ -110,25 +110,36 @@ const nodeFields = defineFields([{
   inputType: InputTypes.CUSTOM,
   component: ColorPicker
 }, {
+  label: '宽度',
+  name: 'width',
+  inputType: InputTypes.NUMBER,
+  config: {
+    tip: '单位为像素',
+    minlength: 0,
+    maxlength: 200
+  }
+}, {
+  label: '高度',
+  name: 'height',
+  inputType: InputTypes.NUMBER,
+  config: {
+    minlength: 0,
+    maxlength: 200,
+    tip: '单位为像素'
+  }
+}, {
   label: '备注',
   name: 'remark',
   inputType: InputTypes.LONGTEXT,
-  // }, {
-  //   label: '连接类型',
-  //   name: 'lineType',
-  //   inputType: InputTypes.RADIO,
-  //   options: lineTypes,
-  //   config: {
-  //     default: lineTypes[0].value
-  //   }
-},
-BUILTIN_FIELDS.EDGE_TYPE,
-BUILTIN_FIELDS.EDGE_CURVE_OFFSET,
-BUILTIN_FIELDS.EDGE_STYLE,
-BUILTIN_FIELDS.EDGE_VISIBLE,
+}
 ])
 
-const edgeFields = defineFields()
+const edgeFields = defineFields([
+  BUILTIN_FIELDS.EDGE_TYPE,
+  BUILTIN_FIELDS.EDGE_CURVE_OFFSET,
+  BUILTIN_FIELDS.EDGE_STYLE,
+  BUILTIN_FIELDS.EDGE_VISIBLE,
+])
 
 const comboFields = defineFields([{
   label: '名称',

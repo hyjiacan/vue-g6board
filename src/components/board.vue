@@ -21,8 +21,18 @@
 import G6 from '@antv/g6';
 import FieldsDialog from './fieldsdialog.vue'
 import contextmenu from './contextmenu';
-import EventBus from './events';
+import EventBus from './metas/events';
 import './setup'
+
+/**
+ * 默认的锚点位置数据
+ */
+const ANCHOR_POINTS = [
+  [0.5, 0],
+  [1, 0.5],
+  [0.5, 1],
+  [0, 0.5],
+]
 
 export default {
   components: { FieldsDialog, contextmenu },
@@ -167,7 +177,48 @@ export default {
           }
         }],
         edge: [{
-          label: '移除边',
+          label: '编辑连接',
+          command: 'edit-edge',
+          handler: (e) => {
+            const item = e.item
+            const data = item.getModel()
+
+            const e1 = {
+              type: 'edge',
+              data: data,
+              item: item,
+              graph: this.graph
+            }
+
+            let form
+
+            const handler = this.options.beforeEditHandler
+            if (handler) {
+              // 如果有返回值，则使用返回值作为节点数据
+              const handleResult = handler(e1)
+              // 返回 false 取消编辑
+              if (handleResult === false) {
+                return
+              }
+              if (handleResult === undefined) {
+                form = {
+                  ...data
+                }
+              } else {
+                form = handleResult
+              }
+            } else {
+              form = {
+                ...data
+              }
+            }
+
+            this.dialogs.edge.form = form
+            this.dialogs.edge.editItem = item
+            this.dialogs.edge.visible = true
+          }
+        }, {
+          label: '移除连接',
           command: 'remove-edge',
           handler: (e) => {
             this.$confirm('您正在移除连接，是否继续？', '提示').then(() => {
@@ -340,6 +391,7 @@ export default {
         // 指定图画布的容器 id
         container: this.$refs.canvas,
         enabledStack: true,
+        // 必须将 groupByTypes 设置为 false，带有 combo 的图中元素的视觉层级才能合理
         groupByTypes: false,
         plugins,
         modes: {
@@ -361,12 +413,21 @@ export default {
             'add-edge',
             'contextmenu',
             'drag-canvas',
+            {
+              type: 'brush-select',
+              brushStyle: {
+                fill: '#00000088',
+                lineWidth: 2
+              },
+              trigger: 'shift'
+            }
           ]
         },
         // 画布宽高
         width: size.width,
         height: size.height,
         defaultNode: {
+          anchorPoints: ANCHOR_POINTS,
           ...styles.node
         },
         defaultEdge: {
@@ -386,6 +447,7 @@ export default {
               fontSize: 24
             }
           },
+          anchorPoints: ANCHOR_POINTS,
           ...styles.combo
         },
         nodeStateStyles: {
@@ -398,12 +460,21 @@ export default {
       graph.data(this.data);
       graph.render()
 
+      // // TODO 配置边的属性 style: {visible:false} 未生效，在此重新配置一下
+      // // 隐藏指定的边
+      // setTimeout(() => {
+      //   this.data.edges.filter(item => item.style && item.style.visible === false).forEach(item => {
+      //     graph.updateItem(item.id, { style: { visible: false } })
+      //     console.info(item.id)
+      //   })
+      // }, 1000)
+
       window.G6 = graph
 
       // // 处理多边场景
       // const offsetDiff = 10;
       // const multiEdgeType = 'quadratic';
-      // const singleEdgeType = 'polyline-ext';
+      // const singleEdgeType = 'polyline';
       // const loopEdgeType = 'loop';
       // G6.Util.processParallelEdges(this.data.edges, offsetDiff, multiEdgeType, singleEdgeType, loopEdgeType);
 
@@ -452,6 +523,9 @@ export default {
           edge.style = {}
         }
         edge.style.endArrow = showEndArrow
+
+        // 编辑和预览时设置指定边隐藏
+        edge.visible = this.editMode || (edge.style.visible !== false)
       })
       this.graph.render()
     },
@@ -485,6 +559,7 @@ export default {
       this.graph.off('combo:dragend', this.onDragEnd)
     },
     onEdgeAdded(e) {
+      this.contextmenus.edge[0].handler(e)
       this.emitChangeEvent('edge-add', {
         item: e.item,
         data: e.item.getModel()
@@ -605,6 +680,7 @@ export default {
           this.$message.warning('编辑失败，此数据已经存在')
           return
         }
+
         this.graph.updateItem(editItem, form)
         this.emitChangeEvent('node-update', {
           item: editItem,
@@ -637,7 +713,45 @@ export default {
         this.$emit('change', e)
       })
     },
-    onEdgeOk() {
+    /**
+     * 编辑边完成的函数
+     */
+    async onEdgeOk() {
+      const editItem = this.dialogs.edge.editItem
+      let form = this.dialogs.edge.form
+
+      const e = {
+        type: 'edge',
+        data: form,
+        item: editItem,
+        graph: this.graph
+      }
+
+      const editHandler = this.options.editHandler
+      if (editHandler) {
+        // 如果有返回值，则使用返回值作为节点数据
+        let handleResult
+        try {
+          handleResult = await editHandler(e)
+        } catch (e) {
+          this.$message.warning(e.message)
+          return
+        }
+        // 返回 false 取消编辑
+        if (handleResult === false) {
+          return
+        }
+        if (handleResult !== undefined) {
+          form = handleResult
+        }
+      }
+
+      this.graph.updateItem(editItem, form)
+      this.emitChangeEvent('edge-update', {
+        item: editItem,
+        data: form
+      })
+      this.dialogs.edge.visible = false
     },
     async onComboOk() {
       const editItem = this.dialogs.combo.editItem

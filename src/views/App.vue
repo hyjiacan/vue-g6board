@@ -35,25 +35,29 @@ export default {
       options,
       deviceTypes: storage.getDeviceTypes(),
       data: {
-        nodes,
+        nodes: nodes.map(node => {
+          if (!node.labelCfg) {
+            node.labelCfg = {}
+          }
+          if (!node.labelCfg.style) {
+            node.labelCfg.style = {}
+          }
+          node.labelCfg.style.fill = node.labelColor || undefined
+          return node
+        }),
         combos,
         edges: edges.map(edge => {
+          if (!edge.style) {
+            edge.style = {}
+          }
           if (edge.state === '正常') {
-            edge.style = {
-              stroke: 'green'
-            }
+            edge.style.stroke = 'green'
           } else if (edge.state === '断开') {
-            edge.style = {
-              stroke: 'gray'
-            }
+            edge.style.stroke = 'gray'
           } else if (edge.state === '卡顿') {
-            edge.style = {
-              stroke: 'red'
-            }
+            edge.style.stroke = 'red'
           } else {
-            edge.style = {
-              stroke: 'black'
-            }
+            edge.style.stroke = 'black'
           }
           // link.label = meta.state
           return edge
@@ -86,9 +90,9 @@ export default {
       // eslint-disable-next-line
       console.info(nodes)
     },
-    onGraphChange(e) {
+    onGraphChange() {
       // eslint-disable-next-line
-      console.info(e)
+      // console.info(e)
     }
   },
 }
