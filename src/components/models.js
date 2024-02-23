@@ -428,30 +428,6 @@ const BUILTIN_FIELDS = {
       default: true,
       tip: '在预览图时，边是否可见'
     }
-  },
-  EDGE_SOURCE_ANCHOR: {
-    label: '起点位置',
-    name: 'sourceAnchor',
-    inputType: InputTypes.SWITCH,
-    options: [{
-      label: '自动',
-      value: -1
-    }, {
-      label: '上',
-      value: 1
-    }, {
-      label: '下',
-      value: 2
-    }, {
-      label: '左',
-      value: 3
-    }, {
-      label: '右',
-      value: 4
-    }],
-    config: {
-      default: -1
-    }
   }
 }
 

@@ -23,16 +23,7 @@ import FieldsDialog from './fieldsdialog.vue'
 import contextmenu from './contextmenu';
 import EventBus from './metas/events';
 import './setup'
-
-/**
- * 默认的锚点位置数据
- */
-const ANCHOR_POINTS = [
-  [0.5, 0],
-  [1, 0.5],
-  [0.5, 1],
-  [0, 0.5],
-]
+import anchorPoints from './metas/anchorPoints'
 
 export default {
   components: { FieldsDialog, contextmenu },
@@ -427,7 +418,7 @@ export default {
         width: size.width,
         height: size.height,
         defaultNode: {
-          anchorPoints: ANCHOR_POINTS,
+          anchorPoints: anchorPoints,
           ...styles.node
         },
         defaultEdge: {
@@ -447,7 +438,7 @@ export default {
               fontSize: 24
             }
           },
-          anchorPoints: ANCHOR_POINTS,
+          anchorPoints: anchorPoints,
           ...styles.combo
         },
         nodeStateStyles: {

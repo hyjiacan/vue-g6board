@@ -2,6 +2,7 @@ import { BUILTIN_FIELDS, InputTypes, defineFields } from "../components/models"
 import storage from '../assets/storage'
 // import lineTypes from "./lineTypes"
 import { ColorPicker } from "element-ui"
+import anchorPoints from "../components/metas/anchorPoints"
 
 const nodeFields = defineFields([{
   label: '设备类型',
@@ -139,6 +140,24 @@ const edgeFields = defineFields([
   BUILTIN_FIELDS.EDGE_CURVE_OFFSET,
   BUILTIN_FIELDS.EDGE_STYLE,
   BUILTIN_FIELDS.EDGE_VISIBLE,
+  {
+    label: '起点位置',
+    name: 'sourceAnchor',
+    inputType: InputTypes.RADIO,
+    options: anchorPoints.getAnchors(),
+    config: {
+      tip: '设置连续在起始节点上的连接点'
+    }
+  },
+  {
+    label: '终点位置',
+    name: 'targetAnchor',
+    inputType: InputTypes.RADIO,
+    options: anchorPoints.getAnchors(),
+    config: {
+      tip: '设置连续在终结节点上的连接点'
+    }
+  }
 ])
 
 const comboFields = defineFields([{

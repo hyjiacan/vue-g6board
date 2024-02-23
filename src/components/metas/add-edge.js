@@ -1,6 +1,5 @@
 import G6 from "@antv/g6";
 
-// TODO 添加连线到分组的支持
 G6.registerBehavior('add-edge', {
   getEvents() {
     return {

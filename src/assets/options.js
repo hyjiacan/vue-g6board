@@ -18,7 +18,7 @@ export default defineOptions({
     combo: {
       type: 'rect-ext',
       style: {
-        stroke: 'red',
+        // stroke: 'red',
         lineDash: [10, 2]
       },
       labelCfg: {
@@ -26,7 +26,7 @@ export default defineOptions({
           fontSize: 10,
           // stroke: 'red',
           fill: 'blue',
-          backgroundColor: 'red'
+          // backgroundColor: 'red'
         }
       },
       title: {
