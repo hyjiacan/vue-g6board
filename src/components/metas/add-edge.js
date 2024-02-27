@@ -5,8 +5,9 @@ G6.registerBehavior('add-edge', {
     return {
       'node:click': 'onClick',
       'combo:click': 'onClick',
-      mousemove: 'onMousemove',
+      mousemove: 'onMouseMove',
       // 点击空白处，取消边
+      // 因为点击空白处，实质是点击在边上
       'edge:click': 'onEdgeClick'
     };
   },
@@ -72,10 +73,10 @@ G6.registerBehavior('add-edge', {
     if (this.addingEdge && this.edge) {
       this.onEnd(model)
     } else {
-      // 仅在按下了 Ctrl 时才允许连续线
-      if (!ev.originalEvent.ctrlKey) {
-        return
-      }
+      // // 仅在按下了 Ctrl 时才允许连续线
+      // if (!ev.originalEvent.ctrlKey) {
+      //   return
+      // }
       const option = {
         source: model.id,
         target: point,
@@ -84,20 +85,12 @@ G6.registerBehavior('add-edge', {
           endArrow: true
         }
       }
-      if (model._lineType) {
-        option.type = model._lineType
-      }
-      if (model._lineStyle === 'dotted') {
-        option.style.lineDash = [2, 2]
-      } else if (model._lineStyle === 'dashed') {
-        option.style.lineDash = [10, 2]
-      }
       this.edge = graph.addItem('edge', option);
       this.addingEdge = true;
       // window.addEventListener('keydown', cancel)
     }
   },
-  onMousemove(ev) {
+  onMouseMove(ev) {
     const point = {
       x: ev.x,
       y: ev.y
@@ -108,7 +101,7 @@ G6.registerBehavior('add-edge', {
       });
 
       // 避免边被图形遮挡
-      this.edge.toFront()
+      // this.edge.toFront()
     }
 
     // const item = ev.item

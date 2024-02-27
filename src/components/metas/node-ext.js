@@ -57,21 +57,28 @@ G6.registerNode('image-ext', {
     const img = item.getKeyShape()
     const { x, y, height, width } = img.attr()
     const group = item.getContainer()
-    const selectBorder = group.getChildByIndex(2)
 
-    // 选中框
-    selectBorder.attr({
-      width: width + offset,
-      height: height + offset,
-      x: x - offset / 2,
-      y: y - offset / 2,
-    })
+    const children = group.getChildren()
+
+    const selectBorder = children.filter(item => item.get('name') === 'select-border')[0]
+
+    if (selectBorder) {
+      // 选中框
+      selectBorder.attr({
+        width: width + offset,
+        height: height + offset,
+        x: x - offset / 2,
+        y: y - offset / 2,
+      })
+    }
 
     // 高亮框
-    const highlightBorder = group.getChildByIndex(3)
-    const size = Math.max(height, width)
-    highlightBorder.attr({
-      r: size
-    })
+    const highlightBorder = children.filter(item => item.get('name') === 'highlight-border')[0]
+    if (highlightBorder) {
+      const size = Math.max(height, width)
+      highlightBorder.attr({
+        r: size
+      })
+    }
   }
 }, 'image')

@@ -418,7 +418,7 @@ export default {
         width: size.width,
         height: size.height,
         defaultNode: {
-          anchorPoints: anchorPoints,
+          anchorPoints: anchorPoints.getPoints(),
           ...styles.node
         },
         defaultEdge: {
@@ -438,7 +438,7 @@ export default {
               fontSize: 24
             }
           },
-          anchorPoints: anchorPoints,
+          anchorPoints: anchorPoints.getPoints(),
           ...styles.combo
         },
         nodeStateStyles: {
@@ -450,15 +450,6 @@ export default {
       });
       graph.data(this.data);
       graph.render()
-
-      // // TODO 配置边的属性 style: {visible:false} 未生效，在此重新配置一下
-      // // 隐藏指定的边
-      // setTimeout(() => {
-      //   this.data.edges.filter(item => item.style && item.style.visible === false).forEach(item => {
-      //     graph.updateItem(item.id, { style: { visible: false } })
-      //     console.info(item.id)
-      //   })
-      // }, 1000)
 
       window.G6 = graph
 
@@ -605,8 +596,6 @@ export default {
       this.showContextMenu(e, 'edge')
     },
     showContextMenu(e, type) {
-      let x = e.canvasX
-      let y = e.canvasY
       const item = e.item
 
       // 检查是否允许打开
@@ -624,10 +613,7 @@ export default {
         }
       }
 
-      // const bounds = this.getBounds()
-      // x += bounds.left
-      // y += bounds.top
-      this.$refs.contextmenu.show(x, y, type, item)
+      this.$refs.contextmenu.show(e, type, item)
     },
     async onNodeOk() {
       const editItem = this.dialogs.node.editItem

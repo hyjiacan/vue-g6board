@@ -7,6 +7,7 @@ import {
   InputTypes,
   BUILTIN_FIELDS
 } from './models'
+import anchorPoints from './metas/anchorPoints'
 
 function install(Vue) {
   Vue.component('G6Board', G6Board)
@@ -21,5 +22,6 @@ export {
   defineTooltip,
   defineOptions,
   InputTypes,
-  BUILTIN_FIELDS
+  BUILTIN_FIELDS,
+  anchorPoints
 }

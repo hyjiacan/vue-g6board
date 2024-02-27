@@ -358,9 +358,9 @@ const BUILTIN_FIELDS = {
     }, {
       label: '折线',
       value: 'polyline'
-    }, {
-      label: '圆弧线',
-      value: 'arc'
+      // }, {
+      //   label: '圆弧线',
+      //   value: 'arc'
       // }, {
       //   label: '二阶贝塞尔曲线',
       //   value: 'quadratic'
@@ -426,7 +426,7 @@ const BUILTIN_FIELDS = {
     inputType: InputTypes.SWITCH,
     config: {
       default: true,
-      tip: '在预览图时，边是否可见'
+      tip: '在非编辑模式时，连接线是否可见'
     }
   }
 }

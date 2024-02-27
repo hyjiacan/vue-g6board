@@ -79,9 +79,11 @@ export default {
         top: rect.top
       }
     },
-    async show(x, y, active, item) {
-      this.position.x = x
-      this.position.y = y
+    async show(e, active, item) {
+      let x = e.canvasX
+      let y = e.canvasY
+      this.position.x = e.x
+      this.position.y = e.y
 
       this.item = item
 
