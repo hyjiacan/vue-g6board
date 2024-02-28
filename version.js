@@ -32,7 +32,7 @@ function runCommand(...commands) {
   return msg
 }
 
-const remote = runCommand('git remote')
+const remote = 'origin' // runCommand('git remote')
 const branch = runCommand('git branch --show-current')
 
 console.info('Update remote data')
