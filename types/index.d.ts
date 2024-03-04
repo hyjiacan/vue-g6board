@@ -104,12 +104,16 @@ export interface FieldConfig {
   onchange?: (e: FieldChangeEventArgs) => void;
 }
 
-export type EDGE_TYPE = {}
-export type EDGE_CURVE_OFFSET = {}
-export type EDGE_STYLE = {}
-export type EDGE_VISIBLE = {}
+export type EDGE_TYPE = {};
+export type EDGE_CURVE_OFFSET = {};
+export type EDGE_STYLE = {};
+export type EDGE_VISIBLE = {};
 
-export type BUILTIN_FIELDS = EDGE_TYPE | EDGE_CURVE_OFFSET | EDGE_STYLE | EDGE_VISIBLE;
+export type BUILTIN_FIELDS =
+  | EDGE_TYPE
+  | EDGE_CURVE_OFFSET
+  | EDGE_STYLE
+  | EDGE_VISIBLE;
 
 export interface FieldOption {
   /**
@@ -206,17 +210,6 @@ export interface BoardOptions {
    * 编辑分组时的字段
    */
   comboFields?: Array<Field>;
-  /**
-   * 在编辑节点、分组或边前的数据处理函数
-   * @type {Function}
-   * @returns {Object|false} 返回 false 可以取消节点的操作
-   */
-  beforeEditHandler: (e: EditHandlerEventArgs) => Object | false;
-  /**
-   * 在编辑节点、分组或边时的数据处理函数
-   * @returns {Object|false} 返回 false 可以取消节点的操作
-   */
-  editHandler?: (e: EditHandlerEventArgs) => Object | false;
   styles: {
     /**
      * 节点的样式
@@ -277,11 +270,53 @@ export interface BoardOptions {
         "select-border": {};
       };
     };
+    on: {
+      node: {
+        /**
+         * 渲染节点
+         * @type {Function}
+         */
+        draw: null;
+        /**
+         * 更新节点
+         * @type {Function}
+         */
+        update: null;
+      };
+      edge: {
+        /**
+         * 返回 false 表示不允许添加边
+         * @returns {boolean}
+         */
+        beforeAdd: null;
+      };
+      contextmenu: {
+        /**
+         * 是否允许打开右键菜单
+         * @type {Function}
+         * @returns {boolean}
+         */
+        beforeShow?: null;
+      };
+      edit: {
+        /**
+         * 在编辑节点、分组或边前的数据处理函数
+         * @type {Function}
+         * @returns {Object|false} 返回 false 可以取消节点的操作
+         */
+        before: (e: EditHandlerEventArgs) => Object | false;
+        /**
+         * 在编辑节点、分组或边时的数据处理函数
+         * @returns {Object|false} 返回 false 可以取消节点的操作
+         */
+        after?: (e: EditHandlerEventArgs) => Object | false;
+      };
+    };
   };
   /**
    * Tooltip 渲染器
    */
-  tooltipRenderers: {
+  tooltip: {
     /**
      * 节点的 Tooltip 渲染器
      */

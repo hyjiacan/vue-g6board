@@ -1,86 +1,88 @@
 <template>
-  <el-dialog :title="title" :visible.sync="isVisible" @closed="onClose" :width="width" :close-on-click-modal="false"
-    :close-on-press-escape="false" custom-class="g6-board--dialog" append-to-body>
-    <el-form size="small" ref="form" :model="form" :rules="rules" label-width="100px" :style="styles">
-      <template v-for="field in data">
-        <el-form-item :key="field._id" :label="field.label" :prop="field.name" v-show="field.config.isVisible()">
-          <el-input v-if="field.inputType === InputTypes.TEXT" v-model.trim="form[field.name]"
-            :minlength="field.config.minlength" :maxlength="field.config.maxlength" @change="onChange(field)"
-            :placeholder="field.config.placeholder" :readonly="field.config.readonly" :style="field.style"></el-input>
+  <el-drawer :title="title" :visible.sync="isVisible" @closed="onClose" :size="width" :wrapper-closable="false"
+    custom-class="g6-board--dialog" append-to-body>
+    <div class="g6-board--dialog-body">
+      <el-form size="small" ref="form" :model="form" :rules="rules" label-width="100px" :style="styles">
+        <template v-for="field in data">
+          <el-form-item :key="field._id" :label="field.label" :prop="field.name" v-show="field.config.isVisible()">
+            <el-input v-if="field.inputType === InputTypes.TEXT" v-model.trim="form[field.name]"
+              :minlength="field.config.minlength" :maxlength="field.config.maxlength" @change="onChange(field)"
+              :placeholder="field.config.placeholder" :readonly="field.config.readonly" :style="field.style"></el-input>
 
-          <el-input v-else-if="field.inputType === InputTypes.LONGTEXT" type="textarea" v-model.trim="form[field.name]"
-            :minlength="field.config.minlength" :maxlength="field.config.maxlength" :rows="5" @change="onChange(field)"
-            :placeholder="field.config.placeholder" :readonly="field.config.readonly" :style="field.style"
-            show-word-limit></el-input>
+            <el-input v-else-if="field.inputType === InputTypes.LONGTEXT" type="textarea" v-model.trim="form[field.name]"
+              :minlength="field.config.minlength" :maxlength="field.config.maxlength" :rows="5" @change="onChange(field)"
+              :placeholder="field.config.placeholder" :readonly="field.config.readonly" :style="field.style"
+              show-word-limit></el-input>
 
-          <el-input-number v-else-if="field.inputType === InputTypes.NUMBER" v-model.number="form[field.name]"
-            :max="field.config.maxlength" :min="field.config.minlength" :precision="field.config.precision"
-            :placeholder="field.config.placeholder" :readonly="field.config.readonly" :controls="false"
-            @change="onChange(field)" :style="field.style"></el-input-number>
+            <el-input-number v-else-if="field.inputType === InputTypes.NUMBER" v-model.number="form[field.name]"
+              :max="field.config.maxlength" :min="field.config.minlength" :precision="field.config.precision"
+              :placeholder="field.config.placeholder" :readonly="field.config.readonly" :controls="false"
+              @change="onChange(field)" :style="field.style"></el-input-number>
 
-          <el-switch v-else-if="field.inputType === InputTypes.SWITCH" v-model.number="form[field.name]"
-            @change="onChange(field)" :readonly="field.config.readonly" :style="field.style" active-text=""
-            inactive-text=""></el-switch>
+            <el-switch v-else-if="field.inputType === InputTypes.SWITCH" v-model.number="form[field.name]"
+              @change="onChange(field)" :readonly="field.config.readonly" :style="field.style" active-text=""
+              inactive-text=""></el-switch>
 
-          <el-select v-else-if="field.inputType === InputTypes.SELECT &&
-            field.config.optionsLoader
-            " v-model="form[field.name]" :placeholder="field.config.placeholder" :loading="field.config.optionsLoading"
-            :remote-method="field.config.optionsLoader.bind(field, {
-              data: form,
-              fields: fieldsMap,
-            })" :disabled="field.config.readonly" :style="field.style" @change="onChange(field)"
-            popper-class="g6-board--dialog-select-opions" filterable remote>
-            <template #prefix v-if="getSelectIcon(field)">
-              <img class="select-icon" :src="getSelectIcon(field)" />
-            </template>
+            <el-select v-else-if="field.inputType === InputTypes.SELECT &&
+              field.config.optionsLoader
+              " v-model="form[field.name]" :placeholder="field.config.placeholder"
+              :loading="field.config.optionsLoading" :remote-method="field.config.optionsLoader.bind(field, {
+                data: form,
+                fields: fieldsMap,
+              })" :disabled="field.config.readonly" :style="field.style" @change="onChange(field)"
+              popper-class="g6-board--dialog-select-opions" filterable remote>
+              <template #prefix v-if="getSelectIcon(field)">
+                <img class="select-icon" :src="getSelectIcon(field)" />
+              </template>
 
-            <el-option v-for="item in field.options" :key="item.value" :label="item.label" :value="item.value"
-              :title="item.title">
-              <img v-if="item.icon" class="select-icon" :src="item.icon" />
-              <span>{{ item.label }}</span>
-            </el-option>
-          </el-select>
+              <el-option v-for="item in field.options" :key="item.value" :label="item.label" :value="item.value"
+                :title="item.title">
+                <img v-if="item.icon" class="select-icon" :src="item.icon" />
+                <span>{{ item.label }}</span>
+              </el-option>
+            </el-select>
 
-          <el-select v-else-if="field.inputType === InputTypes.SELECT" v-model="form[field.name]"
-            :placeholder="field.config.placeholder" :disabled="field.config.readonly" :style="field.style"
-            popper-class="g6-board--dialog-select-opions" @change="onChange(field)" filterable>
-            <template #prefix v-if="getSelectIcon(field)">
-              <img class="select-icon" :src="getSelectIcon(field)" />
-            </template>
+            <el-select v-else-if="field.inputType === InputTypes.SELECT" v-model="form[field.name]"
+              :placeholder="field.config.placeholder" :disabled="field.config.readonly" :style="field.style"
+              popper-class="g6-board--dialog-select-opions" @change="onChange(field)" filterable>
+              <template #prefix v-if="getSelectIcon(field)">
+                <img class="select-icon" :src="getSelectIcon(field)" />
+              </template>
 
-            <el-option v-for="item in field.options" :key="item.value" :label="item.label" :value="item.value"
-              :title="item.title">
-              <img v-if="item.icon" class="select-icon" :src="item.icon" />
-              <span>{{ item.label }}</span>
-            </el-option>
-          </el-select>
+              <el-option v-for="item in field.options" :key="item.value" :label="item.label" :value="item.value"
+                :title="item.title">
+                <img v-if="item.icon" class="select-icon" :src="item.icon" />
+                <span>{{ item.label }}</span>
+              </el-option>
+            </el-select>
 
-          <el-checkbox-group v-else-if="field.inputType === InputTypes.CHECKBOX" v-model="form[field.name]"
-            :disabled="field.config.readonly" :style="field.style" @change="onChange(field)">
-            <el-checkbox v-for="item in field.options" :key="item.value" :label="item.label" :title="item.title"
-              :value="item.value"></el-checkbox>
-          </el-checkbox-group>
+            <el-checkbox-group v-else-if="field.inputType === InputTypes.CHECKBOX" v-model="form[field.name]"
+              :disabled="field.config.readonly" :style="field.style" @change="onChange(field)">
+              <el-checkbox v-for="item in field.options" :key="item.value" :label="item.label" :title="item.title"
+                :value="item.value"></el-checkbox>
+            </el-checkbox-group>
 
-          <el-radio-group v-else-if="field.inputType === InputTypes.RADIO" v-model="form[field.name]"
-            :disabled="field.config.readonly" :style="field.style" @change="onChange(field)">
-            <el-radio v-for="item in field.options" :key="item.value" :label="item.value" :title="item.title">{{
-              item.label }}</el-radio>
-          </el-radio-group>
+            <el-radio-group v-else-if="field.inputType === InputTypes.RADIO" v-model="form[field.name]"
+              :disabled="field.config.readonly" :style="field.style" @change="onChange(field)">
+              <el-radio v-for="item in field.options" :key="item.value" :label="item.value" :title="item.title">{{
+                item.label }}</el-radio>
+            </el-radio-group>
 
-          <component v-else-if="field.inputType === InputTypes.CUSTOM && field.component" v-model="form[field.name]"
-            :disabled="field.config.readonly" :style="field.style" :is="field.component" @change="onChange(field)" />
+            <component v-else-if="field.inputType === InputTypes.CUSTOM && field.component" v-model="form[field.name]"
+              :disabled="field.config.readonly" :style="field.style" :is="field.component" @change="onChange(field)" />
 
-          <div class="input-tip" v-if="field.config.tip">
-            {{ field.config.tip }}
-          </div>
-        </el-form-item>
-      </template>
-    </el-form>
-    <template #footer>
-      <el-button @click="onCancel">取消</el-button>
-      <el-button type="primary" @click="onOk">确定</el-button>
-    </template>
-  </el-dialog>
+            <div class="input-tip" v-if="field.config.tip">
+              {{ field.config.tip }}
+            </div>
+          </el-form-item>
+        </template>
+      </el-form>
+      <div class="g6-board--dialog-footer">
+        <el-button @click="onCancel">取消</el-button>
+        <el-button type="primary" @click="onOk">确定</el-button>
+      </div>
+    </div>
+  </el-drawer>
 </template>
 <script>
 import { InputTypes, FieldConfig } from "./models";

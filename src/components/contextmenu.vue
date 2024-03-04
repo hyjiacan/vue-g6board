@@ -2,7 +2,7 @@
   <div class="g6-board--contextmenu" v-if="visible" @contextmenu.prevent :style="style" @click.stop>
     <div class="g6-board--contextmenu-title" v-if="title">{{ title }}</div>
     <ul class="g6-board--contextmenu-items">
-      <li v-for="(item, i) in activeMenu" :key="i" :title="item.title" @click="onItemClick(item)"
+      <li v-for="(item, i) in items" :key="i" :title="item.title" @click="onItemClick(item)"
         :class="{ 'g6-board--contextmenu-separator': !Object.keys(item).length }">
         <i></i>
         <span class="g6-board--contextmenu-item-label">{{ item.label }}</span>
@@ -17,25 +17,6 @@ export default {
     title: {
       type: String,
       default: '操作'
-    },
-    /**
-     * 数组表示菜单不复用
-     * 对象表示菜单要复用，此时对象的每个 value 为数组
-     * 空对象表示为分隔线
-     * {
-     * key1: [{
-     *  command: 'xxx',
-     *  label: 'xxx',
-     *  title: 'xxx',
-     * }],
-     * key2: [{
-     *
-     * }]
-     * }
-     */
-    items: {
-      type: [Array, Object],
-      required: true
     }
   },
   data() {
@@ -50,7 +31,23 @@ export default {
         x: 0,
         y: 0
       },
-      item: null
+      item: null,
+      /**
+       * 数组表示菜单不复用
+       * 对象表示菜单要复用，此时对象的每个 value 为数组
+       * 空对象表示为分隔线
+       * {
+       * key1: [{
+       *  command: 'xxx',
+       *  label: 'xxx',
+       *  title: 'xxx',
+       * }],
+       * key2: [{
+       *
+       * }]
+       * }
+       */
+      items: []
     }
   },
   mounted() {
@@ -60,14 +57,6 @@ export default {
   beforeDestroy() {
     window.removeEventListener('click', this.hide)
     window.removeEventListener('keydown', this.hide)
-  },
-  computed: {
-    activeMenu() {
-      if (Array.isArray(this.items)) {
-        return this.items
-      }
-      return this.items[this.active]
-    }
   },
   methods: {
     getBounds() {
@@ -79,7 +68,7 @@ export default {
         top: rect.top
       }
     },
-    async show(e, active, item) {
+    async show(e, active, item, menuItems) {
       let x = e.canvasX
       let y = e.canvasY
       this.position.x = e.x
@@ -91,6 +80,8 @@ export default {
         this.visible = false
         await this.$nextTick()
       }
+
+      this.items = menuItems
 
       this.style.left = `${x}px`
       this.style.top = `${y}px`

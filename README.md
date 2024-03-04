@@ -15,23 +15,21 @@ npm i @wangankeji/vue-g6board
   <g6-board ref="board" :options="options" :data="data" :edit-mode="editMode" />
 </template>
 <script>
-import {defineOptions} from '@wangankeji/vue-g6board'
+import { defineOptions } from "@wangankeji/vue-g6board";
 
 export default {
-  components: {G6Board},
+  components: { G6Board },
   data() {
     return {
-      options: defineOptions({
-
-      }),
+      options: defineOptions({}),
       data: {
         nodes: [],
         edges: []
       },
       editMode: false
-    }
+    };
   }
-}
+};
 </script>
 ```
 
@@ -100,9 +98,9 @@ export default {
 
 ```json
 {
-  value: 100,
-  event: MouseWhellEvent,
-  graph: G6.Graph
+  "value": 100,
+  "event": MouseWhellEvent,
+  "graph": G6.Graph
 }
 ```
 
@@ -124,10 +122,10 @@ export default {
 
 ```json
 {
-  type: '',
-  item: {},
-  data: {},
-  graph: G6.Graph
+  "type": "",
+  "item": {},
+  "data": {},
+  "graph": G6.Graph
 }
 ```
 
@@ -168,4 +166,4 @@ export default {
 
 ### 节点图标
 
-现支持图片、SVG格式作为节点图标。
+现支持图片、SVG 格式作为节点图标。

@@ -1,4 +1,5 @@
 import G6 from "@antv/g6";
+import EventBus from "./events";
 
 const offset = 8
 
@@ -29,6 +30,12 @@ G6.registerNode('image-ext', {
         y: 0,
       },
       name: 'highlight-border'
+    })
+
+    EventBus.emit('node:after-draw', {
+      model: cfg,
+      group,
+      img
     })
 
     // 渲染锚点
@@ -80,5 +87,10 @@ G6.registerNode('image-ext', {
         r: size
       })
     }
+
+    EventBus.emit('node:after-update', {
+      model: cfg,
+      img
+    })
   }
 }, 'image')

@@ -13,7 +13,7 @@
     <fields-dialog :fields="options.comboFields" :title="dialogs.combo.editItem ? '编辑分组' : '添加分组'"
       :visible.sync="dialogs.combo.visible" v-model="dialogs.combo.form" :graph="graph" @ok="onComboOk" />
 
-    <contextmenu ref="contextmenu" :items="contextmenus" :title="contextmenuTitle"></contextmenu>
+    <contextmenu ref="contextmenu" :title="contextmenuTitle"></contextmenu>
   </div>
 </template>
 
@@ -127,7 +127,7 @@ export default {
 
             let form
 
-            const handler = this.options.beforeEditHandler
+            const handler = this.options.on?.edit?.before
             if (handler) {
               // 如果有返回值，则使用返回值作为节点数据
               const handleResult = handler(e1)
@@ -183,7 +183,7 @@ export default {
 
             let form
 
-            const handler = this.options.beforeEditHandler
+            const handler = this.options.on?.edit?.before
             if (handler) {
               // 如果有返回值，则使用返回值作为节点数据
               const handleResult = handler(e1)
@@ -267,7 +267,7 @@ export default {
 
             let form
 
-            const handler = this.options.beforeEditHandler
+            const handler = this.options.on?.edit?.before
             if (handler) {
               // 如果有返回值，则使用返回值作为节点数据
               const handleResult = handler(e1)
@@ -358,21 +358,21 @@ export default {
       // })
 
       const plugins = []
-      if (this.options.tooltipRenderers.node) {
+      if (this.options.tooltip.node) {
         // 允许出现 tooltip 的 item 类型
-        this.options.tooltipRenderers.node.itemTypes = ['node']
-        const tooltipOption = this.options.tooltipRenderers.node
+        this.options.tooltip.node.itemTypes = ['node']
+        const tooltipOption = this.options.tooltip.node
         tooltipOption.shouldBegin = tooltipOption.shouldBegin.bind(this)
         tooltipOption.getContent = tooltipOption.getContent.bind(this)
-        this.tooltipPlugins.push(new G6.Tooltip(this.options.tooltipRenderers.node))
+        this.tooltipPlugins.push(new G6.Tooltip(this.options.tooltip.node))
       }
-      if (this.options.tooltipRenderers.edge) {
+      if (this.options.tooltip.edge) {
         // 允许出现 tooltip 的 item 类型
-        this.options.tooltipRenderers.edge.itemTypes = ['edge']
-        const tooltipOption = this.options.tooltipRenderers.edge
+        this.options.tooltip.edge.itemTypes = ['edge']
+        const tooltipOption = this.options.tooltip.edge
         tooltipOption.shouldBegin = tooltipOption.shouldBegin.bind(this)
         tooltipOption.getContent = tooltipOption.getContent.bind(this)
-        this.tooltipPlugins.push(new G6.Tooltip(this.options.tooltipRenderers.edge))
+        this.tooltipPlugins.push(new G6.Tooltip(this.options.tooltip.edge))
       }
 
       plugins.push(...this.tooltipPlugins)
@@ -525,6 +525,9 @@ export default {
       EventBus.on('node:contextmenu', this.onNodeContextMenu)
       EventBus.on('edge:contextmenu', this.onEdgeContextMenu)
       EventBus.on('combo:contextmenu', this.onComboContextMenu)
+      EventBus.on('edge:before-add', this.onBeforeAddEdge)
+      EventBus.on('node:after-draw', this.onAfterDrawNode)
+      EventBus.on('node:after-update', this.onAfterUpdateNode)
       this.graph.on('wheelzoom', this.onCanvasZoom)
       this.graph.on('custom:add-edge', this.onEdgeAdded)
       this.graph.on('node:dragend', this.onDragEnd)
@@ -535,10 +538,47 @@ export default {
       EventBus.off('node:contextmenu', this.onNodeContextMenu)
       EventBus.off('edge:contextmenu', this.onEdgeContextMenu)
       EventBus.off('combo:contextmenu', this.onComboContextMenu)
+      EventBus.off('edge:before-add', this.onBeforeAddEdge)
+      EventBus.off('node:after-draw', this.onAfterDrawNode)
+      EventBus.off('node:after-update', this.onAfterUpdateNode)
       this.graph.off('wheelzoom', this.onCanvasZoom)
       this.graph.off('custom:add-edge', this.onEdgeAdded)
       this.graph.off('node:dragend', this.onDragEnd)
       this.graph.off('combo:dragend', this.onDragEnd)
+    },
+    onAfterDrawNode(e) {
+      const handler = this.options.on?.node?.draw
+      if (!handler) {
+        return
+      }
+      handler({
+        type: 'draw',
+        ...e
+      })
+    },
+    onAfterUpdateNode(e) {
+      const handler = this.options.on?.node?.update
+      if (!handler) {
+        return
+      }
+
+      handler({
+        type: 'update',
+        ...e
+      })
+    },
+    onBeforeAddEdge(e) {
+      const handler = this.options.on?.edge?.beforeAdd
+      if (!handler) {
+        return
+      }
+      const result = handler({
+        graph: this.graph,
+        data: e.option
+      })
+      if (result === false) {
+        e.cancel()
+      }
     },
     onEdgeAdded(e) {
       this.contextmenus.edge[0].handler(e)
@@ -599,21 +639,27 @@ export default {
       const item = e.item
 
       // 检查是否允许打开
-      if (this.options.contextmenu) {
-        let visible = this.options.contextmenu.visible
-        if (visible !== undefined) {
-          if (typeof visible === 'function') {
-            visible = visible.call(this.graph, { type, item, data: item?.getModel(), graph: this.graph })
-          }
-
-          if (!visible) {
-            this.$refs.contextmenu.hide()
-            return
-          }
+      const beforeShow = this.options.on?.contextmenu?.beforeShow
+      let items = [...this.contextmenus[type]]
+      if (beforeShow) {
+        const e = {
+          type,
+          item,
+          data: item?.getModel(),
+          graph: this.graph,
+          items
         }
+        if (beforeShow.call(this.graph, e) === false) {
+          this.$refs.contextmenu.hide()
+          return
+        }
+        items = e.items
       }
-
-      this.$refs.contextmenu.show(e, type, item)
+      if (!items || !items.length) {
+        // 没有菜单项，不显示右键菜单
+        return
+      }
+      this.$refs.contextmenu.show(e, type, item, items)
     },
     async onNodeOk() {
       const editItem = this.dialogs.node.editItem
@@ -631,7 +677,7 @@ export default {
         graph: this.graph
       }
 
-      const editHandler = this.options.editHandler
+      const editHandler = this.options.on?.edit?.after
       if (editHandler) {
         // 如果有返回值，则使用返回值作为节点数据
         let handleResult
@@ -704,7 +750,7 @@ export default {
         graph: this.graph
       }
 
-      const editHandler = this.options.editHandler
+      const editHandler = this.options.on?.edit?.after
       if (editHandler) {
         // 如果有返回值，则使用返回值作为节点数据
         let handleResult
@@ -748,7 +794,7 @@ export default {
         graph: this.graph
       }
 
-      const editHandler = this.options.editHandler
+      const editHandler = this.options.on?.edit?.after
       if (editHandler) {
         // 如果有返回值，则使用返回值作为节点数据
         let handleResult

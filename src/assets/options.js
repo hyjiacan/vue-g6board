@@ -94,75 +94,108 @@ export default defineOptions({
       }
     }
   },
-  beforeEditHandler(e) {
-    if (e.type === 'node') {
-      const data = e.data
-      data.device = data.ip
-      return data
+  on: {
+    node: {
+      draw(e) {
+        const { group, img } = e
+        const { x, y, width, height } = img.attr()
+
+        group.addShape('rect', {
+          attrs: {
+            x: x + width - 16,
+            y: y + height - 16,
+            width: 16,
+            height: 16,
+            fill: '#0f0b'
+          },
+          name: 'icon'
+        })
+      }
+    },
+    contextmenu: {
+      // beforeShow(e) {
+      //   const item = {
+      //     label: '自定义菜单项',
+      //     command: 'xxx',
+      //     handler(e) {
+      //       console.info(e)
+      //     }
+      //   }
+      //   e.items.splice(1, 0, item)
+      // }
+    },
+    edit: {
+      before(e) {
+        if (e.type === 'node') {
+          const data = e.data
+          data.device = data.ip
+          return data
+        }
+        if (e.type !== 'combo') {
+          return
+        }
+        const data = {
+          ...e.data,
+          type: 'rect-ext',
+        }
+        // 有个 21 的 padding
+        const bounds = e.item.getBBox()
+        const padding = 21 * 2
+        data.width = bounds.width - padding
+        data.height = bounds.height - padding
+        if (data.fixSize) {
+          data.fixed = true
+        } else {
+          data.fixed = false
+        }
+        return data
+      },
+      after(e) {
+        const data = e.data
+        if (e.type === 'node') {
+          data.id = data.ip
+          if (!data.type) {
+            data.type = 'image-ext'
+          }
+          if (!data.labelCfg) {
+            data.labelCfg = {}
+          }
+          if (!data.labelCfg.style) {
+            data.labelCfg.style = {}
+          }
+          data.labelCfg.style.fill = data.labelColor || '#000'
+          data.img = storage.getIcon(data.deviceType)
+          data.size = [data.width, data.height]
+        } else if (e.type === 'combo') {
+          data.label = data.name
+          if (data.fixed) {
+            data.fixSize = [data.width, data.height]
+          } else {
+            delete data.fixSize
+          }
+        } else if (e.type === 'edge') {
+          if (!data.style) {
+            data.style = {}
+          }
+          let dash
+          switch (data._lineStyle) {
+            case 'solid':
+              break
+            case 'dotted':
+              dash = [2, 2]
+              break
+            case 'dashed':
+              dash = [10, 5]
+              break
+          }
+          data.style.lineDash = dash
+          data.style.visible = data._lineVisible
+        }
+        return data
+      }
     }
-    if (e.type !== 'combo') {
-      return
-    }
-    const data = {
-      ...e.data,
-      type: 'rect-ext',
-    }
-    // 有个 21 的 padding
-    const bounds = e.item.getBBox()
-    const padding = 21 * 2
-    data.width = bounds.width - padding
-    data.height = bounds.height - padding
-    if (data.fixSize) {
-      data.fixed = true
-    } else {
-      data.fixed = false
-    }
-    return data
   },
-  editHandler(e) {
-    const data = e.data
-    if (e.type === 'node') {
-      data.id = data.ip
-      if (!data.type) {
-        data.type = 'image-ext'
-      }
-      if (!data.labelCfg) {
-        data.labelCfg = {}
-      }
-      if (!data.labelCfg.style) {
-        data.labelCfg.style = {}
-      }
-      data.labelCfg.style.fill = data.labelColor || '#000'
-      data.img = storage.getIcon(data.deviceType)
-      data.size = [data.width, data.height]
-    } else if (e.type === 'combo') {
-      data.label = data.name
-      if (data.fixed) {
-        data.fixSize = [data.width, data.height]
-      } else {
-        delete data.fixSize
-      }
-    } else if (e.type === 'edge') {
-      if (!data.style) {
-        data.style = {}
-      }
-      let dash
-      switch (data._lineStyle) {
-        case 'solid':
-          break
-        case 'dotted':
-          dash = [2, 2]
-          break
-        case 'dashed':
-          dash = [10, 5]
-          break
-      }
-      data.style.lineDash = dash
-      data.style.visible = data._lineVisible
-    }
-    return data
-  },
-  tooltipRenderers: {
+  tooltip: {
     node: defineTooltip(node => {
       const table = document.createElement('table')
 

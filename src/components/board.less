@@ -1,29 +1,32 @@
+:root {
+  // vars
+  --g6board-contextmenu-color: #000;
+  --g6board-contextmenu-background: #fff;
+  --g6board-contextmenu-shadow: 2px 2px 5px 1px #e6e5e5;
+
+  --g6board-contextmenu-title-color: #000;
+  --g6board-contextmenu-title-background: none;
+  --g6board-contextmenu-title-border-color: #dbdadaaa;
+
+  --g6board-contextmenu-font-size: 0.8rem;
+
+  --g6board-contextmenu-hover-color: blue;
+  --g6board-contextmenu-hover-background: rgb(215, 239, 247);
+
+  --g6board-contextmenu-gutter-background: #dbdada88;
+
+  --g6board-contextmenu-separeator-color: #ebebeb transparent #fffefec7
+    transparent;
+
+  --g6board-input-tip-color: gray;
+
+  --g6board-zoom-tip-color: #88888888;
+}
+
 .g6-board {
   position: relative;
   width: 100%;
   height: 100%;
-
-  // vars
-  --contextmenu-color: #000;
-  --contextmenu-background: #fff;
-  --contextmenu-shadow: 2px 2px 5px 1px #e6e5e5;
-
-  --contextmenu-title-color: #000;
-  --contextmenu-title-background: none;
-  --contextmenu-title-border-color: #dbdadaaa;
-
-  --contextmenu-font-size: 0.8rem;
-
-  --contextmenu-hover-color: blue;
-  --contextmenu-hover-background: rgb(215, 239, 247);
-
-  --contextmenu-gutter-background: #dbdada88;
-
-  --contextmenu-separeator-color: #ebebeb transparent #fffefec7 transparent;
-
-  --input-tip-color: gray;
-
-  --zoom-tip-color: #88888888;
 }
 
 .g6-board--body {
@@ -34,9 +37,9 @@
 .g6-board--contextmenu {
   position: absolute;
   user-select: none;
-  color: var(--contextmenu-color);
-  background: var(--contextmenu-background);
-  box-shadow: var(--contextmenu-shadow);
+  color: var(--g6board-contextmenu-color);
+  background: var(--g6board-contextmenu-background);
+  box-shadow: var(--g6board-contextmenu-shadow);
   min-width: 160px;
   z-index: 5;
 }
@@ -44,9 +47,9 @@
 .g6-board--contextmenu-title {
   padding: 5px;
   font-size: var(-contextmenu-font-size);
-  color: var(--contextmenu-title-color);
-  background: var(--contextmenu-title-background);
-  border-bottom: 1px solid var(--contextmenu-title-border-color);
+  color: var(--g6board-contextmenu-title-color);
+  background: var(--g6board-contextmenu-title-background);
+  border-bottom: 1px solid var(--g6board-contextmenu-title-border-color);
   font-weight: bold;
 }
 
@@ -62,7 +65,7 @@
     i {
       display: block;
       width: 30px;
-      background: var(--contextmenu-gutter-background);
+      background: var(--g6board-contextmenu-gutter-background);
     }
 
     span {
@@ -75,8 +78,8 @@
     cursor: default;
 
     &:hover {
-      color: var(--contextmenu-hover-color);
-      background: var(--contextmenu-hover-background);
+      color: var(--g6board-contextmenu-hover-color);
+      background: var(--g6board-contextmenu-hover-background);
     }
 
     span {
@@ -90,7 +93,7 @@
     display: block;
     border-width: 1px 0;
     border-style: solid none;
-    border-color: var(--contextmenu-separeator-color);
+    border-color: var(--g6board-contextmenu-separeator-color);
     margin: 2px 0;
   }
 }
@@ -104,16 +107,39 @@
 
 .g6-board--dialog {
   .input-tip {
-    color: var(--input-tip-color);
+    color: var(--g6board-input-tip-color);
+    width: 100%;
     font-size: x-small;
     line-height: 1.5;
     word-break: break-all;
     word-wrap: break-word;
-    white-space: pre;
+    white-space: pre-line;
   }
   .select-icon {
     .select-icon();
   }
+}
+
+.g6-board--dialog-body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .el-form {
+    height: calc(100% - 50px);
+  }
+}
+
+.g6-board--dialog-footer {
+  height: 50px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0 5px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .g6-board--dialog-select-opions {
@@ -128,7 +154,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  color: var(--zoom-tip-color);
+  color: var(--g6board-zoom-tip-color);
   font-weight: bold;
   z-index: 999;
   font-size: 8em;

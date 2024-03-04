@@ -1,4 +1,5 @@
 import G6 from "@antv/g6";
+import EventBus from "./events";
 
 G6.registerBehavior('add-edge', {
   getEvents() {
@@ -11,6 +12,9 @@ G6.registerBehavior('add-edge', {
       'edge:click': 'onEdgeClick'
     };
   },
+  // isChildOf(node, combo) {
+
+  // },
   onEnd(model) {
     const graph = this.graph
     const source = this.edge.getModel().source
@@ -38,6 +42,7 @@ G6.registerBehavior('add-edge', {
       this.addingEdge = false;
       return
     }
+
     const defaultStyle = graph.cfg.defaultEdge.style
     graph.updateItem(this.edge, {
       target: target,
@@ -84,6 +89,16 @@ G6.registerBehavior('add-edge', {
           ...this.graph.cfg.defaultEdge.style,
           endArrow: true
         }
+      }
+      let canceled = false
+      EventBus.emit('edge:before-add', {
+        option,
+        cancel: () => {
+          canceled = true
+        }
+      })
+      if (canceled) {
+        return
       }
       this.edge = graph.addItem('edge', option);
       this.addingEdge = true;

@@ -166,18 +166,6 @@ const BoardOptions = {
    * @type {Field[]}
    */
   comboFields: [],
-  /**
-   * 在编辑节点、分组或边前的数据处理函数
-   * @type {Function}
-   * @returns {Object|false} 返回 false 可以取消节点的操作
-   */
-  beforeEditHandler: (e) => { return e.data },
-  /**
-   * 在编辑节点、分组或边时的数据处理函数
-   * @type {Function}
-   * @returns {Object|false} 返回 false 可以取消节点的操作
-   */
-  editHandler: () => { },
   styles: {
     /**
      * 节点的样式
@@ -227,7 +215,7 @@ const BoardOptions = {
   /**
    * Tooltip 渲染器
    */
-  tooltipRenderers: {
+  tooltip: {
     /**
      * 节点的 Tooltip 渲染器
      * @type {defineTooltip}
@@ -239,12 +227,46 @@ const BoardOptions = {
      */
     edge: () => { },
   },
-  contextmenu: {
-    /**
-     * 是否允许打开右键菜单
-     * @type {Boolean|Function}
-     */
-    visible: true
+  on: {
+    node: {
+      /**
+       * 渲染节点
+       */
+      draw: null,
+      /**
+       * 更新节点
+       */
+      update: null
+    },
+    edge: {
+      /**
+       * 返回 false 表示不允许添加边
+       */
+      beforeAdd: null
+    },
+    contextmenu: {
+      /**
+       * 是否允许打开右键菜单
+       * @type {Function}
+       * @returns {boolean}
+       */
+      beforeShow: null
+    },
+    edit: {
+      /**
+    * 在编辑节点、分组或边前的数据处理函数
+    * @type {Function}
+    * @returns {Object|false} 返回 false 可以取消节点的操作
+    */
+      before: (e) => { return e.data },
+      /**
+       * 在编辑节点、分组或边时的数据处理函数
+       * @type {Function}
+       * @returns {Object|false} 返回 false 可以取消节点的操作
+       */
+      after: () => { },
+    }
+
   }
 }
 
