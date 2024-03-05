@@ -1,6 +1,6 @@
 <template>
   <el-drawer :title="title" :visible.sync="isVisible" @closed="onClose" :size="width" :wrapper-closable="false"
-    custom-class="g6-board--dialog" append-to-body>
+    custom-class="g6-board--dialog" style="position: absolute;" :modal="false">
     <div class="g6-board--dialog-body">
       <el-form size="small" ref="form" :model="form" :rules="rules" label-width="100px" :style="styles">
         <template v-for="field in data">
