@@ -3,6 +3,10 @@
  */
 const InputTypes = {
   /**
+   * 自定义组件类型
+   */
+  CUSTOM: 0,
+  /**
    * 文本
    */
   TEXT: 1,

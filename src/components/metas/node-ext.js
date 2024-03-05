@@ -90,6 +90,7 @@ G6.registerNode('image-ext', {
 
     EventBus.emit('node:after-update', {
       model: cfg,
+      group,
       img
     })
   }
