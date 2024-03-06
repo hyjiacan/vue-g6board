@@ -13,22 +13,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://gitee.com/wangankeji/vue-g6board.git"
+    "url": "https://gitee.com/wangankeji-fe/vue-g6board.git"
   },
   "bugs": {
-    "url": "https://gitee.com/wangankeji/vue-g6board/issues"
+    "url": "https://gitee.com/wangankeji-fe/vue-g6board/issues"
   },
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
-  "homepage": "https://wangankeji.gitee.io/vue-g6board/",
+  "homepage": "https://wangankeji-fe.gitee.io/vue-g6board/",
   "keywords": [
     "vue",
     "g6",
     "editor"
   ],
-  "author": "wangankeji",
+  "author": "wangankeji-fe",
   "license": "MIT",
   "files": [
     "dist",
